@@ -6,6 +6,9 @@ import type { ArtName } from '../../components/PageArt.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import FeatureSection from '../../components/FeatureSection.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import Chevron from '../../components/Chevron.astro';
 import { services, type Service } from '../../data/services';
 import { url } from '../../lib/paths';
 import { brandify } from '../../lib/brand';
@@ -16,9 +19,15 @@ export function getStaticPaths() {
 
 interface Props { service: Service }
 const { service } = Astro.props;
+const others = services.filter((s) => s.slug !== service.slug);
 ---
 <BaseLayout title={service.seoTitle} description={service.description}>
-  <PageHero title={service.h1} intro={service.intro} art={service.slug as ArtName} />
+  <PageHero title={service.h1} intro={service.intro} art={service.slug as ArtName}>
+    <Breadcrumbs
+      slot="breadcrumbs"
+      items={[{ label: 'Home', href: url('') }, { label: 'Services', href: url('services/') }, { label: service.name }]}
+    />
+  </PageHero>
 
   <section class="section familiar" aria-labelledby="familiar-heading">
     <div class="wrap split">
@@ -60,6 +69,22 @@ const { service } = Astro.props;
       <div class="experience split__body">
         <p set:html={brandify(service.experience)} />
       </div>
+    </div>
+  </section>
+
+  <!-- "Other services" heading is builder-drafted copy (brief/copy-changes.md) -->
+  <section class="section others" aria-labelledby="others-heading">
+    <div class="wrap">
+      <h2 id="others-heading" class="others__heading">Other services</h2>
+      <ul class="others__list">
+        {others.map((s) => (
+          <li class="others__item">
+            <ServiceIcon name={s.icon} />
+            <a href={url(`services/${s.slug}/`)} class="others__link" set:html={brandify(s.name)} />
+            <Chevron class="others__chevron" />
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -138,5 +163,88 @@ const { service } = Astro.props;
     font-weight: 700;
     line-height: 1.35;
     color: var(--ink);
+  }
+
+  .others {
+    padding-block: clamp(3rem, 2rem + 4vw, 5rem);
+  }
+
+  .others__heading {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  .others__list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .others__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .others__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid #24484e;
+    border-radius: 1rem;
+    background: linear-gradient(160deg, #15393f 0%, #102e33 100%);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .others__item:hover,
+  .others__item:focus-within {
+    border-color: var(--mint);
+    transform: translateY(-2px);
+  }
+
+  .others__item :global(.service-icon) {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .others__link {
+    flex: 1;
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 1.1875rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* Whole card is clickable */
+  .others__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+  }
+
+  .others__link:hover {
+    color: var(--white);
+    text-decoration: underline;
+  }
+
+  .others__link:focus-visible {
+    outline: none;
+  }
+
+  .others__link:focus-visible::after {
+    outline: var(--focus-width) solid var(--white);
+    outline-offset: 3px;
+  }
+
+  .others__item :global(.others__chevron) {
+    flex: none;
+    width: 0.75rem;
+    height: 0.9rem;
   }
 </style>

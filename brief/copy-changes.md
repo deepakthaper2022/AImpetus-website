@@ -15,6 +15,9 @@ Replace "deep roots in the NHS and public sector" with "deep roots in the NHS an
 
 Note: the default meta description is 195 characters, over the PDF's own 155-character guide. It's only a fallback (every page has its own), so it's used as written. Shorten it in the doc if you want.
 
+## Home – "Why AImpetus" heading
+Agreed 13 Nov 2026: replace the Home section H2 "A new company. A proven team." with **"Senior people. Proven delivery."** (leads with proof rather than newness). The About page H1 stays "A new company. A proven team."
+
 ## Copy not in the PDF (drafted by the builder, in use until approved)
 
 | Where | Copy |
@@ -24,6 +27,7 @@ Note: the default meta description is 195 characters, over the PDF's own 155-cha
 | Insights – coming soon (betas) | Our first articles are coming soon. Follow us on LinkedIn to see them first. |
 | Legal pages – SEO titles (betas) | Privacy notice \| AImpetus · Cookie notice \| AImpetus · Accessibility statement \| AImpetus (meta description: the default) |
 | Contact form – small UI text (betas) | "(optional)" after "I'm a…" · first dropdown option "Select an option" · thanks page link "Go to the home page" |
+| Service pages – navigation (betas) | Breadcrumb "Home › Services › [service name]" · section heading "Other services" linking to the other three service pages · thanks page breadcrumb "Home › Contact › Thanks" |
 | Contact form errors (betas) | Error summary heading: There is a problem · Enter your name · Enter your work email address · Enter an email address in the correct format, like name@example.org · Enter your organisation · Tell us how we can help |
 
 ## Holding page

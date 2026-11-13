@@ -15,6 +15,7 @@ const showArt = customArt || art !== false;
 <section class:list={['page-hero', { 'page-hero--no-art': !showArt }]} aria-labelledby="page-title">
   <div class="wrap page-hero__inner">
     <div class="page-hero__text">
+      <slot name="breadcrumbs" />
       <h1 id="page-title" set:html={brandify(title)} />
       {intro && <p class="lede page-hero__intro">{intro}</p>}
       <slot />
