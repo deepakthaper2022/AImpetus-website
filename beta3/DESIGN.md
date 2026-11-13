@@ -52,7 +52,7 @@ How it differs from the other two:
 
 - **Header cards** (after "Services, About and Insights look empty; no more people photos"): a white card in the photo slot, sitting on the same stripes (`HeaderCard.astro`, `PageHeader` `media` slot):
   - **Services:** a 2×2 grid of service tiles that link to each service (one per row on the narrowest phones).
-  - **About:** a facts-only card (Founded 2026 · 60 years of combined experience · 2 founders · 10+ years on NHS national programmes).
+  - **About:** an experience card, with words instead of numbers (founders' direction). A dark lead tile reads "From mainframe to AI", with an era track (Mainframe › Desktop › Cloud › AI, with AI highlighted). Below it: AI-native from day one · Founder-led, every engagement · Decades in the NHS and public sector.
   - **Insights:** a decorative stack of empty article cards with the mark.
 - **Our approach** (How we work): three white stage cards on a mint band, joined by teal chevron connectors (right on wide screens, down on phones). Each has a large number and an icon, and "Scale or stop" ends with a two-tone Scale / Stop split.
 
