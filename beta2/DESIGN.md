@@ -16,4 +16,4 @@ How it differs from beta1 (Editorial):
 - **Founders as profile cards**, with the photo on an ink panel.
 - **Closing CTA as a boxed ink panel** with grid lines and a mint edge, inside a paper section.
 
-Contrast pairs are as in beta1 (see beta1/DESIGN.md), plus: teal-dark `#0B5C56` on `#E3EFEC` (current nav item) 6.4:1; slate on `#F1F7F5` 6.5:1.
+Contrast pairs are as in beta1 (see beta1/DESIGN.md), plus: teal-dark `#0B5C56` on `#E3EFEC` (current nav item) 6.7:1; slate on `#F1F7F5` 6.7:1; muted on the featured bento cell `#11353A` 7.6:1.
