@@ -15,11 +15,11 @@ Engine room, dark-first (ink `#0E2A2F`) with mint accents and paper sections for
   - How we work: a 1 → 2 → 3 path ending in scale or stop.
   - Contact: a calendar with a chosen slot, plus conversation bubbles.
   - Insights: a stack of articles with a bookmark.
-  - About: the two founders (`FounderDuo.astro`).
+  - About: "60" (years of combined experience) inside an amber-and-mint ring, with the chevrons.
   - Thanks and 404: the chevrons. Legal pages have no art.
 - **Rhythm:** ink hero → ink section → paper section, alternating. Paper is used for reading-heavy content (cards, service detail, legal pages).
 - **Feature sections** (`FeatureSection.astro`, after the second review's "headings hanging, flat white blocks"): the heading sits in a left column that stays in view while you scroll, with the item count as a large outlined numeral. The cards on the right have an ink icon chip with line icons (`FeatureIcon.astro`) and numbering, and the first card is a dark featured card. The paper behind has a dot-grid texture and a faint chevron watermark. Used for Why AImpetus, What you can expect, What we do, Why now and What we believe.
-- **Components:** dark gradient tiles with line icons on ink; a numbered step track with amber chevrons; a patterned teal call-to-action band; founder portraits (`FounderPortrait.astro`): photos from `src/assets/founders/<slug>.jpg`, cropped square and served as AVIF/WebP, with the monogram badge as fallback.
+- **Components:** dark gradient tiles with line icons on ink; a numbered step track with amber chevrons; a patterned teal call-to-action band; founder portraits (`FounderPortrait.astro`): photos from `src/assets/founders/<slug>.jpg`, served as AVIF/WebP, with the monogram badge as fallback. `scripts/prepare-founder-photos.mjs` crops the originals in `assets/photos/` and gives them a shared subtle grade (less saturation, ink/teal soft-light tone, ink vignette), so two photos taken in different places read as a pair.
 - **Chevron uses:** section markers above every H2, list bullets, arrow links, step-track joints, the CTA pattern, the hero artwork.
 
 ## Key decisions

@@ -12,6 +12,7 @@ export type ArtName =
   | 'how-we-work'
   | 'contact'
   | 'insights'
+  | 'about'
   | 'chevrons';
 
 interface Props { name: ArtName }
@@ -219,6 +220,22 @@ const AMBER = '#F59E0B';
         {[226, 248, 270].map((y, i) => <line x1="132" y1={y} x2={i === 2 ? 210 : 266} y2={y} stroke={LINE} stroke-width="4" stroke-linecap="round" />)}
         <!-- Bookmark -->
         <path d="M 252 88 v 40 l 12 -10 l 12 10 v -40 z" fill={AMBER} />
+      </g>
+    )}
+
+    {name === 'about' && (
+      <g>
+        <!-- Two founders, 60 years of combined experience -->
+        <circle cx="200" cy="200" r="132" fill="none" stroke={MINT} stroke-opacity="0.4" stroke-width="2" stroke-dasharray="4 8" />
+        <path d="M 68 200 A 132 132 0 0 1 200 68" fill="none" stroke={AMBER} stroke-width="4" stroke-linecap="round" />
+        <path d="M 332 200 A 132 132 0 0 1 200 332" fill="none" stroke={MINT} stroke-width="4" stroke-linecap="round" />
+        <circle cx="200" cy="68" r="7" fill={AMBER} />
+        <circle cx="200" cy="332" r="7" fill={MINT} />
+        <text x="200" y="222" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="112" fill="none" stroke={MINT} stroke-width="2.5" letter-spacing="-4">60</text>
+        <g transform="translate(200 268) scale(1.5) translate(-24.5 -24)">
+          <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill={AMBER} />
+          <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill={MINT} />
+        </g>
       </g>
     )}
 
