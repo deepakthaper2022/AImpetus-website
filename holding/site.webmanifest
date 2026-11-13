@@ -1,0 +1,13 @@
+{
+  "name": "AImpetus",
+  "short_name": "AImpetus",
+  "description": "Data, digital and AI services",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0E2A2F",
+  "theme_color": "#0E2A2F",
+  "icons": [
+    { "src": "/icons/aimpetus-mark-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/aimpetus-mark-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

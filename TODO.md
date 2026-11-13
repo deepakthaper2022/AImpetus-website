@@ -6,7 +6,7 @@ Placeholders, open questions and checks, grouped by folder. `[Placeholder: …]`
 - **Design directions:** AGENTS.md is current and CLAUDE.md has been synced to match. All three betas are Engine room variants: 1 Editorial, 2 Structured, 3 Schematic.
 - **Holding page logo:** reversed SVG on the ink background (the copy's "primary" is for light backgrounds; the builder notes say reversed).
 - **Serifed "I" in headings:** applied to every "AI" and "AImpetus" in Space Grotesk headings (the content PDF's wider rule). Done with Inter's built-in serifed capital I (character variant `cv08`), so no extra typeface. Use the full Inter woff2 from the Inter release, not a Google Fonts subset, which drops `cv08`.
-- **sitemap.xml:** a one-URL sitemap at the root for the holding page, referenced from robots.txt. Betas never listed.
+- **sitemap.xml:** not needed yet (founders, 13 Nov 2026). Holding page has robots.txt (allow all) only. Add a sitemap at launch.
 - **Web manifest:** `site.webmanifest` created per folder from the 192/512 PNGs (name "AImpetus", ink theme colour). It isn't in assets/.
 - **Open Graph image:** use the LinkedIn banner as briefed, even though platforms may crop its 4:1 shape (see open question below).
 - **Contact "I'm a…" dropdown:** optional, as briefed, with no option pre-selected.
@@ -45,7 +45,9 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 - [ ] Deploy to Netlify, connect aimpetus.ai and www.aimpetus.ai, confirm the www → bare redirect and HTTPS
 
 ## holding/
-- [ ] Build (Prompt 1)
+- [x] Built (Prompt 1): index.html, styles.css, 404.html, robots.txt, site.webmanifest, self-hosted fonts, favicon set, OG/Twitter tags, canonical
+- [ ] The 404 copy is a draft (see "Copy drafted by the builder")
+- [ ] Optional: the large chevron graphic only shows from 960 px wide. On phones the page is text-only. Say if you want a small version on mobile.
 - [ ] Both founders approve the holding page copy and look
 - [ ] Deploy the holding page first
 

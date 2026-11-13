@@ -1,0 +1,335 @@
+/* AImpetus holding page – Engine room style. See brief/brand.md. */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter Bold serifed capital I only (Inter cv08), so "AI" never reads as "Al" in Space Grotesk headings */
+@font-face {
+  font-family: "AImpetus I";
+  src: url("/fonts/inter-brand-i-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0049;
+}
+
+:root {
+  --ink: #0e2a2f;
+  --ink-raised: #13353b;
+  --teal: #0f766e;
+  --mint: #5eead4;
+  --mint-light: #9ff3e5;
+  --amber: #f59e0b;
+  --paper: #f7f7f4;
+  --white: #ffffff;
+  --muted: #b9c8ca; /* 8.7:1 on ink */
+  --rule: #2a4a50; /* decorative only */
+
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --max-width: 76rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--mint);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--mint-light);
+  text-decoration-thickness: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.brand-i {
+  font-family: "AImpetus I", "Inter", var(--font-heading);
+}
+
+/* Layout */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+main {
+  flex: 1;
+}
+
+.site-header {
+  /* Clear space of at least the chevron height around the logo */
+  padding: clamp(1.75rem, 4vw, 3rem) 0 1.5rem;
+}
+
+.logo {
+  width: clamp(10rem, 30vw, 13.5rem);
+  height: auto;
+}
+
+/* Hero */
+
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  padding: clamp(2.5rem, 8vw, 6.5rem) 0 clamp(3rem, 8vw, 6rem);
+}
+
+.eyebrow {
+  margin-bottom: 1.25rem;
+  color: var(--mint);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 15ch;
+  font-size: clamp(2.375rem, 1.4rem + 4.6vw, 5rem);
+  letter-spacing: -0.02em;
+}
+
+h1 .ai {
+  color: var(--mint);
+}
+
+.lede {
+  max-width: 38rem;
+  margin-top: 1.75rem;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+  line-height: 1.55;
+}
+
+.hero-mark {
+  display: none;
+}
+
+.chevron-amber {
+  fill: var(--amber);
+}
+
+.chevron-mint {
+  fill: var(--mint);
+}
+
+@media (min-width: 60em) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, 22rem);
+    gap: 4rem;
+  }
+
+  .hero-mark {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* No motion on this page today; keep any future motion off for those who ask */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Contact and founders */
+
+.details {
+  display: grid;
+  gap: 3rem;
+  padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 8vw, 5.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+@media (min-width: 48em) {
+  .details {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4rem;
+  }
+}
+
+h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+}
+
+/* Small chevron section marker */
+h2::before {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.6em;
+  background: var(--mint);
+  clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+}
+
+.actions {
+  margin-top: 1.75rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  background: var(--mint);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--mint-light);
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.email {
+  margin-top: 0.875rem;
+  color: var(--muted);
+}
+
+.founder-list {
+  display: grid;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.founder h3 {
+  font-size: 1.25rem;
+}
+
+.role {
+  margin-top: 0.25rem;
+  color: var(--muted);
+}
+
+.founder-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+
+/* Footer */
+
+.site-footer {
+  padding: 1.75rem 0 2.25rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.site-footer p {
+  max-width: 60rem;
+}
+
+/* Windows high contrast / forced colours */
+@media (forced-colors: active) {
+  .button {
+    border: 2px solid ButtonText;
+  }
+
+  h2::before {
+    background: CanvasText;
+  }
+}
+
+/* 404 page */
+
+.logo-link {
+  display: inline-block;
+}
+
+.hero-404 .actions {
+  margin-top: 2rem;
+}
