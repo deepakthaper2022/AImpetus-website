@@ -1,16 +1,16 @@
 ---
-// Privacy, cookie and accessibility pages: ink title band, paper reading area.
+// Beta 3 privacy, cookie and accessibility pages: light header, readable column.
 import BaseLayout from './BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import PageHeader from '../components/PageHeader.astro';
 import Placeholder from '../components/Placeholder.astro';
 interface Props { title: string; heading: string; description?: string }
 const { title, heading, description } = Astro.props;
 ---
 <BaseLayout title={title} description={description}>
-  <PageHero title={heading} art={false}>
+  <PageHeader title={heading}>
     <p class="updated">Last updated: <Placeholder text="publication date" /></p>
-  </PageHero>
-  <section class="section on-paper legal">
+  </PageHeader>
+  <section class="section legal">
     <div class="wrap">
       <div class="prose">
         <slot />
@@ -21,12 +21,12 @@ const { title, heading, description } = Astro.props;
 
 <style>
   .updated {
-    margin-top: 1.25rem;
-    color: var(--muted-on-ink);
+    color: var(--slate);
     font-weight: 600;
   }
 
-  .legal {
-    padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+  .legal :global(.prose h2) {
+    padding-top: 1.5rem;
+    border-top: 1px solid #e3e8e6;
   }
 </style>

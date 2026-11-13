@@ -13,11 +13,11 @@ import brandI from '../assets/fonts/inter-brand-i-700.woff2?url';
 interface Props {
   title?: string;
   description?: string;
-  /** Beta 3 light theme (opt-in while interior pages are rebuilt) */
+  /** Beta 3 light theme (default) */
   light?: boolean;
 }
 
-const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, light = false } = Astro.props;
+const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, light = true } = Astro.props;
 const pageUrl = absoluteUrl(Astro.url.pathname.replace(import.meta.env.BASE_URL, ''));
 const ogImage = absoluteUrl('social/linkedin-banner-1584x396.png');
 ---

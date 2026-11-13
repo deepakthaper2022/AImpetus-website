@@ -1,0 +1,58 @@
+---
+// Beta 3: rounded photo with optional logo stripes behind it. The stripes position
+// against the nearest positioned ancestor on wide screens (see LogoStripes), so the
+// section using this should be `position: relative; overflow: hidden` and set
+// --stripe-pad to its vertical padding.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import LogoStripes from './LogoStripes.astro';
+interface Props {
+  src: ImageMetadata;
+  stripes?: 'pair' | 'soft' | 'tint' | false;
+  sizes?: string;
+  eager?: boolean;
+  ratio?: string;
+}
+const { src, stripes = false, sizes = '(min-width: 64em) 46vw, 92vw', eager = false, ratio = '16 / 10' } = Astro.props;
+---
+<div class="photo-frame" style={`--ratio: ${ratio}`}>
+  {stripes && <LogoStripes variant={stripes} />}
+  <Picture
+    src={src}
+    alt=""
+    widths={[560, 800, 1100, Math.min(src.width, 1452)]}
+    sizes={sizes}
+    formats={['avif', 'webp']}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    class="photo-frame__img"
+  />
+</div>
+
+<style>
+  .photo-frame {
+    position: relative;
+  }
+
+  @media (min-width: 64em) {
+    .photo-frame {
+      position: static;
+    }
+  }
+
+  .photo-frame :global(picture) {
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+
+  .photo-frame :global(.photo-frame__img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+    border-radius: 1.5rem;
+    box-shadow: 0 28px 56px -30px rgba(14, 42, 47, 0.45);
+  }
+</style>

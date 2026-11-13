@@ -1,0 +1,111 @@
+---
+// Beta 3 interior page header: white, breadcrumb, H1 and intro. With a photo it is
+// a two-column hero (photo on the right, logo stripes behind it); without one, pale
+// logo stripes sit on the right on wide screens only.
+import type { ImageMetadata } from 'astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import PhotoFrame from './PhotoFrame.astro';
+import LogoStripes from './LogoStripes.astro';
+import { brandify } from '../lib/brand';
+import { url } from '../lib/paths';
+
+interface Crumb { label: string; href?: string }
+interface Props {
+  title: string;
+  intro?: string;
+  kicker?: string;
+  crumbs?: Crumb[];
+  crumbLabel?: string;
+  photo?: ImageMetadata;
+  stripes?: 'pair' | 'tint' | false;
+}
+const { title, intro, kicker, crumbs, crumbLabel, photo, stripes = 'tint' } = Astro.props;
+const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?? title }];
+---
+<section class:list={['page-header', { 'page-header--photo': photo }]} aria-labelledby="page-title">
+  <div class="wrap page-header__inner">
+    {!photo && stripes && <div class="page-header__stripes"><LogoStripes variant={stripes} /></div>}
+    <div class="page-header__text">
+      <Breadcrumbs items={trail} />
+      {kicker && <p class="kicker">{kicker}</p>}
+      <h1 id="page-title" set:html={brandify(title)} />
+      {intro && <p class="lede page-header__intro">{intro}</p>}
+      <slot />
+    </div>
+    {photo && (
+      <div class="page-header__media">
+        <PhotoFrame src={photo} stripes={stripes} eager ratio="3 / 2" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-header {
+    --stripe-pad: clamp(1.75rem, 1rem + 2.5vw, 3.25rem);
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--stripe-pad);
+    border-bottom: 1px solid #e3e8e6;
+    background:
+      radial-gradient(ellipse 50% 80% at 90% 30%, rgba(94, 234, 212, 0.14), transparent 70%),
+      var(--white);
+  }
+
+  .page-header__inner {
+    position: relative;
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    align-items: center;
+  }
+
+  @media (min-width: 64em) {
+    .page-header--photo .page-header__inner {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      gap: clamp(3rem, 5vw, 5rem);
+    }
+  }
+
+  .page-header__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-header:not(.page-header--photo) .page-header__text {
+    max-width: 44rem;
+    padding-block: clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  .page-header .kicker {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 {
+    max-width: 20ch;
+    font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .page-header__intro {
+    max-width: 40rem;
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+    color: var(--slate);
+  }
+
+  .page-header__text :global(> .button),
+  .page-header__text :global(> p:not(.lede):not(.kicker)) {
+    margin-top: 1.5rem;
+  }
+
+  /* No photo: pale stripes on the right, wide screens only */
+  .page-header__stripes {
+    display: none;
+  }
+
+  @media (min-width: 64em) {
+    .page-header__stripes {
+      display: block;
+    }
+  }
+</style>

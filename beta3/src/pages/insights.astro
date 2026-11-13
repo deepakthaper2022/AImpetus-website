@@ -1,20 +1,18 @@
 ---
-// Insights – copy from brief/website-content.pdf ("Insights page"). No articles yet:
-// the "coming soon" line is builder-drafted copy (brief/copy-changes.md).
+// Beta 3 Insights – copy from brief/website-content.pdf ("Insights page"). The
+// "coming soon" line is builder-drafted copy (brief/copy-changes.md).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import PageHeader from '../components/PageHeader.astro';
 import Placeholder from '../components/Placeholder.astro';
-import PageArt from '../components/PageArt.astro';
 import { COMPANY_LINKEDIN } from '../lib/site';
 ---
 <BaseLayout
   title="Insights | AImpetus"
   description="Practical thinking on data, digital and AI in national health and public services, from the AImpetus founders."
 >
-  <PageHero
+  <PageHeader
     title="Insights"
     intro="Practical thinking on making data, digital and AI work in public services. No hype, just what we've learned from delivery."
-    art="insights"
   >
     <p class="follow">
       {COMPANY_LINKEDIN ? (
@@ -23,50 +21,85 @@ import { COMPANY_LINKEDIN } from '../lib/site';
         <>Follow AImpetus on LinkedIn <Placeholder text="company LinkedIn page" /></>
       )}
     </p>
-  </PageHero>
+  </PageHeader>
 
-  <section class="section on-paper soon">
-    <div class="wrap soon__inner">
-      <div class="soon__art"><PageArt name="chevrons" /></div>
+  <section class="section band-paper">
+    <div class="wrap">
       <!-- TODO: copy to approve (not in the brief) -->
-      <p class="soon__text">Our first articles are coming soon. Follow us on LinkedIn to see them first.</p>
+      <p class="soon">Our first articles are coming soon. Follow us on LinkedIn to see them first.</p>
+      <ul class="placeholders" aria-hidden="true">
+        {[1, 2, 3].map(() => (
+          <li class="ph">
+            <span class="ph__img"></span>
+            <span class="ph__line ph__line--title"></span>
+            <span class="ph__line ph__line--title ph__line--short"></span>
+            <span class="ph__line"></span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   .follow {
-    margin-top: 1.75rem;
     font-weight: 600;
   }
 
-  .soon__inner {
-    display: grid;
-    gap: 2rem;
-    align-items: center;
-    justify-items: start;
-  }
-
-  .soon__art {
-    width: min(100%, 14rem);
-    padding: 1rem;
-    border-radius: 50%;
-    background: var(--ink);
-  }
-
-  .soon__text {
-    max-width: 30rem;
+  .soon {
+    max-width: 36rem;
+    padding: 1.5rem 1.75rem;
+    border-left: 6px solid var(--teal);
+    border-radius: 0 1.25rem 1.25rem 0;
+    background: var(--white);
     font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);
     font-weight: 700;
-    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
-    line-height: 1.25;
-    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .placeholders {
+    display: grid;
+    gap: 1.25rem;
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0;
+    list-style: none;
   }
 
   @media (min-width: 48em) {
-    .soon__inner {
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: clamp(2rem, 5vw, 4rem);
+    .placeholders {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+  }
+
+  .ph {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 1rem 1.5rem;
+    border: 1px dashed #c7d3cf;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .ph__img {
+    aspect-ratio: 16 / 9;
+    margin-bottom: 0.5rem;
+    border-radius: 0.875rem;
+    background: linear-gradient(120deg, #e3f3ef, #f1f5f3);
+  }
+
+  .ph__line {
+    height: 0.75rem;
+    border-radius: 1rem;
+    background: #e5eae8;
+  }
+
+  .ph__line--title {
+    height: 1rem;
+    background: #d8dfdc;
+  }
+
+  .ph__line--short {
+    width: 60%;
   }
 </style>

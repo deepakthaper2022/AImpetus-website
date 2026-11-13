@@ -7,7 +7,7 @@
 // On wide screens the SVG is positioned against the section (its media wrapper is
 // static); on narrow screens against the photo, so it never sits behind text.
 // Arm angle matches the mark (dx 10 : dy 12). Decorative only.
-interface Props { variant?: 'pair' | 'soft' }
+interface Props { variant?: 'pair' | 'soft' | 'tint' }
 const { variant = 'pair' } = Astro.props;
 
 const TIP_Y = 60; // of 1000: the visible sliver of the upper arm
@@ -22,9 +22,9 @@ const arm = (tip: number, w: number) => {
 // viewBox spans x -440 … 900 so the stripes reach the bottom edge before the left edge
 ---
 <svg class:list={['logo-stripes', `logo-stripes--${variant}`]} viewBox="-440 0 1340 1000" aria-hidden="true" focusable="false">
-  {variant === 'pair' ? (
+  {variant === 'pair' || variant === 'tint' ? (
     <>
-      <polygon class="ls ls--amber" points={arm(630, 170)} />
+      <polygon class="ls ls--amber" points={arm(640, 105)} />
       <polygon class="ls ls--mint" points={arm(900, 230)} />
     </>
   ) : (
@@ -48,13 +48,15 @@ const arm = (tip: number, w: number) => {
 
   /* Pushed partly off the right edge: the amber point sits just beside the photo,
      the mint tip runs off the page, and the long arms stay clear of the text */
-  .logo-stripes--pair {
+  .logo-stripes--pair,
+  .logo-stripes--tint {
     right: 0;
     transform: translateX(18%);
   }
 
   @media (min-width: 64em) and (max-width: 79.99em) {
-    .logo-stripes--pair {
+    .logo-stripes--pair,
+    .logo-stripes--tint {
       transform: translateX(26%);
     }
   }
@@ -74,7 +76,8 @@ const arm = (tip: number, w: number) => {
       height: calc(100% + 3.75rem);
     }
 
-    .logo-stripes--pair {
+    .logo-stripes--pair,
+    .logo-stripes--tint {
       right: calc(-1 * var(--gutter));
       transform: none;
     }
@@ -92,6 +95,8 @@ const arm = (tip: number, w: number) => {
   .ls--amber { fill: var(--amber); }
   .ls--mint { fill: var(--mint); }
   .ls--soft { fill: #c9eee6; }
+  .logo-stripes--tint .ls--amber { fill: #fbd38d; }
+  .logo-stripes--tint .ls--mint { fill: #c9eee6; }
 
   @media (forced-colors: active) {
     .logo-stripes {

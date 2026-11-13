@@ -1,0 +1,66 @@
+---
+// Beta 3 closing call to action: one rounded dark-teal panel.
+import Button from './Button.astro';
+import { brandify } from '../lib/brand';
+interface Props { heading?: string; text?: string; button: string; href: string; id?: string }
+const { heading, text, button, href, id = 'cta-heading' } = Astro.props;
+---
+<section class="cta-section" aria-labelledby={heading ? id : undefined} aria-label={heading ? undefined : button}>
+  <div class="wrap">
+    <div class:list={['cta', 'on-ink', { 'cta--compact': !heading && !text }]}>
+      {(heading || text) && (
+        <div>
+          {heading && <h2 id={id} set:html={brandify(heading)} />}
+          {text && <p class="lede">{text}</p>}
+        </div>
+      )}
+      <div class="cta__action">
+        <Button href={href}>{button}</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding-block: clamp(1rem, 2vw, 1.5rem) var(--section-space);
+  }
+
+  .cta {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding: clamp(2rem, 5vw, 4.5rem);
+    border-radius: 1.75rem;
+    background:
+      radial-gradient(ellipse 60% 120% at 100% 0%, rgba(94, 234, 212, 0.22), transparent 60%),
+      linear-gradient(120deg, var(--ink) 40%, #0f4a47 100%);
+  }
+
+  @media (min-width: 60em) {
+    .cta {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4rem;
+    }
+  }
+
+  .cta--compact {
+    display: flex;
+    justify-content: center;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .cta h2 {
+    max-width: 18ch;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+    line-height: 1.06;
+  }
+
+  .cta .lede {
+    max-width: 36rem;
+  }
+
+  .cta h2 + .lede {
+    margin-top: 1.25rem;
+  }
+</style>

@@ -98,9 +98,10 @@ The betas currently use SVG artwork, monogram badges and illustrations, so nothi
 ### beta3/ – light, people-first (direction changed by the founders)
 - [x] Schematic version rejected ("childish, like an architecture diagram"); rebuilt light with dark teal, using thapar.tech as the reference
 - [x] AI-generated photos supplied (hero, workshop, conversation), plus natural founder photos
-- [x] Home page built
-- [ ] Founders review the Home page
-- [ ] Rebuild the remaining pages in the light style (they still use beta1's dark layouts), make the light theme the default, then the full checks and commit
+- [x] Home page built and refined (thick cropped logo stripes, tighter spacing, mint-led stripes, problem panel)
+- [x] All 15 pages rebuilt in the light style and checked (see beta3/DESIGN.md)
+- [ ] Founders review every page
+- [ ] After deploy: submit the form once to confirm Netlify detects `contact-beta3`
 
 ## Launch (after a beta is chosen)
 - [ ] Review beta1, beta2, beta3 and choose one (or a blend)

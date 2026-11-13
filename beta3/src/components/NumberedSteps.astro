@@ -1,0 +1,53 @@
+---
+// Beta 3: numbered steps with teal number circles.
+interface Step { lead: string; text: string }
+interface Props { steps: Step[]; separator?: string; size?: 'md' | 'lg' }
+const { steps, separator = ' – ', size = 'md' } = Astro.props;
+---
+<ol class:list={['steps', `steps--${size}`]}>
+  {steps.map((step, i) => (
+    <li class="step">
+      <span class="step__num" aria-hidden="true">{i + 1}</span>
+      <p><strong>{step.lead}</strong>{separator}{step.text}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps {
+    display: grid;
+    gap: 1.25rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .step__num {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  .step p {
+    padding-top: 0.35rem;
+    font-size: 1.125rem;
+  }
+
+  .steps--lg .step p {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+</style>

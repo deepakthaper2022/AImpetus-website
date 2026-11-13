@@ -1,0 +1,72 @@
+---
+// Beta 3: headed list with soft icon circles and hairlines (no boxes).
+import FeatureIcon, { type FeatureIconName } from './FeatureIcon.astro';
+import { brandify } from '../lib/brand';
+interface Item { lead: string; text: string; icon?: FeatureIconName }
+interface Props { items: readonly Item[]; ordered?: boolean; leadSuffix?: string; columns?: 1 | 2 }
+const { items, ordered = false, leadSuffix = '', columns = 2 } = Astro.props;
+const List = ordered ? 'ol' : 'ul';
+---
+<List class:list={['reasons', `reasons--${columns}`]}>
+  {items.map((item) => (
+    <li class="reason">
+      <span class="reason__icon">
+        {item.icon ? <FeatureIcon name={item.icon} /> : <span class="reason__dot" aria-hidden="true"></span>}
+      </span>
+      <div>
+        <h3><span set:html={brandify(item.lead)} />{leadSuffix && <span class="visually-hidden">{leadSuffix}</span>}</h3>
+        <p>{item.text}</p>
+      </div>
+    </li>
+  ))}
+</List>
+
+<style>
+  .reasons {
+    display: grid;
+    gap: 0 clamp(2rem, 5vw, 4rem);
+    margin: clamp(1.75rem, 3.5vw, 2.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .reasons--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .reason {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--rule-on-paper);
+  }
+
+  .reason__icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: #dcf3ee;
+  }
+
+  .reason__dot {
+    width: 0.9rem;
+    height: 1.1rem;
+    background: var(--teal);
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  }
+
+  .reason h3 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .reason p {
+    margin-top: 0.375rem;
+    color: var(--slate);
+  }
+</style>
