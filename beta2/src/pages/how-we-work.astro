@@ -1,0 +1,87 @@
+---
+// How we work – copy from brief/website-content.pdf ("How we work page").
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import StepTrack from '../components/StepTrack.astro';
+import DataTable from '../components/DataTable.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FeatureSection from '../components/FeatureSection.astro';
+import { url } from '../lib/paths';
+
+const approach = [
+  { lead: 'Understand.', text: "We start with your service, your users, your data and the outcome you need. We agree what success looks like and how we'll measure it." },
+  { lead: 'Prove.', text: 'We test the idea quickly and safely, against the measures we agreed. You see evidence, not just a demo.' },
+  { lead: 'Scale or stop.', text: "We scale what works and stop what doesn't. Then we make sure your team can run and improve it." },
+];
+
+const expect = [
+  { icon: 'senior', lead: 'Senior people throughout.', text: 'The founders lead every engagement, supported by trusted senior associates.' },
+  { icon: 'honest', lead: 'Honest advice.', text: "We'll tell you if something isn't worth doing, or if we're not the right fit." },
+  { icon: 'standards', lead: 'Your standards, not ours.', text: 'We work within your security, information governance, accessibility and service standards.' },
+  { icon: 'knowledge', lead: 'Knowledge left behind.', text: "We document, coach and hand over, so you're not dependent on us." },
+  { icon: 'value', lead: 'Value for money.', text: 'We size the team to the job, and nothing more.' },
+] as const;
+
+const ways = [
+  ['Health check or discovery', 'Getting an independent view before you commit', 'A short, fixed-scope piece of work with clear recommendations'],
+  ['Specialist support', 'Adding senior data, AI or delivery capability to your team', 'Experienced specialists working inside your team, directly or through a partner'],
+  ['Outcome-based project', 'Delivering a defined result, such as a pilot or platform', 'A small team accountable for agreed outcomes'],
+];
+---
+<BaseLayout
+  title="How we work | AImpetus"
+  description="Senior-led, partner-friendly delivery. We start small, prove the benefit, then scale what works for public-sector and other organisations."
+>
+  <PageHero
+    art="how-we-work"
+    title="Senior-led. Evidence-based. Easy to work with."
+    intro="We keep our approach simple: understand the problem properly, prove the value early and only scale what works. Senior people stay involved throughout."
+  />
+
+  <section class="section" aria-labelledby="approach-heading">
+    <div class="wrap">
+      <SectionHead id="approach-heading" text="Our approach" />
+      <StepTrack steps={approach} separator=" " />
+    </div>
+  </section>
+
+  <FeatureSection id="expect-heading" heading="What you can expect from us" items={[...expect]} ordered={false} />
+
+  <section class="section ways" aria-labelledby="ways-heading">
+    <div class="wrap">
+      <SectionHead id="ways-heading" text="Ways to work with us" />
+      <DataTable columns={['Option', 'Best for', 'How it works']} rows={ways} />
+    </div>
+  </section>
+
+  <CtaBand
+    id="alongside-heading"
+    heading="Working alongside your teams"
+    text="We fit around the people already doing the work: your in-house teams, other suppliers and delivery partners. We bring senior specialists who need little supervision, work to your standards and leave knowledge behind."
+    button="Book a 30-minute conversation"
+    href={url('contact/')}
+  />
+</BaseLayout>
+
+<style>
+  .ways :global(.data-table) {
+    font-size: 1.0625rem;
+  }
+
+  .ways :global(.data-table tbody th) {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--white);
+  }
+
+  @media (min-width: 48em) {
+    .ways :global(.data-table tbody th) {
+      width: 26%;
+    }
+
+    .ways :global(.data-table tbody tr:hover) {
+      background: rgba(94, 234, 212, 0.04);
+    }
+  }
+</style>

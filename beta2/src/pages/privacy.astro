@@ -1,0 +1,74 @@
+---
+// Privacy notice – copy from brief/legal-pages.pdf. SEO title is builder-drafted.
+import LegalLayout from '../layouts/LegalLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import DataTable from '../components/DataTable.astro';
+import { url } from '../lib/paths';
+
+const purposes = [
+  ['Replying to your enquiry and arranging conversations', 'Legitimate interests: responding to people who contact us'],
+  ['Discussing, providing and invoicing our services', 'Contract, or steps before entering a contract'],
+  ['Keeping business records and meeting legal and tax obligations', 'Legal obligation'],
+  ['Running and securing our website', 'Legitimate interests: keeping the site working and safe'],
+  ["Sending occasional updates, if you've asked for them", 'Consent, which you can withdraw at any time'],
+];
+---
+<LegalLayout title="Privacy notice | AImpetus" heading="Privacy notice">
+  <p class="lede">This notice explains how AImpetus Ltd ("AImpetus", "we", "us") collects and uses personal information when you visit aimpetus.ai or contact us.</p>
+
+  <h2>Who we are</h2>
+  <p>AImpetus Ltd is the controller of your personal information. We are a company registered in England and Wales, company number 17574177, with our registered office at 68 Oatlands Road, Shinfield, RG2 9DN. We are registered with the Information Commissioner's Office (ICO), registration number <Placeholder text="ICO registration number" />.</p>
+  <p>If you have any questions about this notice or your information, email <a href="mailto:contact@aimpetus.ai">contact@aimpetus.ai</a>.</p>
+
+  <h2>What information we collect</h2>
+  <ul>
+    <li><strong>When you contact us:</strong> your name, work email address, organisation, the type of organisation you represent, and anything you include in your message.</li>
+    <li><strong>When you book a conversation:</strong> your name, email address, the time you choose and any notes you add. Bookings are handled by <Placeholder text="booking tool, for example Microsoft Bookings or Calendly" />.</li>
+    <li><strong>When we work with you or your organisation:</strong> business contact details and correspondence needed to discuss, deliver and invoice our services.</li>
+    <li><strong>When you visit the website:</strong> basic technical information our hosting provider needs to run and secure the site, such as your IP address and browser type. See our <a href={url('cookies/')}>cookie notice</a> for more.</li>
+  </ul>
+  <p>We don't knowingly collect special category information (such as health information) through the website. Please don't include it in your message.</p>
+
+  <h2>How and why we use it</h2>
+  <DataTable columns={['Purpose', 'Lawful basis under UK GDPR']} rows={purposes} />
+  <p>We don't sell your information, and we don't use it for automated decision-making or profiling.</p>
+
+  <h2>Who we share it with</h2>
+  <p>We share information only with trusted providers who help us run the business, under contracts that require them to protect it:</p>
+  <ul>
+    <li>Website hosting: <Placeholder text="hosting provider" /></li>
+    <li>Email and office software: <Placeholder text="for example Microsoft 365 or Google Workspace" /></li>
+    <li>Booking tool: <Placeholder text="booking tool" /></li>
+    <li>Our accountants and professional advisers, where needed</li>
+  </ul>
+  <p>We may also share information if the law requires it, or with a delivery partner when you've agreed to work with us together.</p>
+
+  <h2>International transfers</h2>
+  <p>Some of our providers may store information outside the UK. Where they do, we make sure appropriate safeguards are in place, such as UK adequacy regulations or the UK International Data Transfer Agreement or Addendum.</p>
+
+  <h2>How long we keep it</h2>
+  <ul>
+    <li>Enquiries that don't lead to work: up to 2 years from our last contact.</li>
+    <li>Client and supplier records: 6 years after the end of the relevant financial year, to meet tax and legal requirements.</li>
+    <li>Marketing preferences: until you unsubscribe or ask us to stop.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li>ask for a copy of your information</li>
+    <li>ask us to correct it</li>
+    <li>ask us to delete it</li>
+    <li>ask us to restrict how we use it</li>
+    <li>object to us using it, including for any marketing</li>
+    <li>ask us to transfer it to you or someone else</li>
+    <li>withdraw consent at any time, where we rely on consent</li>
+  </ul>
+  <p>To use any of these rights, email <a href="mailto:contact@aimpetus.ai">contact@aimpetus.ai</a>. We'll reply within one month.</p>
+
+  <h2>Complaints</h2>
+  <p>If you're unhappy with how we've handled your information, please tell us first so we can put it right. You also have the right to complain to the Information Commissioner's Office at <a href="https://ico.org.uk">ico.org.uk</a> or on 0303 123 1113.</p>
+
+  <h2>Changes to this notice</h2>
+  <p>We may update this notice from time to time. The latest version will always be on this page, with the date it was last updated.</p>
+</LegalLayout>

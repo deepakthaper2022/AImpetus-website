@@ -89,7 +89,9 @@ The betas currently use SVG artwork, monogram badges and illustrations, so nothi
 - Note: Lighthouse SEO is 66 on beta pages only because of the required `noindex`. It can't reach 95 while betas are hidden from search; every other SEO check passes.
 
 ### beta2/ – Engine room: Structured
-- [ ] Build, then founders review
+- [x] Set-up (copied from beta1; base /beta2/, form contact-beta2), light header, Home page
+- [ ] Founders review the Home page
+- [ ] Restyle the remaining pages in the Structured direction (they currently inherit beta1's page layouts with the beta2 header), then the full checks, DESIGN.md and commit
 
 ### beta3/ – Engine room: Schematic
 - [ ] Build, then founders review

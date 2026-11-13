@@ -1,0 +1,70 @@
+---
+// Beta 2 section header: a numbered index and rule, then the H2, with an
+// optional intro alongside on wide screens.
+import { brandify } from '../lib/brand';
+interface Props { id: string; index: string; text: string; intro?: string }
+const { id, index, text, intro } = Astro.props;
+---
+<div class:list={['index-head', { 'index-head--intro': intro }]}>
+  <div class="index-head__rule" aria-hidden="true">
+    <span class="index-head__num">{index}</span>
+  </div>
+  <h2 id={id} set:html={brandify(text)} />
+  {intro && <p class="lede index-head__intro">{intro}</p>}
+</div>
+
+<style>
+  .index-head {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .index-head__rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .index-head__rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .index-head__num {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.75rem;
+    height: 1.75rem;
+    padding-inline: 0.5rem;
+    border-radius: 0.25rem;
+    background: var(--accent);
+    color: var(--on-accent, var(--ink));
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .index-head h2 {
+    max-width: 22ch;
+  }
+
+  .index-head__intro {
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 60em) {
+    .index-head--intro {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      column-gap: clamp(3rem, 6vw, 6rem);
+      align-items: end;
+    }
+
+    .index-head--intro .index-head__rule {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

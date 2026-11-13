@@ -1,0 +1,250 @@
+---
+// The four service pages. Copy lives in src/data/services.ts.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import type { ArtName } from '../../components/PageArt.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FeatureSection from '../../components/FeatureSection.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import Chevron from '../../components/Chevron.astro';
+import { services, type Service } from '../../data/services';
+import { url } from '../../lib/paths';
+import { brandify } from '../../lib/brand';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+interface Props { service: Service }
+const { service } = Astro.props;
+const others = services.filter((s) => s.slug !== service.slug);
+---
+<BaseLayout title={service.seoTitle} description={service.description}>
+  <PageHero title={service.h1} intro={service.intro} art={service.slug as ArtName}>
+    <Breadcrumbs
+      slot="breadcrumbs"
+      items={[{ label: 'Home', href: url('') }, { label: 'Services', href: url('services/') }, { label: service.name }]}
+    />
+  </PageHero>
+
+  <section class="section familiar" aria-labelledby="familiar-heading">
+    <div class="wrap split">
+      <SectionHead id="familiar-heading" text="Sound familiar?" />
+      <ul class="chevron-list chevron-list--large split__body">
+        {service.familiar.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <FeatureSection
+    id="do-heading"
+    heading="What we do"
+    items={service.whatWeDo.map((item) => ({ lead: item.term, text: item.text }))}
+    leadSuffix=":"
+    ordered={false}
+  />
+
+  <section class="section get" aria-labelledby="get-heading">
+    <div class="wrap">
+      <SectionHead id="get-heading" text="What you get" />
+      <ul class="get__grid">
+        {service.whatYouGet.map((item) => (
+          <li class="tile-dark get__item">
+            <svg class="get__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill="#F59E0B" />
+              <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill="#5EEAD4" />
+            </svg>
+            <p>{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section on-paper" aria-labelledby="experience-heading">
+    <div class="wrap split">
+      <SectionHead id="experience-heading" text="Where our experience comes from" />
+      <div class="experience split__body">
+        <p set:html={brandify(service.experience)} />
+      </div>
+    </div>
+  </section>
+
+  <!-- "Other services" heading is builder-drafted copy (brief/copy-changes.md) -->
+  <section class="section others" aria-labelledby="others-heading">
+    <div class="wrap">
+      <h2 id="others-heading" class="others__heading">Other services</h2>
+      <ul class="others__list">
+        {others.map((s) => (
+          <li class="others__item">
+            <ServiceIcon name={s.icon} />
+            <a href={url(`services/${s.slug}/`)} class="others__link" set:html={brandify(s.name)} />
+            <Chevron class="others__chevron" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand button={service.cta} href={url('contact/')} />
+</BaseLayout>
+
+<style>
+  .split {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 60em) {
+    .split {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(3rem, 6vw, 7rem);
+      align-items: start;
+    }
+  }
+
+  .split__body {
+    max-width: var(--measure);
+  }
+
+  .familiar {
+    background: linear-gradient(180deg, var(--ink) 0%, #0c2529 100%);
+  }
+
+  .get__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 40em) {
+    .get__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64em) {
+    .get__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .get__item {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .get__mark {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .get__item p {
+    color: var(--white);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .experience {
+    margin: 0;
+    padding-left: clamp(1.25rem, 3vw, 2rem);
+    border-left: 4px solid var(--amber);
+  }
+
+  .experience p {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .others {
+    padding-block: clamp(3rem, 2rem + 4vw, 5rem);
+  }
+
+  .others__heading {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  .others__list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .others__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .others__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid #24484e;
+    border-radius: 1rem;
+    background: linear-gradient(160deg, #15393f 0%, #102e33 100%);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .others__item:hover,
+  .others__item:focus-within {
+    border-color: var(--mint);
+    transform: translateY(-2px);
+  }
+
+  .others__item :global(.service-icon) {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .others__link {
+    flex: 1;
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 1.1875rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* Whole card is clickable */
+  .others__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+  }
+
+  .others__link:hover {
+    color: var(--white);
+    text-decoration: underline;
+  }
+
+  .others__link:focus-visible {
+    outline: none;
+  }
+
+  .others__link:focus-visible::after {
+    outline: var(--focus-width) solid var(--white);
+    outline-offset: 3px;
+  }
+
+  .others__item :global(.others__chevron) {
+    flex: none;
+    width: 0.75rem;
+    height: 0.9rem;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+// Initials badge used until real founder photos are supplied (see TODO.md "Images").
+interface Props { initials: string }
+const { initials } = Astro.props;
+---
+<div class="monogram" aria-hidden="true">
+  <span>{initials}</span>
+  <svg viewBox="0 0 48 48" class="monogram__mark" focusable="false">
+    <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill="#F59E0B" />
+    <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill="#5EEAD4" />
+  </svg>
+</div>
+
+<style>
+  .monogram {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 1.25rem;
+    background: radial-gradient(circle at 30% 25%, #1d4a50, var(--ink) 70%);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.75rem;
+    letter-spacing: 0.02em;
+    box-shadow: inset 0 0 0 1px #3b6168;
+  }
+
+  .monogram__mark {
+    position: absolute;
+    right: -0.6rem;
+    bottom: -0.6rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0.2rem;
+    border-radius: 0.6rem;
+    background: var(--ink);
+    box-shadow: 0 0 0 3px var(--white);
+  }
+</style>

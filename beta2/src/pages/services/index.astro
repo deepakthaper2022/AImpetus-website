@@ -1,0 +1,134 @@
+---
+// Services overview – copy from brief/website-content.pdf ("Services overview page").
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import ArrowLink from '../../components/ArrowLink.astro';
+import Chevron from '../../components/Chevron.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/services';
+import { url } from '../../lib/paths';
+import { brandify } from '../../lib/brand';
+---
+<BaseLayout
+  title="Services | AImpetus"
+  description="Data and platforms, AI to benefit, digital transformation and delivery assurance for public-sector and other organisations."
+>
+  <PageHero
+    art="services"
+    title="Services built around the outcome, not the technology"
+    intro="We help public-sector and other organisations improve services with data, digital and AI. Each service can stand alone or work with the others, and each starts with the problem you need to solve."
+  />
+
+  <section class="section fit" aria-labelledby="fit-heading">
+    <div class="wrap fit__inner">
+      <div>
+        <SectionHead id="fit-heading" text="How our services fit together" />
+        <p class="lede section-intro">Good data makes digital change possible. Good digital services give AI somewhere useful to work. Strong delivery assurance keeps all of it on track.</p>
+      </div>
+
+      <!-- Decorative: the four services as a flow -->
+      <div class="flow" aria-hidden="true">
+        {services.map((service, i) => (
+          <>
+            <span class="flow__node"><ServiceIcon name={service.icon} /></span>
+            {i < services.length - 1 && <Chevron tone="amber" class="flow__arrow" />}
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-paper">
+    <div class="wrap">
+      <ul class="service-cards">
+        {services.map((service) => (
+          <li class="card service-card">
+            <ServiceIcon name={service.icon} />
+            <h3 set:html={brandify(service.name)} />
+            <p>{service.forWhen}</p>
+            <ArrowLink href={url(`services/${service.slug}/`)}>{service.explore}</ArrowLink>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Not sure where to start?"
+    text="Most conversations begin with a problem, not a service. Tell us yours."
+    button="Book a 30-minute conversation"
+    href={url('contact/')}
+  />
+</BaseLayout>
+
+<style>
+  .fit__inner {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 60em) {
+    .fit__inner {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      column-gap: clamp(3rem, 6vw, 7rem);
+    }
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .flow__node {
+    display: grid;
+    place-items: center;
+    width: clamp(3.75rem, 3rem + 3vw, 5.25rem);
+    aspect-ratio: 1;
+    border: 1px solid #24484e;
+    border-radius: 1rem;
+    background: linear-gradient(160deg, #15393f 0%, #102e33 100%);
+  }
+
+  .flow__node :global(.service-icon) {
+    width: 60%;
+    height: 60%;
+  }
+
+  .flow :global(.flow__arrow) {
+    width: 0.75rem;
+    height: 0.9rem;
+  }
+
+  .service-cards {
+    display: grid;
+    gap: 1.25rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .service-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .service-card {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+  }
+
+  .service-card h3 {
+    margin: 0;
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  .service-card :global(.arrow-link) {
+    margin-top: 0.25rem;
+  }
+</style>

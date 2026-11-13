@@ -1,0 +1,68 @@
+---
+// Breadcrumb trail for pages two levels deep (service pages, contact thanks).
+interface Crumb { label: string; href?: string }
+interface Props { items: Crumb[] }
+const { items } = Astro.props;
+---
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, i) => (
+      <li>
+        {item.href && i < items.length - 1 ? (
+          <a href={item.href}>{item.label}</a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Chevron separator between items */
+  li + li::before {
+    content: '';
+    width: 0.45em;
+    height: 0.55em;
+    margin-inline: 0.75rem;
+    background: var(--amber);
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--mint);
+  }
+
+  [aria-current='page'] {
+    color: var(--muted-on-ink);
+  }
+
+  @media (forced-colors: active) {
+    li + li::before {
+      background: CanvasText;
+    }
+  }
+</style>

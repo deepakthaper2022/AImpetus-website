@@ -1,0 +1,26 @@
+---
+// A standalone text link with a trailing chevron (e.g. "See our services").
+import Chevron from './Chevron.astro';
+interface Props { href: string; class?: string }
+const { href, class: className = '' } = Astro.props;
+---
+<a href={href} class:list={['arrow-link', className]}><span><slot /></span><Chevron class="arrow-link__icon" /></a>
+
+<style>
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-weight: 600;
+  }
+
+  .arrow-link :global(.arrow-link__icon) {
+    fill: currentColor;
+    transition: transform 0.15s ease;
+  }
+
+  .arrow-link:hover :global(.arrow-link__icon) {
+    transform: translateX(3px);
+  }
+</style>

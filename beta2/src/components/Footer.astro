@@ -1,0 +1,117 @@
+---
+import Placeholder from './Placeholder.astro';
+import { footerNav, company, COMPANY_LINKEDIN } from '../lib/site';
+import { url } from '../lib/paths';
+import { brandify } from '../lib/brand';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src={url('images/aimpetus-logo-reversed.svg')} alt="AImpetus" width="519" height="96" class="footer-logo" loading="lazy" />
+      <p class="footer-tagline" set:html={brandify(company.tagline)} />
+      <p class="footer-descriptor">{company.descriptor}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        {footerNav.map((item) => (
+          <li><a href={url(item.path)}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <p class="footer-social">
+      {COMPANY_LINKEDIN ? (
+        <a href={COMPANY_LINKEDIN}>Follow us on LinkedIn</a>
+      ) : (
+        <>Follow us on LinkedIn <Placeholder text="company LinkedIn page" /></>
+      )}
+    </p>
+
+    <div class="footer-legal">
+      <p>{company.registration}</p>
+      <p>{company.copyright}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(3rem, 6vw, 5rem) 2.5rem;
+    background: var(--ink-deep);
+    color: var(--muted-on-ink);
+    font-size: 0.9375rem;
+    --text-muted: var(--muted-on-ink);
+  }
+
+  .site-footer .wrap {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .footer-logo {
+    width: 10rem;
+    height: auto;
+  }
+
+  .footer-tagline {
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--step-2);
+    line-height: 1.2;
+    color: var(--white);
+  }
+
+  .footer-descriptor {
+    margin-top: 0.5rem;
+  }
+
+  .footer-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--paper);
+  }
+
+  .footer-nav a:hover {
+    color: var(--mint);
+  }
+
+  .footer-social {
+    color: var(--paper);
+  }
+
+  .footer-legal {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-on-ink);
+    font-size: var(--step--1);
+  }
+
+  .footer-legal p + p {
+    margin-top: 0.25rem;
+  }
+
+  @media (min-width: 48em) {
+    .site-footer .wrap {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      column-gap: 4rem;
+    }
+
+    .footer-brand {
+      grid-row: span 2;
+    }
+
+    .footer-legal {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

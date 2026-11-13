@@ -1,0 +1,826 @@
+---
+// Beta 2 Home – Engine room: Structured. Copy from brief/website-content.pdf ("Home
+// page") with brief/copy-changes.md applied. Key-fact labels and the problem/outcome
+// labels are builder-drafted (copy-changes.md).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import Chevron from '../components/Chevron.astro';
+import IndexHead from '../components/IndexHead.astro';
+import HeroPanels from '../components/HeroPanels.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import FounderPortrait from '../components/FounderPortrait.astro';
+import { services } from '../data/services';
+import { url } from '../lib/paths';
+import { brandify } from '../lib/brand';
+
+const facts = [
+  { value: '60', label: 'years of combined experience' },
+  { value: '10+', label: 'years on NHS national programmes' },
+  { value: '4', label: 'services, one aim' },
+];
+
+const why = [
+  { icon: 'senior', lead: 'Senior people, start to finish.', text: 'Two founders with 60 years of combined experience. The people who scope your work lead its delivery.' },
+  { icon: 'health', lead: 'We know how national health programmes work.', text: 'More than a decade delivering NHS England and NHS Improvement data, cloud and digital programmes.' },
+  { icon: 'layers', lead: 'Data and digital first, so AI holds up.', text: 'We build the platforms, data and controls AI needs, then test use cases against real benefits.' },
+  { icon: 'commercial', lead: 'Delivery and commercial sense together.', text: 'Experience of running a UK technology services business and large NHS delivery portfolios. Realistic plans, clear contracts, no surprises.' },
+  { icon: 'partner', lead: 'Easy to work with.', text: 'Small and partner-friendly. We fit your teams and standards, and leave knowledge behind.' },
+] as const;
+
+const steps = [
+  { lead: 'Understand', text: 'we start with your service, your data and the outcome you need.' },
+  { lead: 'Prove', text: 'we test the idea quickly, against measures agreed up front.' },
+  { lead: 'Scale or stop', text: "we scale what works, stop what doesn't, and leave your team able to run it." },
+];
+
+const founders = [
+  { name: 'Prahlad Koti', slug: 'prahlad-koti', initials: 'PK', role: 'Co-founder and Managing Director', text: 'former UK Managing Director of Mastek, with more than 30 years in technology services.' },
+  { name: 'Deepak Thaper', slug: 'deepak-thaper', initials: 'DT', role: 'Co-founder and Delivery & Technology Director', text: 'nearly 30 years in technology delivery, including more than a decade on NHS national programmes.' },
+];
+---
+<BaseLayout
+  title="AImpetus | Data, digital and AI for public services"
+  description="Better digital services, with AI in the engine room. Senior-led data, digital and AI delivery, with deep roots in the NHS and wider UK public sector."
+>
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="wrap hero__inner">
+      <div class="hero__text">
+        <p class="eyebrow"><span class="eyebrow__tag">Data, digital and AI services</span></p>
+        <h1 id="hero-heading">Better digital services, with <span class="hero-ai">A<span class="brand-i">I</span></span> in the engine room.</h1>
+        <p class="lede hero__lede">We build the data platforms, digital services and governance that let AI work safely in live services. Senior-led, with 60 years of combined experience and deep roots in the NHS and wider UK public sector.</p>
+        <div class="hero__actions">
+          <Button href={url('contact/')}>Book a 30-minute conversation</Button>
+          <ArrowLink href={url('services/')}>See our services</ArrowLink>
+        </div>
+      </div>
+      <div class="hero__art"><HeroPanels /></div>
+    </div>
+
+    <!-- Key facts strip (labels drafted from brief facts) -->
+    <div class="wrap">
+      <ul class="facts">
+        {facts.map((f) => (
+          <li class="fact">
+            <span class="fact__value">{f.value}</span>
+            <span class="fact__label">{f.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. The problem we solve -->
+  <section class="section on-paper problem" aria-labelledby="problem-heading">
+    <div class="wrap">
+      <IndexHead id="problem-heading" index="01" text="AI is easy to pilot. Hard to run." />
+      <div class="problem__grid">
+        <p class="lede problem__text">Most organisations have tried AI. Far fewer have it working in a live service. The usual blockers aren't the AI itself. They're scattered data, ageing platforms, unclear governance and programmes stretched thin. We fix the groundwork, so AI and digital change can hold up in the real world.</p>
+        <!-- Decorative: pilot (dashed) to live (solid) -->
+        <div class="pilot-live" aria-hidden="true">
+          <div class="pl pl--pilot"><span class="pl__dot"></span><span class="pl__bar"></span><span class="pl__bar pl__bar--short"></span></div>
+          <Chevron tone="amber" class="pl__arrow" />
+          <div class="pl pl--live"><span class="pl__dot"></span><span class="pl__bar"></span><span class="pl__bar pl__bar--short"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Why AImpetus -->
+  <section class="section why" aria-labelledby="why-heading">
+    <div class="wrap">
+      <IndexHead id="why-heading" index="02" text="Senior people. Proven delivery." />
+      <ol class="bento">
+        {why.map((item, i) => (
+          <li class:list={['bento__cell', { 'bento__cell--wide': i === 0 }]}>
+            <div class="bento__top">
+              <span class="bento__chip"><FeatureIcon name={item.icon} /></span>
+              <span class="bento__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <h3 class="bento__lead" set:html={brandify(item.lead)} />
+            <p class="bento__text">{item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. What we do: problem → outcome cards -->
+  <section class="section on-paper" aria-labelledby="services-heading">
+    <div class="wrap">
+      <IndexHead id="services-heading" index="03" text="Four services, one aim: services that work better." />
+      <ul class="po-grid">
+        {services.map((s) => (
+          <li class:list={['po', `po--${s.icon}`]}>
+            <div class="po__head">
+              <span class="po__icon"><ServiceIcon name={s.icon} /></span>
+              <h3 class="po__name"><a href={url(`services/${s.slug}/`)} class="po__link" set:html={brandify(s.name)} /></h3>
+            </div>
+            <dl class="po__body">
+              <div class="po__row po__row--problem">
+                <dt>The problem</dt>
+                <dd>{s.forWhen}</dd>
+              </div>
+              <div class="po__row po__row--outcome">
+                <dt>The outcome</dt>
+                <dd>{s.homeLine}</dd>
+              </div>
+            </dl>
+            <span class="po__go" aria-hidden="true"><Chevron /></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. How we work (summary) -->
+  <section class="section how" aria-labelledby="how-heading">
+    <div class="wrap">
+      <IndexHead id="how-heading" index="04" text="Start small. Prove it. Then scale." />
+      <ol class="stepboxes">
+        {steps.map((step, i) => (
+          <li class="stepbox">
+            <span class="stepbox__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <p><strong>{step.lead}</strong> – {step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <ArrowLink href={url('how-we-work/')} class="section-link">How we work</ArrowLink>
+    </div>
+  </section>
+
+  <!-- 6. Founders -->
+  <section class="section on-paper" aria-labelledby="founders-heading">
+    <div class="wrap">
+      <IndexHead id="founders-heading" index="05" text="Led by the people who do the work" />
+      <ul class="profiles">
+        {founders.map((f) => (
+          <li class="profile">
+            <div class="profile__photo"><FounderPortrait slug={f.slug} initials={f.initials} size="lg" /></div>
+            <div class="profile__body">
+              <h3>{f.name}<span class="visually-hidden">,</span></h3>
+              <p class="profile__role">{f.role}<span class="visually-hidden"> –</span></p>
+              <p class="profile__text">{f.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <ArrowLink href={url('about/')} class="section-link">Meet the founders</ArrowLink>
+    </div>
+  </section>
+
+  <!-- 7. Closing call to action -->
+  <section class="on-paper cta-wrap" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <div class="cta-panel">
+        <div class="cta-panel__text">
+          <h2 id="cta-heading" set:html={brandify('Got a data, AI or digital challenge?')} />
+          <p class="lede">Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us.</p>
+        </div>
+        <div class="cta-panel__action">
+          <Button href={url('contact/')}>Book a 30-minute conversation</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) 0;
+    background:
+      linear-gradient(to right, rgba(94, 234, 212, 0.07) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.07) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(135deg, var(--ink) 55%, #10403f 100%);
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  @media (min-width: 60em) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+  }
+
+  .hero__art {
+    width: min(100%, 30rem);
+    justify-self: center;
+  }
+
+  .eyebrow {
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .eyebrow__tag {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid rgba(94, 234, 212, 0.45);
+    border-radius: 0.25rem;
+    background: rgba(94, 234, 212, 0.08);
+    color: var(--mint);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    max-width: 15ch;
+    font-size: clamp(2.5rem, 1.5rem + 4.4vw, 5.25rem);
+  }
+
+  .hero-ai {
+    color: var(--mint);
+  }
+
+  .hero__lede {
+    max-width: 38rem;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  /* Key facts strip */
+  .facts {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #2f5a60;
+  }
+
+  @media (min-width: 40em) {
+    .facts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .fact {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #2f5a60;
+  }
+
+  @media (min-width: 40em) {
+    .fact {
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1.75rem clamp(1rem, 3vw, 2rem);
+      border-bottom: 0;
+    }
+
+    .fact + .fact {
+      border-left: 1px solid #2f5a60;
+    }
+
+    .fact:first-child {
+      padding-left: 0;
+    }
+  }
+
+  .fact__value {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    line-height: 1;
+    color: var(--mint);
+  }
+
+  .fact__label {
+    color: var(--muted-on-ink);
+    font-weight: 600;
+  }
+
+  /* ---------- Problem ---------- */
+  .problem__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 60em) {
+    .problem__grid {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      column-gap: clamp(3rem, 6vw, 6rem);
+    }
+  }
+
+  .problem__text {
+    max-width: var(--measure);
+  }
+
+  .pilot-live {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pl {
+    flex: 1;
+    display: grid;
+    gap: 0.625rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-card);
+  }
+
+  .pl--pilot {
+    border: 2px dashed #9fb0ad;
+    background: transparent;
+  }
+
+  .pl--live {
+    border: 2px solid var(--teal);
+    background: var(--white);
+    box-shadow: 0 16px 32px -20px rgba(15, 118, 110, 0.5);
+  }
+
+  .pl__dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: #9fb0ad;
+  }
+
+  .pl--live .pl__dot {
+    background: var(--teal);
+  }
+
+  .pl__bar {
+    height: 0.5rem;
+    border-radius: 1rem;
+    background: #dfe5e2;
+  }
+
+  .pl--live .pl__bar {
+    background: linear-gradient(to right, var(--teal), #5eead4);
+  }
+
+  .pl__bar--short {
+    width: 60%;
+  }
+
+  .pilot-live :global(.pl__arrow) {
+    width: 1rem;
+    height: 1.2rem;
+  }
+
+  /* ---------- Why: bento grid on ink ---------- */
+  .why {
+    background: var(--ink);
+  }
+
+  .bento {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid #2f5a60;
+    border-radius: var(--radius-card);
+    background: #2f5a60; /* shows through the 1px gaps as grid lines */
+    overflow: hidden;
+  }
+
+  @media (min-width: 40em) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bento__cell--wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .bento {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bento__cell--wide {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+  }
+
+  .bento__cell {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--ink);
+    transition: background-color 0.2s ease;
+  }
+
+  .bento__cell:hover {
+    background: #12363c;
+  }
+
+  .bento__cell--wide {
+    background:
+      radial-gradient(ellipse 60% 90% at 100% 0%, rgba(94, 234, 212, 0.16), transparent 60%),
+      #11353a;
+  }
+
+  .bento__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .bento__chip {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.375rem;
+    background: rgba(94, 234, 212, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(94, 234, 212, 0.3);
+  }
+
+  .bento__num {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--muted-on-ink);
+    letter-spacing: 0.05em;
+  }
+
+  .bento__lead {
+    font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.4375rem);
+    line-height: 1.25;
+  }
+
+  .bento__cell--wide .bento__lead {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+  }
+
+  .bento__text {
+    color: var(--muted-on-ink);
+  }
+
+  .bento__cell--wide .bento__text {
+    max-width: 36rem;
+    color: var(--paper);
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  /* ---------- Services: problem → outcome ---------- */
+  .po-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .po-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .po {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border: 1px solid var(--grid-line);
+    border-top: 5px solid var(--po-accent, var(--teal));
+    border-radius: var(--radius-card);
+    background: var(--white);
+    box-shadow: 0 1px 0 rgba(14, 42, 47, 0.04), 0 16px 36px -26px rgba(14, 42, 47, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .po:hover,
+  .po:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 44px -26px rgba(15, 118, 110, 0.5);
+  }
+
+  .po--data { --po-accent: #0f766e; }
+  .po--ai { --po-accent: #f59e0b; }
+  .po--digital { --po-accent: #0e2a2f; }
+  .po--assurance { --po-accent: #14b8a6; }
+
+  .po__head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+
+  @media (min-width: 30em) {
+    .po__head {
+      flex-direction: row;
+      align-items: center;
+      padding-inline: 1.75rem;
+    }
+  }
+
+  .po__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 0.375rem;
+    background: var(--ink);
+    --icon-line: var(--mint);
+  }
+
+  .po__icon :global(.service-icon) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .po__name {
+    min-width: 0;
+    font-size: clamp(1.375rem, 1.15rem + 0.9vw, 1.75rem);
+    padding-right: 2rem;
+  }
+
+  .po__link {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .po__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .po:hover .po__link {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  .po__link:focus-visible {
+    outline: none;
+  }
+
+  .po__link:focus-visible::after {
+    outline: var(--focus-width) solid var(--ink);
+    outline-offset: 3px;
+    border-radius: var(--radius-card);
+  }
+
+  .po__body {
+    display: grid;
+    margin: 0;
+    border-top: 1px solid var(--grid-line);
+  }
+
+  .po__row {
+    display: grid;
+    gap: 0.375rem;
+    padding: 1.125rem 1.5rem;
+  }
+
+  @media (min-width: 30em) {
+    .po__row {
+      padding-inline: 1.75rem;
+    }
+  }
+
+  .po__row--outcome {
+    border-top: 1px dashed var(--grid-line);
+    background: #f1f7f5;
+  }
+
+  .po__row dt {
+    color: var(--slate);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .po__row--outcome dt {
+    color: var(--teal-dark);
+  }
+
+  .po__row dd {
+    margin: 0;
+  }
+
+  .po__row--outcome dd {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .po__go {
+    position: absolute;
+    top: 1.75rem;
+    right: 1.5rem;
+    --accent: var(--teal);
+  }
+
+  .po__go :global(.chevron) {
+    width: 0.9rem;
+    height: 1.1rem;
+  }
+
+  /* ---------- How: numbered step boxes ---------- */
+  .how {
+    background:
+      linear-gradient(to right, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 48px 48px,
+      var(--ink);
+  }
+
+  .stepboxes {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  @media (min-width: 48em) {
+    .stepboxes {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  .stepbox {
+    position: relative;
+    padding: 4.5rem 1.75rem 1.75rem;
+    border: 1px solid #2f5a60;
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, #14383e, #0d272b);
+  }
+
+  .stepbox__num {
+    position: absolute;
+    top: 0;
+    left: 1.75rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0 0 0.375rem 0.375rem;
+    background: var(--mint);
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .stepbox p {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  /* Arrow between boxes */
+  @media (min-width: 48em) {
+    .stepbox:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: calc(-0.75rem - 7px);
+      z-index: 1;
+      width: 14px;
+      height: 18px;
+      background: var(--amber);
+      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+      transform: translateY(-50%);
+    }
+  }
+
+  .section-link {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  /* ---------- Founders: profile cards ---------- */
+  .profiles {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .profiles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .profile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius-card);
+    background: var(--white);
+    overflow: hidden;
+    box-shadow: 0 16px 36px -26px rgba(14, 42, 47, 0.45);
+  }
+
+  @media (min-width: 30em) {
+    .profile {
+      grid-template-columns: 11rem minmax(0, 1fr);
+    }
+  }
+
+  .profile__photo {
+    padding: 1.5rem;
+    background: var(--ink);
+  }
+
+  .profile__photo :global(.portrait__img) {
+    border-radius: 0.375rem;
+  }
+
+  .profile__photo :global(.monogram) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .profile__body {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .profile h3 {
+    font-size: 1.5rem;
+  }
+
+  .profile__role {
+    margin-top: 0.375rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid var(--grid-line);
+    color: var(--teal-dark);
+    font-weight: 600;
+  }
+
+  .profile__text {
+    margin-top: 0.875rem;
+  }
+
+  /* ---------- CTA panel ---------- */
+  .cta-wrap {
+    padding-block: 0 var(--section-space);
+  }
+
+  .cta-panel {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: var(--radius-card);
+    border-left: 6px solid var(--mint);
+    background:
+      linear-gradient(to right, rgba(94, 234, 212, 0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      var(--ink);
+    color: var(--paper);
+    /* Dark context inside a paper section */
+    --heading: var(--white);
+    --link: var(--mint);
+    --focus: var(--white);
+  }
+
+  @media (min-width: 60em) {
+    .cta-panel {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4rem;
+    }
+  }
+
+  .cta-panel h2 {
+    max-width: 18ch;
+    color: var(--white);
+  }
+
+  .cta-panel .lede {
+    max-width: 36rem;
+    margin-top: 1.25rem;
+  }
+
+  .cta-wrap .cta-panel :global(.button) {
+    --button-bg: var(--mint);
+    --button-bg-hover: var(--mint-light);
+    --button-text: var(--ink);
+  }
+</style>

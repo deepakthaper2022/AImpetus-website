@@ -1,0 +1,391 @@
+---
+// Contact – copy from brief/website-content.pdf ("Contact page"). Netlify Forms,
+// form name contact-beta2, honeypot, success page /beta2/contact/thanks/.
+// Error messages are builder-drafted copy (brief/copy-changes.md).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Button from '../../components/Button.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import { url } from '../../lib/paths';
+import { BOOKING_LINK, COMPANY_LINKEDIN, CONTACT_EMAIL, FORM_NAME } from '../../lib/site';
+---
+<BaseLayout
+  title="Contact us | AImpetus"
+  description="Book a 30-minute conversation with the AImpetus founders about your data, digital or AI challenge."
+>
+  <PageHero
+    art="contact"
+    title="Let's talk"
+    intro="Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us. You'll speak directly to one of the founders."
+  />
+
+  <section class="section book" aria-labelledby="book-heading">
+    <div class="wrap book__inner">
+      <SectionHead id="book-heading" text="Book a conversation" />
+      <div class="book__action">
+        {BOOKING_LINK ? (
+          <Button href={BOOKING_LINK}>Choose a time</Button>
+        ) : (
+          <p><span class="button-pending">Choose a time</span> <Placeholder text="booking link" /></p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-paper" aria-labelledby="message-heading">
+    <div class="wrap contact__grid">
+      <div class="form-card">
+        <h2 id="message-heading">Or send us a message</h2>
+
+        <div class="error-summary" data-error-summary tabindex="-1" hidden>
+          <h3 class="error-summary__title" id="error-summary-title">There is a problem</h3>
+          <ul class="error-summary__list" data-error-list></ul>
+        </div>
+
+        <form
+          name={FORM_NAME}
+          method="POST"
+          action={url('contact/thanks/')}
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          data-contact-form
+        >
+          <input type="hidden" name="form-name" value={FORM_NAME} />
+
+          <!-- Honeypot: hidden from everyone, including assistive technology -->
+          <p hidden>
+            <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <div class="field" data-field="name">
+            <label for="name">Name</label>
+            <p class="field__error" id="name-error" hidden></p>
+            <input id="name" name="name" type="text" autocomplete="name" required data-error-required="Enter your name" />
+          </div>
+
+          <div class="field" data-field="email">
+            <label for="email">Work email</label>
+            <p class="field__error" id="email-error" hidden></p>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              spellcheck="false"
+              required
+              data-error-required="Enter your work email address"
+              data-error-format="Enter an email address in the correct format, like name@example.org"
+            />
+          </div>
+
+          <div class="field" data-field="organisation">
+            <label for="organisation">Organisation</label>
+            <p class="field__error" id="organisation-error" hidden></p>
+            <input id="organisation" name="organisation" type="text" autocomplete="organization" required data-error-required="Enter your organisation" />
+          </div>
+
+          <div class="field">
+            <label for="role">I'm a… <span class="field__optional">(optional)</span></label>
+            <select id="role" name="role">
+              <option value="">Select an option</option>
+              <option>NHS or public-sector organisation</option>
+              <option>Partner or supplier</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field" data-field="message">
+            <label for="message">How can we help?</label>
+            <p class="field__error" id="message-error" hidden></p>
+            <textarea id="message" name="message" rows="6" required data-error-required="Tell us how we can help"></textarea>
+          </div>
+
+          <button type="submit" class="submit">Send message</button>
+
+          <p class="privacy-note">We'll use your details only to reply to your enquiry. See our <a href={url('privacy/')}>privacy notice</a>.</p>
+        </form>
+      </div>
+
+      <section class="other" aria-labelledby="other-heading">
+        <h2 id="other-heading">Other ways to reach us</h2>
+        <ul class="chevron-list other__list">
+          <li>Email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
+          <li>
+            LinkedIn:{' '}
+            {COMPANY_LINKEDIN ? <a href={COMPANY_LINKEDIN}>{COMPANY_LINKEDIN}</a> : <Placeholder text="company LinkedIn page" />}
+          </li>
+          <li>Based in the UK, working with clients across England.</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Progressive enhancement: accessible inline validation with an error summary.
+  // Without JS the browser's own required/email validation still applies.
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const summary = document.querySelector<HTMLElement>('[data-error-summary]');
+  const list = document.querySelector<HTMLElement>('[data-error-list]');
+
+  if (form && summary && list) {
+    form.noValidate = true;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const fields = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-error-required]')];
+
+    const messageFor = (el: HTMLInputElement | HTMLTextAreaElement): string | null => {
+      const value = el.value.trim();
+      if (!value) return el.dataset.errorRequired ?? null;
+      if (el.type === 'email' && !emailPattern.test(value)) return el.dataset.errorFormat ?? null;
+      return null;
+    };
+
+    const showError = (el: HTMLInputElement | HTMLTextAreaElement, message: string | null) => {
+      const error = document.getElementById(`${el.id}-error`);
+      const wrapper = el.closest('.field');
+      if (!error || !wrapper) return;
+      if (message) {
+        error.innerHTML = `<span class="visually-hidden">Error:</span> ${message}`;
+        error.hidden = false;
+        el.setAttribute('aria-invalid', 'true');
+        el.setAttribute('aria-describedby', error.id);
+        wrapper.classList.add('field--error');
+      } else {
+        error.hidden = true;
+        error.textContent = '';
+        el.removeAttribute('aria-invalid');
+        el.removeAttribute('aria-describedby');
+        wrapper.classList.remove('field--error');
+      }
+    };
+
+    form.addEventListener('submit', (event) => {
+      const errors: { id: string; message: string }[] = [];
+      for (const el of fields) {
+        const message = messageFor(el);
+        showError(el, message);
+        if (message) errors.push({ id: el.id, message });
+      }
+
+      if (errors.length) {
+        event.preventDefault();
+        list.innerHTML = '';
+        for (const { id, message } of errors) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `#${id}`;
+          a.textContent = message;
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById(id)?.focus();
+          });
+          li.append(a);
+          list.append(li);
+        }
+        summary.hidden = false;
+        summary.focus();
+        document.title = document.title.startsWith('Error: ') ? document.title : `Error: ${document.title}`;
+      } else {
+        summary.hidden = true;
+      }
+    });
+
+    // Clear a field's error as soon as it is fixed (on input, not blur, so the
+    // layout doesn't shift under the pointer while clicking "Send message")
+    for (const el of fields) {
+      el.addEventListener('input', () => {
+        if (el.getAttribute('aria-invalid') === 'true' && !messageFor(el)) showError(el, null);
+      });
+    }
+  }
+</script>
+
+<style>
+  .book__inner {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 48em) {
+    .book__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+
+  .button-pending {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    margin-right: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px dashed var(--mint);
+    border-radius: var(--radius);
+    color: var(--mint);
+    font-weight: 600;
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  @media (min-width: 60em) {
+    .contact__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    }
+  }
+
+  .form-card {
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--rule-on-paper);
+    border-radius: 1.25rem;
+    background: var(--white);
+    box-shadow: 0 18px 48px -28px rgba(14, 42, 47, 0.35);
+  }
+
+  .form-card h2,
+  .other h2 {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2.125rem);
+  }
+
+  form {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .field label {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .field__optional {
+    color: var(--slate);
+    font-weight: 400;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.75rem 0.875rem;
+    border: 2px solid var(--slate);
+    border-radius: 0.5rem;
+    background: var(--white);
+    color: var(--ink);
+    font: inherit;
+  }
+
+  .field textarea {
+    min-height: 9rem;
+    resize: vertical;
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230E2A2F' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.75rem;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+    border-color: var(--ink);
+  }
+
+  .field__error {
+    color: #b42318;
+    font-weight: 600;
+  }
+
+  .field--error {
+    padding-left: 1rem;
+    border-left: 4px solid #b42318;
+  }
+
+  .field--error input,
+  .field--error textarea {
+    border-color: #b42318;
+  }
+
+  .error-summary {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border: 3px solid #b42318;
+    border-radius: 0.75rem;
+  }
+
+  .error-summary:focus {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .error-summary__title {
+    font-size: 1.25rem;
+    color: var(--ink);
+  }
+
+  .error-summary__list {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  /* Links are created by the script, so they need a global selector */
+  .error-summary__list :global(a) {
+    color: #b42318;
+    font-weight: 600;
+  }
+
+  .submit {
+    justify-self: start;
+    min-height: 3rem;
+    padding: 0.75rem 1.75rem;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    background: var(--teal);
+    color: var(--white);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .submit:hover {
+    background: var(--teal-dark);
+    text-decoration: underline;
+  }
+
+  .submit:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .privacy-note {
+    color: var(--slate);
+    font-size: 0.9375rem;
+  }
+
+  .other__list {
+    margin-top: 1.25rem;
+  }
+
+  @media (forced-colors: active) {
+    .submit {
+      border-color: ButtonText;
+    }
+  }
+</style>

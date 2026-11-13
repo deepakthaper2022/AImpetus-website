@@ -1,0 +1,105 @@
+---
+// Numbered steps joined by a track with amber chevrons (horizontal from 48em).
+interface Step { lead: string; text: string }
+interface Props { steps: Step[]; separator?: string }
+const { steps, separator = ' – ' } = Astro.props;
+---
+<ol class="track">
+  {steps.map((step, i) => (
+    <li class="track__step">
+      <span class="track__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      <p><strong>{step.lead}</strong>{separator}{step.text}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .track {
+    display: grid;
+    gap: 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: 0;
+    list-style: none;
+  }
+
+  .track__step {
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  .track__num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border: 2px solid var(--mint);
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--mint);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  .track__step p {
+    padding-top: 0.6rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .track__step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 3.5rem;
+    bottom: -1.75rem;
+    left: calc(1.625rem - 1px);
+    width: 2px;
+    background: linear-gradient(var(--mint), var(--rule-on-ink));
+  }
+
+  @media (min-width: 48em) {
+    .track {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .track__step {
+      padding-left: 0;
+      padding-top: 5rem;
+    }
+
+    .track__step p {
+      padding-top: 0;
+    }
+
+    .track__num {
+      width: 3.75rem;
+      height: 3.75rem;
+      font-size: 1.25rem;
+    }
+
+    .track__step:not(:last-child)::before {
+      top: 1.875rem;
+      bottom: auto;
+      left: 4.5rem;
+      right: calc(-1 * clamp(2rem, 4vw, 3.5rem) + 1.25rem);
+      width: auto;
+      height: 2px;
+      background: linear-gradient(to right, var(--mint), rgba(94, 234, 212, 0.25));
+    }
+
+    .track__step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: calc(1.875rem - 7px);
+      right: calc(-1 * clamp(2rem, 4vw, 3.5rem) + 0.5rem);
+      width: 12px;
+      height: 16px;
+      background: var(--amber);
+      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+    }
+  }
+</style>

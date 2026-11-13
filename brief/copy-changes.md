@@ -28,6 +28,8 @@ Agreed 13 Nov 2026: replace the Home section H2 "A new company. A proven team." 
 | Legal pages – SEO titles (betas) | Privacy notice \| AImpetus · Cookie notice \| AImpetus · Accessibility statement \| AImpetus (meta description: the default) |
 | Contact form – small UI text (betas) | "(optional)" after "I'm a…" · first dropdown option "Select an option" · thanks page link "Go to the home page" |
 | Service pages – navigation (betas) | Breadcrumb "Home › Services › [service name]" · section heading "Other services" linking to the other three service pages · thanks page breadcrumb "Home › Contact › Thanks" |
+| Beta 2 Home – key facts strip | "60 · years of combined experience" · "10+ · years on NHS national programmes" · "4 · services, one aim" (restating facts already in the copy) |
+| Beta 2 Home – service cards | Labels "The problem" (followed by the Services page "For when…" line) and "The outcome" (followed by the Home card line) |
 | Contact form errors (betas) | Error summary heading: There is a problem · Enter your name · Enter your work email address · Enter an email address in the correct format, like name@example.org · Enter your organisation · Tell us how we can help |
 
 ## Holding page

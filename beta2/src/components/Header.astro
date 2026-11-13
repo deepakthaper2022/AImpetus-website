@@ -1,0 +1,292 @@
+---
+// Beta 2 header: light (white) bar with the primary logo, above the dark hero.
+import { mainNav, BETA_NUMBER } from '../lib/site';
+import { url, isCurrent } from '../lib/paths';
+
+const currentPath = Astro.url.pathname;
+---
+<header class="site-header" data-header>
+  <p class="beta-banner">Beta {BETA_NUMBER} preview – not the live AImpetus website.</p>
+
+  <div class="masthead-bar">
+    <div class="masthead wrap">
+      <a href={url('')} class="logo-link">
+        <img src={url('images/aimpetus-logo-primary.svg')} alt="AImpetus – home" width="519" height="96" class="logo" />
+      </a>
+
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <span class="menu-toggle__icon" aria-hidden="true"></span>
+        <span>Menu</span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Main" data-menu>
+        <ul class="site-nav__list">
+          {mainNav.map((item) => (
+            <li>
+              <a href={url(item.path)} aria-current={isCurrent(currentPath, item.path) ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+        <a href={url('contact/')} class="site-nav__cta">Book a conversation</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement: without JS the nav is simply shown in full.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = header?.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = header?.querySelector<HTMLElement>('[data-menu]');
+
+  if (header && toggle && menu) {
+    header.classList.add('has-js');
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.matchMedia('(min-width: 64em)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .beta-banner {
+    margin: 0;
+    padding: 0.5rem var(--gutter);
+    background: var(--amber);
+    color: var(--ink);
+    font-size: var(--step--1);
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .masthead-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--grid-line);
+    /* Light context for focus rings */
+    --focus: var(--ink);
+  }
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-block: 1rem;
+  }
+
+  .logo-link {
+    display: inline-block;
+    padding-block: 0.25rem;
+  }
+
+  .logo {
+    width: clamp(9.5rem, 28vw, 11.5rem);
+    height: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .site-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.875rem;
+    border-radius: var(--radius);
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .site-nav__list a:hover {
+    background: #eef3f1;
+    color: var(--teal-dark);
+  }
+
+  .site-nav__list a[aria-current='page'] {
+    background: #e3efec;
+    color: var(--teal-dark);
+    box-shadow: inset 0 -3px 0 var(--teal);
+  }
+
+  .site-nav__cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.125rem;
+    border-radius: var(--radius);
+    background: var(--teal);
+    color: var(--white);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .site-nav__cta:hover {
+    background: var(--teal-dark);
+    color: var(--white);
+    text-decoration: underline;
+  }
+
+  .site-nav :focus-visible,
+  .menu-toggle:focus-visible,
+  .logo-link:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--slate);
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .menu-toggle:hover {
+    border-color: var(--teal);
+  }
+
+  .menu-toggle__icon,
+  .menu-toggle__icon::before,
+  .menu-toggle__icon::after {
+    display: block;
+    width: 1.125rem;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .menu-toggle__icon {
+    position: relative;
+  }
+
+  .menu-toggle__icon::before,
+  .menu-toggle__icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-toggle__icon::before {
+    top: -6px;
+  }
+
+  .menu-toggle__icon::after {
+    top: 6px;
+  }
+
+  .menu-open .menu-toggle__icon {
+    background: transparent;
+  }
+
+  .menu-open .menu-toggle__icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .menu-open .menu-toggle__icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 63.99em) {
+    .site-nav {
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .site-nav__list {
+      flex-direction: column;
+    }
+
+    .site-nav__list a {
+      width: 100%;
+      font-size: 1.125rem;
+    }
+
+    .site-nav__cta {
+      justify-content: center;
+    }
+
+    .has-js .menu-toggle {
+      display: inline-flex;
+    }
+
+    .has-js:not(.menu-open) .site-nav {
+      display: none;
+    }
+
+    @media (scripting: enabled) {
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .site-header:not(.menu-open) .site-nav {
+        display: none;
+      }
+    }
+
+    .menu-open .site-nav {
+      padding-block: 0.5rem 1rem;
+      border-top: 1px solid var(--grid-line);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .site-nav__list a[aria-current='page'] {
+      outline: 2px solid CanvasText;
+    }
+
+    .site-nav__cta {
+      border: 2px solid ButtonText;
+    }
+
+    .menu-toggle__icon,
+    .menu-toggle__icon::before,
+    .menu-toggle__icon::after {
+      background: CanvasText;
+    }
+
+    .menu-open .menu-toggle__icon {
+      background: transparent;
+    }
+  }
+</style>
