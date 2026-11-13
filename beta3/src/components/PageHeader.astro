@@ -21,8 +21,9 @@ interface Props {
 }
 const { title, intro, kicker, crumbs, crumbLabel, photo, stripes = 'tint' } = Astro.props;
 const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?? title }];
+const hasMedia = Boolean(photo) || Astro.slots.has('media');
 ---
-<section class:list={['page-header', { 'page-header--photo': photo }]} aria-labelledby="page-title">
+<section class:list={['page-header', { 'page-header--photo': hasMedia }]} aria-labelledby="page-title">
   {stripes && <div class="page-header__stripes"><LogoStripes variant={stripes} /></div>}
   <div class="wrap page-header__inner">
     <div class="page-header__text">
@@ -35,6 +36,11 @@ const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?
     {photo && (
       <div class="page-header__media">
         <PhotoFrame src={photo} eager ratio="3 / 2" />
+      </div>
+    )}
+    {!photo && hasMedia && (
+      <div class="page-header__media page-header__card">
+        <slot name="media" />
       </div>
     )}
   </div>
@@ -66,9 +72,17 @@ const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?
     }
   }
 
-  .page-header__text {
+  .page-header__text,
+  .page-header__card {
     position: relative;
     z-index: 1;
+  }
+
+  /* Branded content card in place of a photo (Services, About, Insights) */
+  .page-header__card {
+    width: 100%;
+    max-width: 34rem;
+    justify-self: end;
   }
 
   .page-header:not(.page-header--photo) .page-header__text {

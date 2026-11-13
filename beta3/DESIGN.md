@@ -50,10 +50,16 @@ How it differs from the other two:
   - header stripes show from 1200 px wide (pushed further off-edge up to 1440 px) and are measured at least 18 px clear of the text;
   - the problem panel's stripe piece enters through the top border and leaves through the right border, so it is never cut mid-panel.
 
+- **Header cards** (after "Services, About and Insights look empty; no more people photos"): a white card in the photo slot, sitting on the same stripes (`HeaderCard.astro`, `PageHeader` `media` slot):
+  - **Services:** a 2×2 grid of service tiles that link to each service (one per row on the narrowest phones).
+  - **About:** a facts-only card (Founded 2026 · 60 years of combined experience · 2 founders · 10+ years on NHS national programmes).
+  - **Insights:** a decorative stack of empty article cards with the mark.
+- **Our approach** (How we work): three white stage cards on a mint band, joined by teal chevron connectors (right on wide screens, down on phones). Each has a large number and an icon, and "Scale or stop" ends with a two-tone Scale / Stop split.
+
 ## Contrast (on white unless stated)
 Ink 15.1:1 · slate 7.2:1 · teal 5.5:1 · teal-dark 7.9:1 · white on teal button 5.5:1 · ink on mint button (CTA) 10.2:1 · slate on paper 6.7:1 · teal-dark on paper 7.3:1.
 
-Plus amber-dark `#B45309` on `#FFF9EE` (problem markers) 4.8:1 · teal on `#EFFAF7` 5.1:1 · teal-dark on `#E9F7F4` 7.1:1 · slate on `#E9F7F4` 6.6:1.
+Plus teal-dark on `#C9EEE6` (Scale) 6.3:1 · `#8A4A06` on `#FDEBC8` (Stop) 5.8:1 · teal on `#F1FAF8` 5.2:1 · amber-dark `#B45309` on `#FFF9EE` (problem markers) 4.8:1 · teal on `#EFFAF7` 5.1:1 · teal-dark on `#E9F7F4` 7.1:1 · slate on `#E9F7F4` 6.6:1.
 
 ## Checks (all pages, 13 Nov 2026)
 - Build passes. No broken links, and nothing outside `/beta3/`. Copy matches the brief plus `brief/copy-changes.md`.

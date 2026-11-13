@@ -6,6 +6,15 @@ import ReasonList from '../components/ReasonList.astro';
 import FounderPortrait from '../components/FounderPortrait.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import CtaPanel from '../components/CtaPanel.astro';
+import HeaderCard from '../components/HeaderCard.astro';
+
+// Facts restated from the About and Home copy (labels: brief/copy-changes.md)
+const facts = [
+  { value: '2026', label: 'Founded' },
+  { value: '60', label: 'years of combined experience' },
+  { value: '2', label: 'founders, leading every engagement' },
+  { value: '10+', label: 'years on NHS national programmes' },
+];
 import { url } from '../lib/paths';
 
 const whyNow = [
@@ -61,7 +70,19 @@ const beliefs = [
     kicker="About us"
     title="A new company. A proven team."
     intro="AImpetus is a UK data, digital and AI services company. We were founded in 2026 by two people who have spent their careers delivering technology for the NHS and the wider public sector."
-  />
+  >
+    <HeaderCard slot="media">
+      <dl class="facts">
+        {facts.map((f) => (
+          <div class="fact">
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="facts__note">NHS England · NHS Improvement · UK public sector</p>
+    </HeaderCard>
+  </PageHeader>
 
   <section class="section" aria-labelledby="started-heading">
     <div class="wrap">
@@ -118,6 +139,62 @@ const beliefs = [
 </BaseLayout>
 
 <style>
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .fact {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.375rem;
+    min-height: 8.5rem;
+    padding: 1.125rem 1.25rem;
+    border-radius: 1rem;
+    background: #f1faf8;
+  }
+
+  .fact:first-child {
+    background: var(--ink);
+  }
+
+  .fact dd {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 1.8rem + 1.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--teal);
+  }
+
+  .fact:first-child dd {
+    color: var(--mint);
+  }
+
+  .fact dt {
+    color: var(--slate);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .fact:first-child dt {
+    color: var(--muted-on-ink);
+  }
+
+  .facts__note {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e3e8e6;
+    color: var(--teal-dark);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
   h2 {
     font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
   }

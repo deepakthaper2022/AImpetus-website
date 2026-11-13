@@ -4,6 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import ServiceCards from '../../components/ServiceCards.astro';
 import CtaPanel from '../../components/CtaPanel.astro';
+import HeaderCard from '../../components/HeaderCard.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import { services } from '../../data/services';
+import { brandify } from '../../lib/brand';
 import { url } from '../../lib/paths';
 ---
 <BaseLayout
@@ -15,7 +19,23 @@ import { url } from '../../lib/paths';
     kicker="Services"
     title="Services built around the outcome, not the technology"
     intro="We help public-sector and other organisations improve services with data, digital and AI. Each service can stand alone or work with the others, and each starts with the problem you need to solve."
-  />
+  >
+    <HeaderCard slot="media">
+      <nav aria-label="Our services">
+        <ul class="tiles">
+          {services.map((s) => (
+            <li>
+              <a href={url(`services/${s.slug}/`)} class="tile">
+                <span class="tile__icon" aria-hidden="true"><ServiceIcon name={s.icon} /></span>
+                <span class="tile__name" set:html={brandify(s.name)} />
+                <span class="tile__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </HeaderCard>
+  </PageHeader>
 
   <section class="section" aria-labelledby="fit-heading">
     <div class="wrap">
@@ -36,6 +56,83 @@ import { url } from '../../lib/paths';
 </BaseLayout>
 
 <style>
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tile {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.75rem;
+    height: 100%;
+    min-height: 9.5rem;
+    padding: clamp(0.875rem, 2.5vw, 1.125rem);
+    border-radius: 1rem;
+    background: #f1faf8;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .tile:hover {
+    background: #dcf3ee;
+    color: var(--ink);
+    transform: translateY(-2px);
+  }
+
+  .tile:hover .tile__name {
+    text-decoration: underline;
+  }
+
+  .tile__icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    background: var(--white);
+  }
+
+  .tile__icon :global(.service-icon) {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .tile__name {
+    font-family: var(--font-heading);
+    font-size: clamp(0.9375rem, 0.8rem + 0.6vw, 1.125rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .tile__arrow {
+    color: var(--teal-dark);
+    font-weight: 600;
+  }
+
+  /* Narrowest phones: one tile per row */
+  @media (max-width: 25.99em) {
+    .tiles {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tile {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-rows: none;
+      align-items: center;
+      min-height: 0;
+    }
+  }
+
+  .tile:hover .tile__arrow {
+    transform: translateX(3px);
+  }
+
   .fit {
     display: grid;
     gap: 1rem 4rem;

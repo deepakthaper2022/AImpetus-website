@@ -21,6 +21,24 @@ import { COMPANY_LINKEDIN } from '../lib/site';
         <>Follow AImpetus on LinkedIn <Placeholder text="company LinkedIn page" /></>
       )}
     </p>
+    <div slot="media" class="stack" aria-hidden="true">
+      {[0, 1, 2].map((i) => (
+        <div class={`stack__card stack__card--${i}`}>
+          <span class="stack__img">
+            {i === 2 && (
+              <svg viewBox="0 0 48 48" focusable="false">
+                <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill="#F59E0B" />
+                <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill="#5EEAD4" />
+              </svg>
+            )}
+          </span>
+          <span class="stack__line stack__line--title"></span>
+          <span class="stack__line stack__line--title stack__line--short"></span>
+          <span class="stack__line"></span>
+          <span class="stack__line stack__line--short"></span>
+        </div>
+      ))}
+    </div>
   </PageHeader>
 
   <section class="section band-paper">
@@ -42,6 +60,62 @@ import { COMPANY_LINKEDIN } from '../lib/site';
 </BaseLayout>
 
 <style>
+  .stack {
+    position: relative;
+    height: 22rem;
+  }
+
+  .stack__card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: grid;
+    gap: 0.75rem;
+    width: min(100%, 19rem);
+    padding: 1rem 1rem 1.5rem;
+    border: 1px solid #e3e8e6;
+    border-radius: 1.25rem;
+    background: var(--white);
+    box-shadow: 0 24px 48px -28px rgba(14, 42, 47, 0.45);
+  }
+
+  .stack__card--0 { transform: translate(-62%, -50%) rotate(-8deg); }
+  .stack__card--1 { transform: translate(-38%, -52%) rotate(5deg); }
+  .stack__card--2 { transform: translate(-50%, -48%); }
+
+  .stack__img {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 0.25rem;
+    border-radius: 0.875rem;
+    background: linear-gradient(120deg, #dcf3ee, #f1faf8);
+  }
+
+  .stack__card--2 .stack__img {
+    background: linear-gradient(120deg, var(--ink), #0f4a47);
+  }
+
+  .stack__img svg {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .stack__line {
+    height: 0.625rem;
+    border-radius: 1rem;
+    background: #e5eae8;
+  }
+
+  .stack__line--title {
+    height: 0.875rem;
+    background: #d3dcd9;
+  }
+
+  .stack__line--short {
+    width: 60%;
+  }
+
   .follow {
     font-weight: 600;
   }
