@@ -6,9 +6,20 @@ Served at `/beta1/`. Astro (static), plain CSS, no client framework. JavaScript 
 Engine room, dark-first (ink `#0E2A2F`) with mint accents and paper sections for reading. Typography-led: large Space Grotesk headlines, generous space, the chevron as the signature mark. After the first review ("too flat, like a document") the Home page gained more visual character, and every page now follows that:
 
 - **Hero artwork** (`HeroArt.astro`): an "engine room" gauge (rings, tick marks, highlighted arc) around the amber and mint chevrons with motion trails, on a faint engineering grid with a mint glow. The outer ring turns very slowly; off under `prefers-reduced-motion`.
-- **Interior heroes** (`PageHero.astro` + `RingArt.astro`): the same grid and gauge language, with the service's line icon in the centre on service pages.
+- **Interior heroes** (`PageHero.astro` + `PageArt.astro`): each page has its own illustration in the same language (faint gauge ring, glow, mint line work, amber accent). The illustrations were added after the second review ("same image on every page"):
+  - Services: the four service icons orbiting the mark.
+  - Data and platforms: stacked platform layers with data flowing in.
+  - AI to benefit: dashed pilot bars becoming solid, with a rising benefit line and a check.
+  - Digital transformation: a rigid legacy grid becoming a connected flow.
+  - Delivery assurance: a dial reading in the confident zone, above a milestone track.
+  - How we work: a 1 → 2 → 3 path ending in scale or stop.
+  - Contact: a calendar with a chosen slot, plus conversation bubbles.
+  - Insights: a stack of articles with a bookmark.
+  - About: the two founders (`FounderDuo.astro`).
+  - Thanks and 404: the chevrons. Legal pages have no art.
 - **Rhythm:** ink hero → ink section → paper section, alternating. Paper is used for reading-heavy content (cards, service detail, legal pages).
-- **Components:** white cards with a teal tab on paper; dark gradient tiles with line icons on ink; a numbered step track with amber chevrons; a patterned teal call-to-action band; monogram badges for the founders until photos arrive.
+- **Feature sections** (`FeatureSection.astro`, after the second review's "headings hanging, flat white blocks"): the heading sits in a left column that stays in view while you scroll, with the item count as a large outlined numeral. The cards on the right have an ink icon chip with line icons (`FeatureIcon.astro`) and numbering, and the first card is a dark featured card. The paper behind has a dot-grid texture and a faint chevron watermark. Used for Why AImpetus, What you can expect, What we do, Why now and What we believe.
+- **Components:** dark gradient tiles with line icons on ink; a numbered step track with amber chevrons; a patterned teal call-to-action band; founder portraits (`FounderPortrait.astro`): photos from `src/assets/founders/<slug>.jpg`, cropped square and served as AVIF/WebP, with the monogram badge as fallback.
 - **Chevron uses:** section markers above every H2, list bullets, arrow links, step-track joints, the CTA pattern, the hero artwork.
 
 ## Key decisions

@@ -3,20 +3,23 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
-import Monogram from '../components/Monogram.astro';
+import FounderPortrait from '../components/FounderPortrait.astro';
+import FounderDuo from '../components/FounderDuo.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import CtaBand from '../components/CtaBand.astro';
+import FeatureSection from '../components/FeatureSection.astro';
 import { url } from '../lib/paths';
 
 const whyNow = [
-  { lead: 'Outcomes, not hype.', text: 'The real test is benefit delivered: better services, lower costs and measurable impact. Technology is the means, not the goal.' },
-  { lead: 'Understanding the business matters as much as the technology.', text: 'AI and digital tools move fast. Knowing how an organisation really works, its people, pressures and priorities, matters just as much.' },
-  { lead: 'The groundwork is the gap.', text: "The tools are ready. What often isn't ready is the data, the platforms and the governance underneath. That's exactly where we work." },
-];
+  { icon: 'target', lead: 'Outcomes, not hype.', text: 'The real test is benefit delivered: better services, lower costs and measurable impact. Technology is the means, not the goal.' },
+  { icon: 'organisation', lead: 'Understanding the business matters as much as the technology.', text: 'AI and digital tools move fast. Knowing how an organisation really works, its people, pressures and priorities, matters just as much.' },
+  { icon: 'foundation', lead: 'The groundwork is the gap.', text: "The tools are ready. What often isn't ready is the data, the platforms and the governance underneath. That's exactly where we work." },
+] as const;
 
 const founders = [
   {
     id: 'prahlad',
+    slug: 'prahlad-koti',
     name: 'Prahlad Koti',
     initials: 'PK',
     role: 'Co-founder and Managing Director',
@@ -30,6 +33,7 @@ const founders = [
   },
   {
     id: 'deepak',
+    slug: 'deepak-thaper',
     name: 'Deepak Thaper',
     initials: 'DT',
     role: 'Co-founder and Delivery & Technology Director',
@@ -44,11 +48,11 @@ const founders = [
 ];
 
 const beliefs = [
-  { lead: 'Outcomes before technology.', text: 'We start with the service and the people who use it.' },
-  { lead: 'Evidence before scale.', text: 'Prove it works, then grow it.' },
-  { lead: 'Honesty before sales.', text: "We'd rather lose a deal than oversell." },
-  { lead: 'Public value.', text: 'Every pound of public money should do real work.' },
-];
+  { icon: 'target', lead: 'Outcomes before technology.', text: 'We start with the service and the people who use it.' },
+  { icon: 'evidence', lead: 'Evidence before scale.', text: 'Prove it works, then grow it.' },
+  { icon: 'honest', lead: 'Honesty before sales.', text: "We'd rather lose a deal than oversell." },
+  { icon: 'public', lead: 'Public value.', text: 'Every pound of public money should do real work.' },
+] as const;
 ---
 <BaseLayout
   title="About us | AImpetus"
@@ -57,7 +61,9 @@ const beliefs = [
   <PageHero
     title="A new company. A proven team."
     intro="AImpetus is a UK data, digital and AI services company. We were founded in 2026 by two people who have spent their careers delivering technology for the NHS and the wider public sector."
-  />
+  >
+    <FounderDuo slot="art" />
+  </PageHero>
 
   <section class="section started" aria-labelledby="started-heading">
     <div class="wrap split">
@@ -69,22 +75,17 @@ const beliefs = [
     </div>
   </section>
 
-  <section class="section on-paper" aria-labelledby="now-heading">
+  <FeatureSection
+    id="now-heading"
+    heading="Why now"
+    intro="AI has moved from experiment to expectation. But the organisations that gain most won't be the ones with the most technology. They'll be the ones that stay focused on outcomes. That's why we started AImpetus now."
+    items={[...whyNow]}
+    ordered={false}
+  >
     <div class="wrap">
-      <div class="split">
-        <SectionHead id="now-heading" text="Why now" />
-        <p class="lede split__body">AI has moved from experiment to expectation. But the organisations that gain most won't be the ones with the most technology. They'll be the ones that stay focused on outcomes. That's why we started AImpetus now.</p>
-      </div>
-      <ul class="card-grid card-grid--3">
-        {whyNow.map((item) => (
-          <li class="card">
-            <p><strong>{item.lead}</strong> {item.text}</p>
-          </li>
-        ))}
-      </ul>
       <p class="lede now__close">We both stepped out of conventional IT services to see the work from a different angle: new technology, new ways of delivering services, and the ground reality of making change stick. AImpetus brings that experience together, so the organisations we work with get the benefit, not the hype.</p>
     </div>
-  </section>
+  </FeatureSection>
 
   <section class="section founders" aria-labelledby="founders-heading">
     <div class="wrap">
@@ -93,7 +94,7 @@ const beliefs = [
         {founders.map((f) => (
           <article class="profile" aria-labelledby={`${f.id}-name`}>
             <div class="profile__side">
-              <Monogram initials={f.initials} />
+              <FounderPortrait slug={f.slug} initials={f.initials} />
             </div>
             <div class="profile__body">
               <h3 id={`${f.id}-name`}>{f.name}</h3>
@@ -109,18 +110,7 @@ const beliefs = [
     </div>
   </section>
 
-  <section class="section on-paper" aria-labelledby="believe-heading">
-    <div class="wrap">
-      <SectionHead id="believe-heading" text="What we believe" />
-      <ul class="card-grid beliefs">
-        {beliefs.map((item) => (
-          <li class="card">
-            <p><strong>{item.lead}</strong> {item.text}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <FeatureSection id="believe-heading" heading="What we believe" items={[...beliefs]} ordered={false} />
 
   <CtaBand button="Book a 30-minute conversation" href={url('contact/')} />
 </BaseLayout>
@@ -158,8 +148,18 @@ const beliefs = [
   }
 
   .now__close {
+    position: relative;
     max-width: 52rem;
     margin-top: clamp(2rem, 4vw, 3rem);
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--amber);
+  }
+
+  /* Line up with the cards column of FeatureSection */
+  @media (min-width: 64em) {
+    .now__close {
+      margin-left: calc((100% - clamp(3rem, 5vw, 5rem)) / 3 + clamp(3rem, 5vw, 5rem));
+    }
   }
 
   .founders__list {
@@ -197,9 +197,4 @@ const beliefs = [
     margin-block: 1.25rem 1rem;
   }
 
-  @media (min-width: 64em) {
-    .beliefs {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
 </style>

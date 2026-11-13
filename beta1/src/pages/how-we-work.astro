@@ -6,6 +6,7 @@ import SectionHead from '../components/SectionHead.astro';
 import StepTrack from '../components/StepTrack.astro';
 import DataTable from '../components/DataTable.astro';
 import CtaBand from '../components/CtaBand.astro';
+import FeatureSection from '../components/FeatureSection.astro';
 import { url } from '../lib/paths';
 
 const approach = [
@@ -15,12 +16,12 @@ const approach = [
 ];
 
 const expect = [
-  { lead: 'Senior people throughout.', text: 'The founders lead every engagement, supported by trusted senior associates.' },
-  { lead: 'Honest advice.', text: "We'll tell you if something isn't worth doing, or if we're not the right fit." },
-  { lead: 'Your standards, not ours.', text: 'We work within your security, information governance, accessibility and service standards.' },
-  { lead: 'Knowledge left behind.', text: "We document, coach and hand over, so you're not dependent on us." },
-  { lead: 'Value for money.', text: 'We size the team to the job, and nothing more.' },
-];
+  { icon: 'senior', lead: 'Senior people throughout.', text: 'The founders lead every engagement, supported by trusted senior associates.' },
+  { icon: 'honest', lead: 'Honest advice.', text: "We'll tell you if something isn't worth doing, or if we're not the right fit." },
+  { icon: 'standards', lead: 'Your standards, not ours.', text: 'We work within your security, information governance, accessibility and service standards.' },
+  { icon: 'knowledge', lead: 'Knowledge left behind.', text: "We document, coach and hand over, so you're not dependent on us." },
+  { icon: 'value', lead: 'Value for money.', text: 'We size the team to the job, and nothing more.' },
+] as const;
 
 const ways = [
   ['Health check or discovery', 'Getting an independent view before you commit', 'A short, fixed-scope piece of work with clear recommendations'],
@@ -33,6 +34,7 @@ const ways = [
   description="Senior-led, partner-friendly delivery. We start small, prove the benefit, then scale what works for public-sector and other organisations."
 >
   <PageHero
+    art="how-we-work"
     title="Senior-led. Evidence-based. Easy to work with."
     intro="We keep our approach simple: understand the problem properly, prove the value early and only scale what works. Senior people stay involved throughout."
   />
@@ -44,18 +46,7 @@ const ways = [
     </div>
   </section>
 
-  <section class="section on-paper" aria-labelledby="expect-heading">
-    <div class="wrap">
-      <SectionHead id="expect-heading" text="What you can expect from us" />
-      <ul class="card-grid card-grid--3-2">
-        {expect.map((item) => (
-          <li class="card">
-            <p><strong>{item.lead}</strong> {item.text}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <FeatureSection id="expect-heading" heading="What you can expect from us" items={[...expect]} ordered={false} />
 
   <section class="section ways" aria-labelledby="ways-heading">
     <div class="wrap">

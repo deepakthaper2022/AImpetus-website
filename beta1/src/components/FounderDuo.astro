@@ -1,0 +1,65 @@
+---
+// About hero artwork: the two founders, joined by the brand chevrons.
+import FounderPortrait from './FounderPortrait.astro';
+---
+<div class="duo" aria-hidden="true">
+  <svg class="duo__bg" viewBox="0 0 400 400" focusable="false">
+    <defs>
+      <radialGradient id="duo-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.2" />
+        <stop offset="1" stop-color="#0E2A2F" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <circle cx="200" cy="200" r="195" fill="url(#duo-glow)" />
+    <circle cx="200" cy="200" r="182" fill="none" stroke="#2A4A50" />
+    <circle cx="200" cy="200" r="170" fill="none" stroke="#2A4A50" stroke-width="6" stroke-dasharray="1.2 14" />
+    <path d="M 128 200 A 72 72 0 0 1 272 200" fill="none" stroke="#5EEAD4" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round" />
+  </svg>
+  <div class="duo__a"><FounderPortrait slug="prahlad-koti" initials="PK" size="lg" /></div>
+  <div class="duo__b"><FounderPortrait slug="deepak-thaper" initials="DT" size="lg" /></div>
+</div>
+
+<style>
+  .duo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .duo__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .duo__a,
+  .duo__b {
+    position: absolute;
+    width: 40%;
+  }
+
+  .duo__a {
+    left: 8%;
+    top: 22%;
+  }
+
+  .duo__b {
+    right: 8%;
+    top: 40%;
+  }
+
+  /* Scale the monogram fallback to fill the slot */
+  .duo :global(.monogram) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    border-radius: 1.5rem;
+  }
+
+  .duo :global(.monogram__mark) {
+    width: 30%;
+    height: 30%;
+  }
+</style>

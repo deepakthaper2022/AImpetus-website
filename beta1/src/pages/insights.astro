@@ -4,7 +4,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Placeholder from '../components/Placeholder.astro';
-import RingArt from '../components/RingArt.astro';
+import PageArt from '../components/PageArt.astro';
 import { COMPANY_LINKEDIN } from '../lib/site';
 ---
 <BaseLayout
@@ -14,7 +14,7 @@ import { COMPANY_LINKEDIN } from '../lib/site';
   <PageHero
     title="Insights"
     intro="Practical thinking on making data, digital and AI work in public services. No hype, just what we've learned from delivery."
-    art={false}
+    art="insights"
   >
     <p class="follow">
       {COMPANY_LINKEDIN ? (
@@ -27,7 +27,7 @@ import { COMPANY_LINKEDIN } from '../lib/site';
 
   <section class="section on-paper soon">
     <div class="wrap soon__inner">
-      <div class="soon__art"><RingArt /></div>
+      <div class="soon__art"><PageArt name="chevrons" /></div>
       <!-- TODO: copy to approve (not in the brief) -->
       <p class="soon__text">Our first articles are coming soon. Follow us on LinkedIn to see them first.</p>
     </div>

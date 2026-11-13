@@ -2,8 +2,10 @@
 // The four service pages. Copy lives in src/data/services.ts.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
+import type { ArtName } from '../../components/PageArt.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import FeatureSection from '../../components/FeatureSection.astro';
 import { services, type Service } from '../../data/services';
 import { url } from '../../lib/paths';
 import { brandify } from '../../lib/brand';
@@ -16,7 +18,7 @@ interface Props { service: Service }
 const { service } = Astro.props;
 ---
 <BaseLayout title={service.seoTitle} description={service.description}>
-  <PageHero title={service.h1} intro={service.intro} icon={service.icon} />
+  <PageHero title={service.h1} intro={service.intro} art={service.slug as ArtName} />
 
   <section class="section familiar" aria-labelledby="familiar-heading">
     <div class="wrap split">
@@ -27,18 +29,13 @@ const { service } = Astro.props;
     </div>
   </section>
 
-  <section class="section on-paper" aria-labelledby="do-heading">
-    <div class="wrap">
-      <SectionHead id="do-heading" text="What we do" />
-      <ul class="card-grid card-grid--3-2">
-        {service.whatWeDo.map((item) => (
-          <li class="card">
-            <p><strong>{item.term}<span class="visually-hidden">:</span></strong> {item.text}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <FeatureSection
+    id="do-heading"
+    heading="What we do"
+    items={service.whatWeDo.map((item) => ({ lead: item.term, text: item.text }))}
+    leadSuffix=":"
+    ordered={false}
+  />
 
   <section class="section get" aria-labelledby="get-heading">
     <div class="wrap">

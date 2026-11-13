@@ -1,24 +1,29 @@
 ---
-// Hero for interior pages: H1, intro and optional actions on ink, with ring artwork.
-import RingArt from './RingArt.astro';
-import type { IconName } from '../data/services';
+// Hero for interior pages: H1, intro and optional actions on ink, with a
+// page-specific illustration (PageArt) or custom art passed in the "art" slot.
+import PageArt, { type ArtName } from './PageArt.astro';
 import { brandify } from '../lib/brand';
 interface Props {
   title: string;
   intro?: string;
-  icon?: IconName;
-  art?: boolean;
+  art?: ArtName | false;
 }
-const { title, intro, icon, art = true } = Astro.props;
+const { title, intro, art = 'chevrons' } = Astro.props;
+const customArt = Astro.slots.has('art');
+const showArt = customArt || art !== false;
 ---
-<section class:list={['page-hero', { 'page-hero--no-art': !art }]} aria-labelledby="page-title">
+<section class:list={['page-hero', { 'page-hero--no-art': !showArt }]} aria-labelledby="page-title">
   <div class="wrap page-hero__inner">
     <div class="page-hero__text">
       <h1 id="page-title" set:html={brandify(title)} />
       {intro && <p class="lede page-hero__intro">{intro}</p>}
       <slot />
     </div>
-    {art && <div class="page-hero__art"><RingArt icon={icon} /></div>}
+    {showArt && (
+      <div class="page-hero__art">
+        {customArt ? <slot name="art" /> : art && <PageArt name={art} />}
+      </div>
+    )}
   </div>
 </section>
 
@@ -68,19 +73,19 @@ const { title, intro, icon, art = true } = Astro.props;
   }
 
   .page-hero__art {
-    display: none;
+    width: min(70%, 15rem);
+    justify-self: center;
   }
 
   @media (min-width: 56em) {
     .page-hero__inner {
-      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
       gap: clamp(2rem, 5vw, 5rem);
     }
 
     .page-hero__art {
-      display: block;
       width: 100%;
-      max-width: 22rem;
+      max-width: 25rem;
       justify-self: end;
     }
   }
