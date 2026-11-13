@@ -1,0 +1,321 @@
+---
+// Beta 3 signature: the AImpetus "engine room" as a working schematic.
+// The system itself draws the logo's chevron:
+//   upper arm = Data and platforms, lower arm = Digital transformation,
+//   tip = AI to benefit, output = better services,
+//   dashed boundary = Delivery assurance (keeps all of it on track).
+// `highlight` lights up one service (service pages, cards); the rest dims.
+// Decorative: the page text always says the same in words.
+type Part = 'data' | 'digital' | 'ai' | 'assurance';
+interface Props { highlight?: Part; compact?: boolean; class?: string; idPrefix?: string }
+const { highlight, compact = false, class: className = '', idPrefix = 'sd' } = Astro.props;
+const on = (p: Part) => !highlight || highlight === p;
+const glowId = `${idPrefix}-glow`;
+const coreId = `${idPrefix}-core`;
+---
+<svg
+  class:list={['sd', { 'sd--compact': compact, 'sd--focus': highlight }, className]}
+  viewBox="0 0 1000 600"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <radialGradient id={glowId} cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#5EEAD4" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id={coreId} cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#1d4a50" />
+      <stop offset="1" stop-color="#0B2328" />
+    </radialGradient>
+  </defs>
+
+  <!-- Delivery assurance: the control boundary around the whole engine -->
+  <g class:list={['sd-part', { 'sd-on': on('assurance') }]}>
+    <rect x="24" y="28" width="790" height="544" rx="18" class="sd-boundary" />
+    <g class="sd-boundary-ticks">
+      <path d="M 24 120 h 16 M 24 300 h 16 M 24 480 h 16 M 814 120 h -16 M 814 480 h -16 M 220 28 v 16 M 420 28 v 16 M 620 28 v 16 M 220 572 v -16 M 420 572 v -16 M 620 572 v -16" />
+    </g>
+    <rect x="44" y="12" width="208" height="32" rx="6" class="sd-tab" />
+    <text x="148" y="33" text-anchor="middle" class="sd-label sd-label--tab">Delivery assurance</text>
+  </g>
+
+  <!-- Upper arm: Data and platforms -->
+  <g class:list={['sd-part', { 'sd-on': on('data') }]}>
+    <g class="sd-feeds">
+      <path d="M -10 70 C 40 70, 60 92, 96 100" />
+      <path d="M -10 110 L 96 110" />
+      <path d="M -10 150 C 40 150, 60 128, 96 120" />
+    </g>
+    <line x1="112" y1="110" x2="632" y2="281" class="sd-pipe" />
+    <line x1="112" y1="110" x2="632" y2="281" class="sd-flow" />
+    <circle cx="104" cy="110" r="16" class="sd-node" />
+    <!-- Platform layers -->
+    <g transform="translate(372 196)" class="sd-layers">
+      <polygon points="0,-36 58,-14 0,8 -58,-14" />
+      <polygon points="0,-20 58,2 0,24 -58,2" />
+      <polygon points="0,-4 58,18 0,40 -58,18" class="sd-layer-top" />
+    </g>
+    <path d="M 372 158 L 372 136" class="sd-leader" />
+    <text x="372" y="124" text-anchor="middle" class="sd-label">Data and platforms</text>
+  </g>
+
+  <!-- Lower arm: Digital transformation -->
+  <g class:list={['sd-part', { 'sd-on': on('digital') }]}>
+    <g class="sd-feeds">
+      <path d="M -10 450 C 40 450, 60 472, 96 480" />
+      <path d="M -10 490 L 96 490" />
+      <path d="M -10 530 C 40 530, 60 508, 96 500" />
+    </g>
+    <line x1="112" y1="490" x2="632" y2="319" class="sd-pipe" />
+    <line x1="112" y1="490" x2="632" y2="319" class="sd-flow" />
+    <circle cx="104" cy="490" r="16" class="sd-node" />
+    <!-- Process steps: old → new -->
+    <g transform="translate(336 390)" class="sd-steps">
+      <rect x="-14" y="-14" width="28" height="28" rx="4" />
+      <rect x="34" y="-30" width="28" height="28" rx="4" />
+      <circle cx="96" cy="-30" r="15" class="sd-step-new" />
+    </g>
+    <path d="M 372 424 L 372 450" class="sd-leader" />
+    <text x="372" y="474" text-anchor="middle" class="sd-label">Digital transformation</text>
+  </g>
+
+  <!-- Tip: AI to benefit -->
+  <g class:list={['sd-part', 'sd-tip', { 'sd-on': on('ai') }]}>
+    <circle cx="690" cy="300" r="120" fill={`url(#${glowId})`} class="sd-glow" />
+    <circle cx="690" cy="300" r="76" class="sd-ring" />
+    <circle cx="690" cy="300" r="58" fill={`url(#${coreId})`} class="sd-core" />
+    <g transform="translate(690 300) scale(2.3) translate(-24.5 -24)">
+      <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill="#F59E0B" />
+      <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill="#5EEAD4" />
+    </g>
+    <path d="M 690 376 L 690 410" class="sd-leader" />
+    <text x="690" y="432" text-anchor="middle" class="sd-label">
+      <tspan>A</tspan><tspan class="sd-i">I</tspan><tspan> to benefit</tspan>
+    </text>
+  </g>
+
+  <!-- Output: better services -->
+  <g class="sd-part sd-on sd-output">
+    <line x1="766" y1="300" x2="842" y2="300" class="sd-pipe" />
+    <line x1="766" y1="300" x2="842" y2="300" class="sd-flow" />
+    <rect x="846" y="262" width="146" height="76" rx="12" class="sd-out" />
+    <polyline points="866,300 876,310 894,290" class="sd-check" />
+    <text x="906" y="296" class="sd-label sd-label--out">Better</text>
+    <text x="906" y="316" class="sd-label sd-label--out">services</text>
+  </g>
+</svg>
+
+<style>
+  .sd {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Parts dim unless they are the focus */
+  .sd-part {
+    opacity: 0.32;
+    transition: opacity 0.3s ease;
+  }
+
+  .sd-part.sd-on {
+    opacity: 1;
+  }
+
+  .sd-boundary {
+    fill: rgba(94, 234, 212, 0.025);
+    stroke: #3b6168;
+    stroke-width: 2;
+    stroke-dasharray: 10 8;
+  }
+
+  .sd-on .sd-boundary {
+    stroke: var(--amber);
+  }
+
+  .sd--focus .sd-on .sd-boundary {
+    stroke-width: 3;
+  }
+
+  .sd-boundary-ticks path {
+    fill: none;
+    stroke: #3b6168;
+    stroke-width: 2;
+  }
+
+  .sd-on .sd-boundary-ticks path {
+    stroke: var(--amber);
+  }
+
+  .sd-tab {
+    fill: #0b2328;
+    stroke: #3b6168;
+    stroke-width: 1.5;
+  }
+
+  .sd-on .sd-tab {
+    stroke: var(--amber);
+  }
+
+  .sd-pipe {
+    stroke: #17434a;
+    stroke-width: 18;
+    stroke-linecap: round;
+  }
+
+  .sd-flow {
+    stroke: var(--mint);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 4 14;
+    animation: sd-flow 1.4s linear infinite;
+  }
+
+  .sd-feeds path {
+    fill: none;
+    stroke: var(--mint);
+    stroke-opacity: 0.6;
+    stroke-width: 2;
+    stroke-dasharray: 3 7;
+    animation: sd-flow 1.8s linear infinite;
+  }
+
+  @keyframes sd-flow {
+    to {
+      stroke-dashoffset: -36;
+    }
+  }
+
+  .sd-node {
+    fill: #0b2328;
+    stroke: var(--mint);
+    stroke-width: 3;
+  }
+
+  .sd-layers polygon {
+    fill: #13353b;
+    stroke: #3b6168;
+    stroke-width: 2;
+  }
+
+  .sd-layers .sd-layer-top {
+    stroke: var(--mint);
+  }
+
+  .sd-steps rect {
+    fill: #13353b;
+    stroke: #3b6168;
+    stroke-width: 2;
+  }
+
+  .sd-steps .sd-step-new {
+    fill: #0b2328;
+    stroke: var(--mint);
+    stroke-width: 2.5;
+  }
+
+  .sd-ring {
+    fill: none;
+    stroke: var(--mint);
+    stroke-opacity: 0.5;
+    stroke-width: 2;
+    stroke-dasharray: 3 9;
+    transform-origin: 690px 300px;
+    animation: sd-spin 30s linear infinite;
+  }
+
+  @keyframes sd-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .sd-core {
+    stroke: var(--mint);
+    stroke-width: 3;
+  }
+
+  .sd-out {
+    fill: #0b2328;
+    stroke: var(--mint);
+    stroke-width: 2.5;
+  }
+
+  .sd-check {
+    fill: none;
+    stroke: var(--mint);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .sd-leader {
+    fill: none;
+    stroke: #3b6168;
+    stroke-width: 1.5;
+  }
+
+  .sd-label {
+    fill: var(--muted-on-ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .sd-on .sd-label {
+    fill: var(--mint);
+  }
+
+  .sd-label--tab {
+    font-size: 13px;
+  }
+
+  .sd-label--out {
+    fill: var(--white) !important;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  .sd-i {
+    font-family: 'AImpetus I', 'Inter', sans-serif;
+  }
+
+  /* Compact (cards) and small screens: no annotation labels */
+  .sd--compact .sd-label,
+  .sd--compact .sd-leader,
+  .sd--compact .sd-tab {
+    display: none;
+  }
+
+  @media (max-width: 39.99em) {
+    .sd .sd-label,
+    .sd .sd-leader {
+      display: none;
+    }
+  }
+
+  /* Small diagrams stay still; motion is kept for the large ones */
+  .sd--compact .sd-flow,
+  .sd--compact .sd-feeds path,
+  .sd--compact .sd-ring {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sd-flow,
+    .sd-feeds path,
+    .sd-ring {
+      animation: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .sd {
+      display: none;
+    }
+  }
+</style>

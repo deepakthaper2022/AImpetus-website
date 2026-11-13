@@ -1,0 +1,72 @@
+---
+// Line illustrations for the four services. Decorative only.
+interface Props { name: 'data' | 'ai' | 'digital' | 'assurance' }
+const { name } = Astro.props;
+---
+<svg class="service-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  {name === 'data' && (
+    <g fill="none" stroke-width="2" stroke-linejoin="round">
+      <path class="si-line" d="M32 40 L54 30 L32 20 L10 30 Z" />
+      <path class="si-line" d="M10 37 L32 47 L54 37" />
+      <path class="si-line" d="M10 44 L32 54 L54 44" />
+      <path class="si-accent" d="M32 8 L32 18 M27 13 L32 18 L37 13" stroke-linecap="round" />
+    </g>
+  )}
+  {name === 'ai' && (
+    <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path class="si-line" d="M10 54 H54" />
+      <path class="si-line" d="M16 54 V42 M26 54 V34 M36 54 V26" />
+      <path class="si-accent-fill" d="M40 12 L46 12 L54 22 L46 32 L40 32 L48 22 Z" stroke="none" />
+      <circle class="si-line" cx="16" cy="18" r="3" />
+      <path class="si-line" d="M16 10 V13 M16 23 V26 M8 18 H11 M21 18 H24" />
+    </g>
+  )}
+  {name === 'digital' && (
+    <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect class="si-line" x="8" y="20" width="18" height="18" rx="2" />
+      <circle class="si-line" cx="47" cy="29" r="10" />
+      <path class="si-accent" d="M29 29 H36 M32 25 L36 29 L32 33" />
+      <path class="si-line" d="M8 48 H56" stroke-dasharray="2 5" />
+      <path class="si-line" d="M17 44 V52 M47 44 V52" />
+    </g>
+  )}
+  {name === 'assurance' && (
+    <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path class="si-line" d="M10 44 A22 22 0 0 1 54 44" />
+      <path class="si-line" d="M14 44 H18 M46 44 H50 M17.3 31 L20.6 33 M46.7 31 L43.4 33 M32 22 V26" />
+      <path class="si-accent" d="M32 44 L42 30" />
+      <circle class="si-accent-fill" cx="32" cy="44" r="3.5" stroke="none" />
+      <path class="si-line" d="M22 54 H42" />
+    </g>
+  )}
+</svg>
+
+<style>
+  .service-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .si-line {
+    stroke: var(--icon-line, var(--mint));
+  }
+
+  .si-accent {
+    stroke: var(--amber);
+  }
+
+  .si-accent-fill {
+    fill: var(--amber);
+  }
+
+  @media (forced-colors: active) {
+    .si-line,
+    .si-accent {
+      stroke: CanvasText;
+    }
+
+    .si-accent-fill {
+      fill: CanvasText;
+    }
+  }
+</style>

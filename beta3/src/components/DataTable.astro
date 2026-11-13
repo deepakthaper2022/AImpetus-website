@@ -1,0 +1,29 @@
+---
+// Accessible table that stacks on small screens. Explicit ARIA roles keep table
+// semantics when CSS changes the display of rows and cells.
+interface Props { caption?: string; columns: string[]; rows: string[][]; captionHidden?: boolean }
+const { caption, columns, rows, captionHidden = false } = Astro.props;
+---
+<div class="table-wrap">
+  <table class="data-table" role="table">
+    {caption && <caption class:list={{ 'visually-hidden': captionHidden }}>{caption}</caption>}
+    <thead role="rowgroup">
+      <tr role="row">
+        {columns.map((c) => <th scope="col" role="columnheader">{c}</th>)}
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      {rows.map((row) => (
+        <tr role="row">
+          {row.map((cell, i) =>
+            i === 0 ? (
+              <th scope="row" role="rowheader" data-label={columns[0]} set:html={cell} />
+            ) : (
+              <td role="cell" data-label={columns[i]} set:html={cell} />
+            )
+          )}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,72 @@
+---
+// Insights – copy from brief/website-content.pdf ("Insights page"). No articles yet:
+// the "coming soon" line is builder-drafted copy (brief/copy-changes.md).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Placeholder from '../components/Placeholder.astro';
+import PageArt from '../components/PageArt.astro';
+import { COMPANY_LINKEDIN } from '../lib/site';
+---
+<BaseLayout
+  title="Insights | AImpetus"
+  description="Practical thinking on data, digital and AI in national health and public services, from the AImpetus founders."
+>
+  <PageHero
+    title="Insights"
+    intro="Practical thinking on making data, digital and AI work in public services. No hype, just what we've learned from delivery."
+    art="insights"
+  >
+    <p class="follow">
+      {COMPANY_LINKEDIN ? (
+        <a href={COMPANY_LINKEDIN}>Follow AImpetus on LinkedIn</a>
+      ) : (
+        <>Follow AImpetus on LinkedIn <Placeholder text="company LinkedIn page" /></>
+      )}
+    </p>
+  </PageHero>
+
+  <section class="section on-paper soon">
+    <div class="wrap soon__inner">
+      <div class="soon__art"><PageArt name="chevrons" /></div>
+      <!-- TODO: copy to approve (not in the brief) -->
+      <p class="soon__text">Our first articles are coming soon. Follow us on LinkedIn to see them first.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .follow {
+    margin-top: 1.75rem;
+    font-weight: 600;
+  }
+
+  .soon__inner {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    justify-items: start;
+  }
+
+  .soon__art {
+    width: min(100%, 14rem);
+    padding: 1rem;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+
+  .soon__text {
+    max-width: 30rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  @media (min-width: 48em) {
+    .soon__inner {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+  }
+</style>

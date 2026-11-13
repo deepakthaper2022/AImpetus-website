@@ -1,0 +1,42 @@
+/* Beta 3 – Engine room: Schematic. Brand tokens from brief/brand.md.
+   Contrast checked (WCAG 2.2 AA): see DESIGN.md for the full list. */
+
+:root {
+  /* Brand colours */
+  --ink: #0e2a2f;
+  --ink-deep: #0a2226; /* footer */
+  --teal: #0f766e; /* links and accents on light only (5.1:1 on paper) */
+  --teal-dark: #0b5c56; /* hover on light (7.3:1 on paper) */
+  --mint: #5eead4; /* accents on dark only (10.2:1 on ink) */
+  --mint-light: #9ff3e5; /* hover on dark */
+  --amber: #f59e0b; /* graphics only, never text on light */
+  --paper: #f7f7f4;
+  --slate: #4a5a5d; /* secondary text on light (6.7:1 on paper) */
+  --white: #ffffff;
+
+  /* Derived */
+  --muted-on-ink: #b9c8ca; /* secondary text on ink (8.7:1) */
+  --rule-on-ink: #2a4a50; /* decorative lines only */
+  --rule-on-paper: #d5dbd7; /* decorative lines only */
+  --placeholder-bg: #ffe7b3; /* ink text 12.5:1 */
+
+  /* Type */
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem; /* body, 17px */
+  --step-1: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem); /* lede */
+  --step-2: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); /* h3 */
+  --step-3: clamp(1.875rem, 1.4rem + 2.2vw, 3.25rem); /* h2 */
+  --step-4: clamp(2.5rem, 1.4rem + 5vw, 5.75rem); /* h1 */
+
+  /* Space */
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --max-width: 80rem;
+  --measure: 40rem;
+  --section-space: clamp(4rem, 3rem + 6vw, 9rem);
+
+  --radius: 0.5rem;
+  --focus-width: 3px;
+}

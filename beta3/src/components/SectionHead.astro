@@ -1,0 +1,20 @@
+---
+// Editorial section heading: small brand chevron marker above an H2.
+import Chevron from './Chevron.astro';
+import { brandify } from '../lib/brand';
+interface Props { id: string; text: string; class?: string }
+const { id, text, class: className = '' } = Astro.props;
+---
+<div class:list={['section-head', className]}>
+  <Chevron class="section-head__marker" />
+  <h2 id={id} set:html={brandify(text)} />
+</div>
+
+<style>
+  .section-head :global(.section-head__marker) {
+    display: block;
+    width: 1rem;
+    height: 1.2rem;
+    margin-bottom: 1.25rem;
+  }
+</style>

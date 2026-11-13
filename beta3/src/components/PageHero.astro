@@ -1,0 +1,93 @@
+---
+// Hero for interior pages: H1, intro and optional actions on ink, with a
+// page-specific illustration (PageArt) or custom art passed in the "art" slot.
+import PageArt, { type ArtName } from './PageArt.astro';
+import { brandify } from '../lib/brand';
+interface Props {
+  title: string;
+  intro?: string;
+  art?: ArtName | false;
+}
+const { title, intro, art = 'chevrons' } = Astro.props;
+const customArt = Astro.slots.has('art');
+const showArt = customArt || art !== false;
+---
+<section class:list={['page-hero', { 'page-hero--no-art': !showArt }]} aria-labelledby="page-title">
+  <div class="wrap page-hero__inner">
+    <div class="page-hero__text">
+      <slot name="breadcrumbs" />
+      <h1 id="page-title" set:html={brandify(title)} />
+      {intro && <p class="lede page-hero__intro">{intro}</p>}
+      <slot />
+    </div>
+    {showArt && (
+      <div class="page-hero__art">
+        {customArt ? <slot name="art" /> : art && <PageArt name={art} />}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(3rem, 2rem + 4vw, 5.5rem);
+    background:
+      radial-gradient(ellipse 50% 80% at 85% 50%, rgba(94, 234, 212, 0.09), transparent 70%),
+      linear-gradient(to right, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 64px 64px,
+      var(--ink);
+  }
+
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 45%;
+    background: linear-gradient(to bottom, transparent, var(--ink));
+    pointer-events: none;
+  }
+
+  .page-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .page-hero h1 {
+    max-width: 18ch;
+    font-size: clamp(2.25rem, 1.3rem + 3.8vw, 4.5rem);
+    line-height: 1.04;
+  }
+
+  .page-hero__intro {
+    max-width: 40rem;
+    margin-top: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .page-hero__text :global(> .button),
+  .page-hero__text :global(> .actions) {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .page-hero__art {
+    width: min(70%, 15rem);
+    justify-self: center;
+  }
+
+  @media (min-width: 56em) {
+    .page-hero__inner {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+
+    .page-hero__art {
+      width: 100%;
+      max-width: 25rem;
+      justify-self: end;
+    }
+  }
+</style>

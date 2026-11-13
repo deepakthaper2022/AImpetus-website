@@ -96,7 +96,9 @@ The betas currently use SVG artwork, monogram badges and illustrations, so nothi
 - [ ] After deploy: submit the form once to confirm Netlify detects `contact-beta2`
 
 ### beta3/ – Engine room: Schematic
-- [ ] Build, then founders review
+- [x] Set-up (copied from beta1; base /beta3/, form contact-beta3), duotone founder photos, header with full-screen phone menu, Home page
+- [ ] Founders review the Home page
+- [ ] Remaining pages in the Schematic direction (they currently inherit beta1's layouts), then the full checks, DESIGN.md and commit
 
 ## Launch (after a beta is chosen)
 - [ ] Review beta1, beta2, beta3 and choose one (or a blend)
