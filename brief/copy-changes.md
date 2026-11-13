@@ -22,6 +22,8 @@ Note: the default meta description is 195 characters, over the PDF's own 155-cha
 | 404 page (holding and betas) | SEO title: Page not found \| AImpetus · H1: Page not found · Sorry, we can't find that page. It may have moved. · [Button: Go to the home page] |
 | Contact thanks page (betas) | SEO title: Thanks \| AImpetus · H1: Thanks for getting in touch · One of the founders will reply within two working days. |
 | Insights – coming soon (betas) | Our first articles are coming soon. Follow us on LinkedIn to see them first. |
+| Legal pages – SEO titles (betas) | Privacy notice \| AImpetus · Cookie notice \| AImpetus · Accessibility statement \| AImpetus (meta description: the default) |
+| Contact form – small UI text (betas) | "(optional)" after "I'm a…" · first dropdown option "Select an option" · thanks page link "Go to the home page" |
 | Contact form errors (betas) | Error summary heading: There is a problem · Enter your name · Enter your work email address · Enter an email address in the correct format, like name@example.org · Enter your organisation · Tell us how we can help |
 
 ## Holding page

@@ -7,6 +7,8 @@ import { DEFAULT_TITLE, DEFAULT_DESCRIPTION, SITE_NAME } from '../lib/site';
 import { url, absoluteUrl } from '../lib/paths';
 import spaceGrotesk from '../assets/fonts/space-grotesk-700.woff2?url';
 import inter400 from '../assets/fonts/inter-400.woff2?url';
+import inter600 from '../assets/fonts/inter-600.woff2?url';
+import brandI from '../assets/fonts/inter-brand-i-700.woff2?url';
 
 interface Props {
   title?: string;
@@ -30,6 +32,8 @@ const ogImage = absoluteUrl('social/linkedin-banner-1584x396.png');
 
     <link rel="preload" href={spaceGrotesk} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={brandI} as="font" type="font/woff2" crossorigin />
 
     <link rel="icon" href={url('favicon.ico')} sizes="32x32" />
     <link rel="icon" href={url('icons/aimpetus-mark.svg')} type="image/svg+xml" />

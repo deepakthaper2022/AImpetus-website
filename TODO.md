@@ -82,10 +82,10 @@ The betas currently use SVG artwork, monogram badges and illustrations, so nothi
 - [ ] CSP: netlify.toml blocks inline scripts. Each beta must emit the mobile-menu script as a file (check after each build). The booking tool, once chosen, may need a CSP exception if embedded.
 
 ### beta1/ – Engine room: Editorial
-- [x] Set-up, tokens, global styles, BaseLayout (noindex, OG, beta banner, skip link), Header (mobile menu), Footer
-- [x] Home page – reworked after feedback (hero artwork, service tiles, cards, chevron track, CTA band). Awaiting founders' review before the other pages are built
-- [ ] Remaining pages, form, 404, DESIGN.md
-- Note: Lighthouse SEO is 66 on beta pages only because of the required `noindex` ("Page is blocked from indexing"). It can't reach 95 while betas are hidden from search; every other SEO check passes.
+- [x] All 15 pages built and checked (see beta1/DESIGN.md)
+- [ ] Founders review every page
+- [ ] Deploy to Netlify, then submit the contact form once to confirm Netlify detects `contact-beta1` and the notification email arrives
+- Note: Lighthouse SEO is 66 on beta pages only because of the required `noindex`. It can't reach 95 while betas are hidden from search; every other SEO check passes.
 
 ### beta2/ – Engine room: Structured
 - [ ] Build, then founders review

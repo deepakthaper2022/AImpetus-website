@@ -39,3 +39,8 @@ export const company = {
 
 // [Placeholder: company LinkedIn page] – set to a URL when known
 export const COMPANY_LINKEDIN: string | null = null;
+
+// [Placeholder: booking link] – set to the booking tool URL when known
+export const BOOKING_LINK: string | null = null;
+
+export const FORM_NAME = 'contact-beta1';

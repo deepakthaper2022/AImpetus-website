@@ -9,6 +9,8 @@ import Chevron from '../components/Chevron.astro';
 import HeroArt from '../components/HeroArt.astro';
 import ServiceIcon from '../components/ServiceIcon.astro';
 import Monogram from '../components/Monogram.astro';
+import StepTrack from '../components/StepTrack.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { url } from '../lib/paths';
 import { brandify } from '../lib/brand';
 
@@ -126,14 +128,7 @@ const founders = [
   <section class="section how" aria-labelledby="how-heading">
     <div class="wrap">
       <SectionHead id="how-heading" text="Start small. Prove it. Then scale." />
-      <ol class="track">
-        {steps.map((step, i) => (
-          <li class="track__step">
-            <span class="track__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <p><strong>{step.lead}</strong> – {step.text}</p>
-          </li>
-        ))}
-      </ol>
+      <StepTrack steps={steps} />
       <ArrowLink href={url('how-we-work/')} class="section-link">How we work</ArrowLink>
     </div>
   </section>
@@ -155,14 +150,12 @@ const founders = [
   </section>
 
   <!-- 7. Closing call to action -->
-  <section class="cta" aria-labelledby="cta-heading">
-    <div class="cta__pattern" aria-hidden="true"></div>
-    <div class="wrap cta__inner">
-      <h2 id="cta-heading" set:html={brandify('Got a data, AI or digital challenge?')} />
-      <p class="lede cta__text">Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us.</p>
-      <Button href={url('contact/')}>Book a 30-minute conversation</Button>
-    </div>
-  </section>
+  <CtaBand
+    heading="Got a data, AI or digital challenge?"
+    text="Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us."
+    button="Book a 30-minute conversation"
+    href={url('contact/')}
+  />
 </BaseLayout>
 
 <style>
@@ -462,98 +455,6 @@ const founders = [
     transform: translateX(4px);
   }
 
-  /* ---------- How we work: chevron track ---------- */
-  .track {
-    display: grid;
-    gap: 2rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding: 0;
-    list-style: none;
-  }
-
-  .track__step {
-    position: relative;
-    padding-left: 4.5rem;
-  }
-
-  .track__num {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: grid;
-    place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
-    border: 2px solid var(--mint);
-    border-radius: 50%;
-    background: var(--ink);
-    color: var(--mint);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.125rem;
-  }
-
-  .track__step p {
-    padding-top: 0.6rem;
-    font-size: var(--step-1);
-    line-height: 1.5;
-  }
-
-  /* Vertical connector on small screens */
-  .track__step:not(:last-child)::before {
-    content: '';
-    position: absolute;
-    top: 3.5rem;
-    bottom: -1.75rem;
-    left: calc(1.625rem - 1px);
-    width: 2px;
-    background: linear-gradient(var(--mint), var(--rule-on-ink));
-  }
-
-  @media (min-width: 48em) {
-    .track {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(2rem, 4vw, 3.5rem);
-    }
-
-    .track__step {
-      padding-left: 0;
-      padding-top: 5rem;
-    }
-
-    .track__step p {
-      padding-top: 0;
-    }
-
-    .track__num {
-      width: 3.75rem;
-      height: 3.75rem;
-      font-size: 1.25rem;
-    }
-
-    /* Horizontal connector with an amber chevron at its end */
-    .track__step:not(:last-child)::before {
-      top: 1.875rem;
-      bottom: auto;
-      left: 4.5rem;
-      right: calc(-1 * clamp(2rem, 4vw, 3.5rem) + 1.25rem);
-      width: auto;
-      height: 2px;
-      background: linear-gradient(to right, var(--mint), rgba(94, 234, 212, 0.25));
-    }
-
-    .track__step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: calc(1.875rem - 7px);
-      right: calc(-1 * clamp(2rem, 4vw, 3.5rem) + 0.5rem);
-      width: 12px;
-      height: 16px;
-      background: var(--amber);
-      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
-    }
-  }
-
   /* ---------- Founders (paper) ---------- */
   .founders__grid {
     display: grid;
@@ -593,38 +494,5 @@ const founders = [
     .founder {
       grid-template-columns: minmax(0, 1fr);
     }
-  }
-
-  /* ---------- Closing CTA ---------- */
-  .cta {
-    position: relative;
-    overflow: hidden;
-    padding-block: var(--section-space);
-    background: linear-gradient(120deg, #0e2a2f 0%, #0f3f3f 55%, #105450 100%);
-  }
-
-  .cta__pattern {
-    position: absolute;
-    inset: 0;
-    /* Repeating chevron motif, fading in from the left */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 48 48'%3E%3Cpolygon points='9,12 18,12 28,24 18,36 9,36 19,24' fill='%235EEAD4' fill-opacity='0.07'/%3E%3Cpolygon points='22,12 30,12 40,24 30,36 22,36 32,24' fill='%235EEAD4' fill-opacity='0.12'/%3E%3C/svg%3E");
-    background-size: 96px 96px;
-    -webkit-mask-image: linear-gradient(to right, transparent 25%, #000 85%);
-    mask-image: linear-gradient(to right, transparent 25%, #000 85%);
-  }
-
-  .cta__inner {
-    position: relative;
-  }
-
-  .cta h2 {
-    max-width: 16ch;
-    font-size: var(--step-4);
-    line-height: 1.04;
-  }
-
-  .cta__text {
-    max-width: 36rem;
-    margin-block: 1.75rem 2.25rem;
   }
 </style>

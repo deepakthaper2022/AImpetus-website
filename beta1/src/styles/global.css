@@ -76,6 +76,7 @@ body {
   --accent: var(--teal);
   --rule: var(--rule-on-paper);
   --focus: var(--ink);
+  --icon-line: var(--teal);
 }
 
 img,
@@ -213,4 +214,237 @@ a:hover {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- Shared content patterns (interior pages) ---------- */
+
+.section-intro {
+  max-width: var(--measure);
+  margin-top: 1.25rem;
+}
+
+/* List with brand chevron bullets */
+.chevron-list {
+  display: grid;
+  gap: 0.875rem;
+  padding: 0;
+  list-style: none;
+}
+
+.chevron-list > li {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.chevron-list > li::before {
+  content: "";
+  position: absolute;
+  top: 0.42em;
+  left: 0;
+  width: 0.65em;
+  height: 0.78em;
+  background: var(--accent);
+  clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+}
+
+.chevron-list--large > li {
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+/* Cards on paper */
+.card-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40em) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .card-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--rule-on-paper);
+  border-radius: 1rem;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(14, 42, 47, 0.04), 0 12px 32px -18px rgba(14, 42, 47, 0.25);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: clamp(1.5rem, 3vw, 2rem);
+  width: 2.5rem;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: var(--teal);
+}
+
+.card strong,
+.card h3 {
+  display: block;
+  margin-bottom: 0.375rem;
+  color: var(--ink);
+  font-size: 1.125rem;
+}
+
+.card h3 {
+  font-size: var(--step-2);
+  margin-bottom: 0.75rem;
+}
+
+/* 3 + 2 layout for five cards */
+@media (min-width: 64em) {
+  .card-grid--3-2 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .card-grid--3-2 > * {
+    grid-column: span 2;
+  }
+
+  .card-grid--3-2 > :nth-child(4),
+  .card-grid--3-2 > :nth-child(5) {
+    grid-column: span 3;
+  }
+}
+
+/* Dark tiles on ink */
+.tile-dark {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid #24484e;
+  border-radius: 1rem;
+  background: linear-gradient(160deg, #15393f 0%, #102e33 100%);
+}
+
+/* Responsive data table */
+.table-wrap {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.data-table caption {
+  margin-bottom: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem 1.25rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+
+.data-table thead th {
+  border-bottom: 2px solid var(--accent);
+  color: var(--heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.data-table tbody th {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+/* Stack rows on small screens; labels come from data-label */
+@media (max-width: 47.99em) {
+  .data-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .data-table tr {
+    display: block;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .data-table th,
+  .data-table td {
+    display: block;
+    padding: 0.25rem 0;
+    border: 0;
+  }
+
+  .data-table td[data-label]::before,
+  .data-table th[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+/* Long-form reading (legal pages) */
+.prose {
+  max-width: 44rem;
+}
+
+.prose > * + * {
+  margin-top: 1rem;
+}
+
+.prose h2 {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+}
+
+.prose h2 + * {
+  margin-top: 1rem;
+}
+
+.prose ul {
+  padding-left: 1.25rem;
+}
+
+.prose li + li {
+  margin-top: 0.5rem;
+}
+
+.prose .table-wrap {
+  max-width: none;
+}
+
+.prose-meta {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* An ink section straight after an interior hero: tighter, with a rule */
+.page-hero + .section:not(.on-paper) {
+  padding-top: clamp(3rem, 2rem + 4vw, 5.5rem);
+  border-top: 1px solid var(--rule-on-ink);
 }

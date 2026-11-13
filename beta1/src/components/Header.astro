@@ -13,7 +13,7 @@ const currentPath = Astro.url.pathname;
       <img src={url('images/aimpetus-logo-reversed.svg')} alt="AImpetus – home" width="519" height="96" class="logo" />
     </a>
 
-    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" hidden data-menu-toggle>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
       <span class="menu-toggle__icon" aria-hidden="true"></span>
       <span>Menu</span>
     </button>
@@ -39,7 +39,6 @@ const currentPath = Astro.url.pathname;
 
   if (header && toggle && menu) {
     header.classList.add('has-js');
-    toggle.hidden = false;
 
     const setOpen = (open: boolean) => {
       toggle.setAttribute('aria-expanded', String(open));
@@ -211,12 +210,24 @@ const currentPath = Astro.url.pathname;
       font-size: 1.125rem;
     }
 
+    /* Collapse from first paint when scripting is on (no layout shift);
+       .has-js is the fallback for browsers without the scripting media query */
     .has-js .menu-toggle {
       display: inline-flex;
     }
 
     .has-js:not(.menu-open) .site-nav {
       display: none;
+    }
+
+    @media (scripting: enabled) {
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .site-header:not(.menu-open) .site-nav {
+        display: none;
+      }
     }
 
     .has-js.menu-open .site-nav {

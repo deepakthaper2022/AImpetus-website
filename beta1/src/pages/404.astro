@@ -1,0 +1,14 @@
+---
+// Beta 1 404 page. Builder-drafted copy (brief/copy-changes.md).
+// netlify.toml serves this for unknown /beta1/* paths.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import { url } from '../lib/paths';
+---
+<BaseLayout title="Page not found | AImpetus">
+  <!-- TODO: copy to approve (not in the brief) -->
+  <PageHero title="Page not found" intro="Sorry, we can't find that page. It may have moved.">
+    <Button href={url('')}>Go to the home page</Button>
+  </PageHero>
+</BaseLayout>
