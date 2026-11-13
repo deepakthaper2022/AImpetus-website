@@ -1,0 +1,49 @@
+---
+interface Props { href: string; size?: 'default' | 'small'; class?: string }
+const { href, size = 'default', class: className = '' } = Astro.props;
+---
+<a href={href} class:list={['button', `button--${size}`, className]}><slot /></a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    /* Mint with ink text on dark; teal with white text on paper */
+    background: var(--button-bg, var(--mint));
+    color: var(--button-text, var(--ink));
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .button:hover {
+    background: var(--button-bg-hover, var(--mint-light));
+    color: var(--button-text, var(--ink));
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  :global(.on-paper) .button {
+    --button-bg: var(--teal);
+    --button-bg-hover: var(--teal-dark);
+    --button-text: var(--white);
+  }
+
+  .button--small {
+    min-height: 2.75rem;
+    padding: 0.5rem 1.125rem;
+    font-size: 0.9375rem;
+  }
+
+  @media (forced-colors: active) {
+    .button {
+      border-color: ButtonText;
+    }
+  }
+</style>

@@ -1,0 +1,365 @@
+---
+// Home – copy from brief/website-content.pdf ("Home page"), with the hero line and
+// meta description from brief/copy-changes.md.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Chevron from '../components/Chevron.astro';
+import { url } from '../lib/paths';
+import { brandify } from '../lib/brand';
+
+const why = [
+  {
+    lead: 'Senior people, start to finish.',
+    text: 'Two founders with 60 years of combined experience. The people who scope your work lead its delivery.',
+  },
+  {
+    lead: 'We know how national health programmes work.',
+    text: 'More than a decade delivering NHS England and NHS Improvement data, cloud and digital programmes.',
+  },
+  {
+    lead: 'Data and digital first, so AI holds up.',
+    text: 'We build the platforms, data and controls AI needs, then test use cases against real benefits.',
+  },
+  {
+    lead: 'Delivery and commercial sense together.',
+    text: 'Experience of running a UK technology services business and large NHS delivery portfolios. Realistic plans, clear contracts, no surprises.',
+  },
+  {
+    lead: 'Easy to work with.',
+    text: 'Small and partner-friendly. We fit your teams and standards, and leave knowledge behind.',
+  },
+];
+
+const services = [
+  { name: 'Data and platforms', line: 'Reliable, governed data that services and AI can depend on.', path: 'services/data-and-platforms/' },
+  { name: 'AI to benefit', line: 'Choose the right use cases, test them safely and prove the benefit before you scale.', path: 'services/ai-to-benefit/' },
+  { name: 'Digital transformation', line: 'Redesign services and processes, modernise platforms and automate the routine.', path: 'services/digital-transformation/' },
+  { name: 'Delivery assurance', line: 'Steady programmes, clear governance and an honest view of risk.', path: 'services/delivery-assurance/' },
+];
+
+const steps = [
+  { lead: 'Understand', text: 'we start with your service, your data and the outcome you need.' },
+  { lead: 'Prove', text: 'we test the idea quickly, against measures agreed up front.' },
+  { lead: 'Scale or stop', text: "we scale what works, stop what doesn't, and leave your team able to run it." },
+];
+
+const founders = [
+  { name: 'Prahlad Koti', text: 'Co-founder and Managing Director – former UK Managing Director of Mastek, with more than 30 years in technology services.' },
+  { name: 'Deepak Thaper', text: 'Co-founder and Delivery & Technology Director – nearly 30 years in technology delivery, including more than a decade on NHS national programmes.' },
+];
+---
+<BaseLayout
+  title="AImpetus | Data, digital and AI for public services"
+  description="Better digital services, with AI in the engine room. Senior-led data, digital and AI delivery, with deep roots in the NHS and wider UK public sector."
+>
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="wrap">
+      <p class="eyebrow"><Chevron tone="amber" /><span>Data, digital and AI services</span></p>
+      <h1 id="hero-heading">Better digital services, with <span class="hero-ai">A<span class="brand-i">I</span></span> in the engine room.</h1>
+      <p class="lede hero-lede">We build the data platforms, digital services and governance that let AI work safely in live services. Senior-led, with 60 years of combined experience and deep roots in the NHS and wider UK public sector.</p>
+      <div class="hero-actions">
+        <Button href={url('contact/')}>Book a 30-minute conversation</Button>
+        <ArrowLink href={url('services/')}>See our services</ArrowLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The problem we solve -->
+  <section class="section" aria-labelledby="problem-heading">
+    <div class="wrap split">
+      <SectionHead id="problem-heading" text="AI is easy to pilot. Hard to run." />
+      <p class="lede split__body">Most organisations have tried AI. Far fewer have it working in a live service. The usual blockers aren't the AI itself. They're scattered data, ageing platforms, unclear governance and programmes stretched thin. We fix the groundwork, so AI and digital change can hold up in the real world.</p>
+    </div>
+  </section>
+
+  <!-- 3. Why AImpetus -->
+  <section class="section on-paper" aria-labelledby="why-heading">
+    <div class="wrap split">
+      <SectionHead id="why-heading" text="A new company. A proven team." />
+      <ol class="numbered why-list split__body">
+        {why.map((item) => (
+          <li>
+            <p><strong>{item.lead}</strong> {item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. What we do -->
+  <section class="section section--flush" aria-labelledby="services-heading">
+    <div class="wrap">
+      <SectionHead id="services-heading" text="Four services, one aim: services that work better." />
+      <ul class="service-list">
+        {services.map((service) => (
+          <li class="service">
+            <h3 class="service__name">
+              <a href={url(service.path)}><span set:html={brandify(service.name)} /><Chevron class="service__chevron" /></a>
+            </h3>
+            <p class="service__line">{service.line}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. How we work (summary) -->
+  <section class="section" aria-labelledby="how-heading">
+    <div class="wrap">
+      <SectionHead id="how-heading" text="Start small. Prove it. Then scale." />
+      <ol class="numbered steps">
+        {steps.map((step) => (
+          <li>
+            <p><strong>{step.lead}</strong> – {step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <ArrowLink href={url('how-we-work/')} class="section-link">How we work</ArrowLink>
+    </div>
+  </section>
+
+  <!-- 6. Founders -->
+  <section class="section on-paper" aria-labelledby="founders-heading">
+    <div class="wrap split">
+      <SectionHead id="founders-heading" text="Led by the people who do the work" />
+      <div class="split__body">
+        <ul class="founder-list">
+          {founders.map((f) => (
+            <li><p><strong>{f.name}</strong>, {f.text}</p></li>
+          ))}
+        </ul>
+        <ArrowLink href={url('about/')} class="section-link">Meet the founders</ArrowLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Closing call to action -->
+  <section class="section section--flush cta" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <SectionHead id="cta-heading" text="Got a data, AI or digital challenge?" class="cta__head" />
+      <p class="lede measure cta__text">Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us.</p>
+      <Button href={url('contact/')}>Book a 30-minute conversation</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(4rem, 3rem + 6vw, 8rem);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--mint);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    max-width: 14ch;
+  }
+
+  .hero-ai {
+    color: var(--mint);
+  }
+
+  .hero-lede {
+    max-width: 40rem;
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Two-column editorial split: heading left, text right */
+  .split {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 60em) {
+    .split {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(3rem, 6vw, 7rem);
+      align-items: start;
+    }
+  }
+
+  .split__body {
+    max-width: var(--measure);
+  }
+
+  /* Numbered lists with large Space Grotesk numerals */
+  .numbered {
+    counter-reset: item;
+    display: grid;
+    gap: 0;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: 0;
+    list-style: none;
+  }
+
+  .numbered > li {
+    counter-increment: item;
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .numbered > li::before {
+    content: counter(item, decimal-leading-zero);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--accent);
+  }
+
+  .numbered p {
+    max-width: var(--measure);
+  }
+
+  .why-list > li p {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 60em) {
+    .split > .numbered {
+      margin-top: 0;
+    }
+  }
+
+  .steps {
+    gap: 0 clamp(2rem, 4vw, 3.5rem);
+  }
+
+  @media (min-width: 48em) {
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .steps > li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      padding-block: 1.75rem 0;
+    }
+
+    .steps > li::before {
+      font-size: clamp(2.5rem, 2rem + 2vw, 3.75rem);
+      line-height: 1;
+    }
+  }
+
+  .steps p {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .section-link {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Services: typographic index, minimal boxes */
+  .service-list {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .service {
+    display: grid;
+    gap: 0.5rem 2rem;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (min-width: 48em) {
+    .service {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(3rem, 6vw, 7rem);
+      align-items: baseline;
+    }
+  }
+
+  .service__name {
+    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.375rem);
+  }
+
+  .service__name a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .service__name a:hover {
+    color: var(--mint);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+  }
+
+  .service__name :global(.service__chevron) {
+    width: 0.45em;
+    height: 0.55em;
+    transition: transform 0.15s ease;
+  }
+
+  .service__name a:hover :global(.service__chevron) {
+    transform: translateX(4px);
+  }
+
+  .service__line {
+    max-width: var(--measure);
+    color: var(--muted-on-ink);
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  /* Founders */
+  .founder-list {
+    display: grid;
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .founder-list p {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  /* Closing CTA */
+  .cta {
+    text-align: left;
+  }
+
+  .cta :global(.cta__head h2) {
+    max-width: 18ch;
+    font-size: var(--step-4);
+    line-height: 1.04;
+  }
+
+  .cta__text {
+    margin-block: 1.75rem 2.25rem;
+  }
+</style>

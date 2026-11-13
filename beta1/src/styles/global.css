@@ -1,0 +1,216 @@
+/* Beta 1 – global styles. Components keep their own scoped styles. */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter Bold serifed capital I only (Inter cv08), so "AI" never reads as "Al" in headings */
+@font-face {
+  font-family: "AImpetus I";
+  src: url("../assets/fonts/inter-brand-i-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0049;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  overflow-wrap: break-word;
+  /* Section-level colour hooks (overridden by .on-paper) */
+  --text: var(--paper);
+  --text-muted: var(--muted-on-ink);
+  --heading: var(--white);
+  --link: var(--mint);
+  --link-hover: var(--mint-light);
+  --accent: var(--mint);
+  --rule: var(--rule-on-ink);
+  --focus: var(--white);
+}
+
+.on-paper {
+  background: var(--paper);
+  color: var(--ink);
+  --text: var(--ink);
+  --text-muted: var(--slate);
+  --heading: var(--ink);
+  --link: var(--teal);
+  --link-hover: var(--teal-dark);
+  --accent: var(--teal);
+  --rule: var(--rule-on-paper);
+  --focus: var(--ink);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--heading);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-2);
+  line-height: 1.2;
+}
+
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--heading);
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration-thickness: 3px;
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Serifed I for "AI" / "AImpetus" in headings (see lib/brand.ts) */
+.brand-i {
+  font-family: "AImpetus I", "Inter", var(--font-heading);
+}
+
+/* Layout helpers */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.section + .section:not(.on-paper):not(.section--flush) {
+  border-top: 1px solid var(--rule-on-ink);
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.55;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+/* Visible placeholder for content still to be supplied */
+.placeholder {
+  padding: 0.05em 0.35em;
+  border: 1px dashed var(--amber);
+  border-radius: 0.25rem;
+  background: var(--placeholder-bg);
+  color: var(--ink);
+  font-weight: 600;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,243 @@
+---
+import Button from './Button.astro';
+import { mainNav, BETA_NUMBER } from '../lib/site';
+import { url, isCurrent } from '../lib/paths';
+
+const currentPath = Astro.url.pathname;
+---
+<header class="site-header" data-header>
+  <p class="beta-banner">Beta {BETA_NUMBER} preview – not the live AImpetus website.</p>
+
+  <div class="masthead wrap">
+    <a href={url('')} class="logo-link">
+      <img src={url('images/aimpetus-logo-reversed.svg')} alt="AImpetus – home" width="519" height="96" class="logo" />
+    </a>
+
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" hidden data-menu-toggle>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main" data-menu>
+      <ul class="site-nav__list">
+        {mainNav.map((item) => (
+          <li>
+            <a href={url(item.path)} aria-current={isCurrent(currentPath, item.path) ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+      <Button href={url('contact/')} size="small" class="site-nav__cta">Book a conversation</Button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement: without JS the nav is simply shown in full.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = header?.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = header?.querySelector<HTMLElement>('[data-menu]');
+
+  if (header && toggle && menu) {
+    header.classList.add('has-js');
+    toggle.hidden = false;
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Close when the layout switches to the desktop nav
+    window.matchMedia('(min-width: 64em)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .beta-banner {
+    margin: 0;
+    padding: 0.5rem var(--gutter);
+    background: var(--amber);
+    color: var(--ink);
+    font-size: var(--step--1);
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-block: 1.25rem;
+  }
+
+  .logo-link {
+    display: inline-block;
+    /* Clear space around the logo */
+    padding-block: 0.25rem;
+  }
+
+  .logo {
+    width: clamp(9.5rem, 28vw, 12rem);
+    height: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+  }
+
+  .site-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--paper);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .site-nav__list a:hover {
+    color: var(--mint);
+    border-bottom-color: currentColor;
+  }
+
+  .site-nav__list a[aria-current='page'] {
+    color: var(--mint);
+    border-bottom-color: var(--mint);
+  }
+
+  .menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--rule-on-ink);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--paper);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .menu-toggle:hover {
+    border-color: var(--mint);
+  }
+
+  /* Three-line icon that becomes a cross */
+  .menu-toggle__icon,
+  .menu-toggle__icon::before,
+  .menu-toggle__icon::after {
+    display: block;
+    width: 1.125rem;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .menu-toggle__icon {
+    position: relative;
+  }
+
+  .menu-toggle__icon::before,
+  .menu-toggle__icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-toggle__icon::before {
+    top: -6px;
+  }
+
+  .menu-toggle__icon::after {
+    top: 6px;
+  }
+
+  .menu-open .menu-toggle__icon {
+    background: transparent;
+  }
+
+  .menu-open .menu-toggle__icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .menu-open .menu-toggle__icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* Small screens: collapsible menu (only once JS has run) */
+  @media (max-width: 63.99em) {
+    .site-nav {
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .site-nav__list {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .site-nav__list a {
+      width: 100%;
+      font-size: 1.125rem;
+    }
+
+    .has-js .menu-toggle {
+      display: inline-flex;
+    }
+
+    .has-js:not(.menu-open) .site-nav {
+      display: none;
+    }
+
+    .has-js.menu-open .site-nav {
+      padding-block: 0.5rem 1rem;
+      border-top: 1px solid var(--rule-on-ink);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .site-nav__list a[aria-current='page'] {
+      border-bottom-color: CanvasText;
+    }
+
+    .menu-toggle__icon,
+    .menu-toggle__icon::before,
+    .menu-toggle__icon::after {
+      background: CanvasText;
+    }
+
+    .menu-open .menu-toggle__icon {
+      background: transparent;
+    }
+  }
+</style>

@@ -76,7 +76,10 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 - [ ] CSP: netlify.toml blocks inline scripts. Each beta must emit the mobile-menu script as a file (check after each build). The booking tool, once chosen, may need a CSP exception if embedded.
 
 ### beta1/ – Engine room: Editorial
-- [ ] Build, then founders review
+- [x] Set-up, tokens, global styles, BaseLayout (noindex, OG, beta banner, skip link), Header (mobile menu), Footer
+- [x] Home page – awaiting founders' review before the other pages are built
+- [ ] Remaining pages, form, 404, DESIGN.md
+- Note: Lighthouse SEO is 66 on beta pages only because of the required `noindex` ("Page is blocked from indexing"). It can't reach 95 while betas are hidden from search; every other SEO check passes.
 
 ### beta2/ – Engine room: Structured
 - [ ] Build, then founders review

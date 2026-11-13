@@ -1,0 +1,88 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { DEFAULT_TITLE, DEFAULT_DESCRIPTION, SITE_NAME } from '../lib/site';
+import { url, absoluteUrl } from '../lib/paths';
+import spaceGrotesk from '../assets/fonts/space-grotesk-700.woff2?url';
+import inter400 from '../assets/fonts/inter-400.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION } = Astro.props;
+const pageUrl = absoluteUrl(Astro.url.pathname.replace(import.meta.env.BASE_URL, ''));
+const ogImage = absoluteUrl('social/linkedin-banner-1584x396.png');
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Beta preview: never indexed (netlify.toml also sends X-Robots-Tag) -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0E2A2F" />
+
+    <link rel="preload" href={spaceGrotesk} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href={url('favicon.ico')} sizes="32x32" />
+    <link rel="icon" href={url('icons/aimpetus-mark.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('icons/apple-touch-icon-180.png')} />
+    <link rel="manifest" href={url('site.webmanifest')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1584" />
+    <meta property="og:image:height" content="396" />
+    <meta property="og:image:alt" content="AImpetus – AI in the engine room." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="AImpetus – AI in the engine room." />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--ink);
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+    outline: var(--focus-width) solid var(--mint);
+    outline-offset: 2px;
+  }
+
+  main:focus {
+    outline: none;
+  }
+</style>
