@@ -11,6 +11,7 @@ import HeroPanels from '../components/HeroPanels.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
 import FounderPortrait from '../components/FounderPortrait.astro';
 import CtaPanel from '../components/CtaPanel.astro';
+import ChevronBlocks from '../components/ChevronBlocks.astro';
 import ProblemOutcome from '../components/ProblemOutcome.astro';
 import StepBoxes from '../components/StepBoxes.astro';
 import { url } from '../lib/paths';
@@ -57,7 +58,10 @@ const founders = [
           <ArrowLink href={url('services/')}>See our services</ArrowLink>
         </div>
       </div>
-      <div class="hero__art"><HeroPanels /></div>
+      <div class="hero__art">
+        <ChevronBlocks class="hero__blocks" />
+        <div class="hero__panels"><HeroPanels /></div>
+      </div>
     </div>
 
     <!-- Key facts strip (labels drafted from brief facts) -->
@@ -74,7 +78,7 @@ const founders = [
   </section>
 
   <!-- 2. The problem we solve -->
-  <section class="section on-paper problem" aria-labelledby="problem-heading">
+  <section class="section on-paper problem wm" aria-labelledby="problem-heading">
     <div class="wrap">
       <IndexHead id="problem-heading" index="01" text="AI is easy to pilot. Hard to run." />
       <div class="problem__grid">
@@ -126,7 +130,7 @@ const founders = [
   </section>
 
   <!-- 6. Founders -->
-  <section class="section on-paper" aria-labelledby="founders-heading">
+  <section class="section on-paper wm wm--left" aria-labelledby="founders-heading">
     <div class="wrap">
       <IndexHead id="founders-heading" index="05" text="Led by the people who do the work" />
       <ul class="profiles">
@@ -158,6 +162,7 @@ const founders = [
   /* ---------- Hero ---------- */
   .hero {
     position: relative;
+    overflow: hidden;
     padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) 0;
     background:
       linear-gradient(to right, rgba(94, 234, 212, 0.07) 1px, transparent 1px) 0 0 / 48px 48px,
@@ -166,6 +171,8 @@ const founders = [
   }
 
   .hero__inner {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 3rem;
     align-items: center;
@@ -180,8 +187,31 @@ const founders = [
   }
 
   .hero__art {
+    position: relative;
     width: min(100%, 30rem);
     justify-self: center;
+  }
+
+  /* Big flat chevron blocks behind the panels, bleeding off the right edge */
+  .hero__art :global(.hero__blocks) {
+    position: absolute;
+    top: 0;
+    bottom: -22%;
+    left: 8%;
+    width: 150%;
+    height: auto;
+  }
+
+  @media (min-width: 60em) {
+    .hero__art :global(.hero__blocks) {
+      top: -18%;
+    }
+  }
+
+  .hero__panels {
+    position: relative;
+    z-index: 1;
+    padding-block: 1rem;
   }
 
   .eyebrow {

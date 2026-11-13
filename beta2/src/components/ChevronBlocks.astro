@@ -1,0 +1,39 @@
+---
+// Beta 2 signature graphic: the logo's chevrons as big, flat colour blocks
+// (teal → amber → mint, in the mark's left-to-right order). Decorative only;
+// the parent positions it and crops it with overflow: hidden.
+interface Props { class?: string; tone?: 'full' | 'soft' }
+const { class: className = '', tone = 'full' } = Astro.props;
+// Mark geometry (48 grid) scaled up: each chevron is 9 wide at the arms, 19 deep
+const chevron = (x: number) => `${x},0 ${x + 90},0 ${x + 300},300 ${x + 90},600 ${x},600 ${x + 210},300`;
+---
+<svg class:list={['chevron-blocks', `chevron-blocks--${tone}`, className]} viewBox="0 0 760 600" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMid slice">
+  <polygon class="cb cb--teal" points={chevron(0)} />
+  <polygon class="cb cb--amber" points={chevron(170)} />
+  <polygon class="cb cb--mint" points={chevron(340)} />
+  <polygon class="cb cb--ink" points={chevron(510)} />
+</svg>
+
+<style>
+  .chevron-blocks {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .cb--teal { fill: #0f766e; }
+  .cb--amber { fill: #f59e0b; }
+  .cb--mint { fill: #5eead4; }
+  .cb--ink { fill: #14383e; }
+
+  .chevron-blocks--soft .cb--teal { fill: #0f5f59; }
+  .chevron-blocks--soft .cb--amber { fill: #f59e0b; opacity: 0.9; }
+  .chevron-blocks--soft .cb--mint { fill: #5eead4; opacity: 0.9; }
+
+  @media (forced-colors: active) {
+    .chevron-blocks {
+      display: none;
+    }
+  }
+</style>

@@ -40,6 +40,8 @@ import { brandify } from '../lib/brand';
 
 <style>
   .site-footer {
+    position: relative;
+    overflow: hidden;
     border-top: 4px solid var(--teal);
     background: var(--white);
     color: var(--ink);
@@ -50,7 +52,22 @@ import { brandify } from '../lib/brand';
     --heading: var(--ink);
   }
 
+  /* Faint chevron watermark */
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    top: -4rem;
+    right: -10rem;
+    width: 30rem;
+    aspect-ratio: 1;
+    background: var(--teal);
+    opacity: 0.05;
+    clip-path: polygon(0 0, 30% 0, 100% 50%, 30% 100%, 0 100%, 70% 50%);
+    pointer-events: none;
+  }
+
   .footer-grid {
+    position: relative;
     display: grid;
     gap: 2rem;
     padding-block: clamp(2.5rem, 5vw, 4rem);
@@ -126,6 +143,7 @@ import { brandify } from '../lib/brand';
   }
 
   .footer-legal {
+    position: relative;
     padding-block: 1.25rem;
     background: var(--paper);
     border-top: 1px solid var(--grid-line);

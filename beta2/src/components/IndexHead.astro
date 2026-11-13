@@ -33,13 +33,14 @@ const { id, index, text, intro } = Astro.props;
     background: var(--rule);
   }
 
+  /* Arrow-shaped tag, echoing the logo chevron */
   .index-head__num {
     display: inline-grid;
     place-items: center;
-    min-width: 2.75rem;
-    height: 1.75rem;
-    padding-inline: 0.5rem;
-    border-radius: 0.25rem;
+    min-width: 3.5rem;
+    height: 2rem;
+    padding-inline: 0.75rem 1.25rem;
+    clip-path: polygon(0 0, calc(100% - 0.75rem) 0, 100% 50%, calc(100% - 0.75rem) 100%, 0 100%);
     background: var(--accent);
     color: var(--on-accent, var(--ink));
     font-family: var(--font-heading);
