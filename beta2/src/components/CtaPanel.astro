@@ -1,7 +1,6 @@
 ---
 // Beta 2 closing call to action: a boxed ink panel inside a paper section.
 import Button from './Button.astro';
-import ChevronBlocks from './ChevronBlocks.astro';
 import { brandify } from '../lib/brand';
 interface Props { heading?: string; text?: string; button: string; href: string; id?: string }
 const { heading, text, button, href, id = 'cta-heading' } = Astro.props;
@@ -18,7 +17,6 @@ const { heading, text, button, href, id = 'cta-heading' } = Astro.props;
       <div class="cta-panel__action">
         <Button href={href}>{button}</Button>
       </div>
-      <div class="cta-panel__blocks" aria-hidden="true"><ChevronBlocks /></div>
     </div>
   </div>
 </section>
@@ -28,61 +26,32 @@ const { heading, text, button, href, id = 'cta-heading' } = Astro.props;
     padding-block: clamp(2.5rem, 5vw, 4rem) var(--section-space);
   }
 
-  /* Arrow-shaped banner with the signature chevron blocks at its point */
   .cta-panel {
-    position: relative;
     display: grid;
     gap: 2rem;
     align-items: center;
-    overflow: hidden;
     padding: clamp(2rem, 5vw, 4rem);
+    border-left: 6px solid var(--mint);
     border-radius: var(--radius-card);
     background:
-      radial-gradient(ellipse 60% 120% at 0% 0%, rgba(94, 234, 212, 0.14), transparent 60%),
-      linear-gradient(120deg, var(--ink) 40%, #0f4a47 100%);
+      linear-gradient(to right, rgba(94, 234, 212, 0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      var(--ink);
     color: var(--paper);
     --heading: var(--white);
     --link: var(--mint);
     --focus: var(--white);
   }
 
-  .cta-panel__blocks {
-    display: none;
-  }
-
   @media (min-width: 60em) {
     .cta-panel {
-      grid-template-columns: minmax(0, 1fr) auto 20rem;
-      gap: 3rem;
-      padding-right: 0;
-      clip-path: polygon(0 0, calc(100% - 4rem) 0, 100% 50%, calc(100% - 4rem) 100%, 0 100%);
-      border-radius: var(--radius-card) 0 0 var(--radius-card);
-    }
-
-    .cta-panel__blocks {
-      display: block;
-      align-self: stretch;
-      margin-block: calc(-1 * clamp(2rem, 5vw, 4rem));
-    }
-
-    .cta-panel__blocks :global(.chevron-blocks) {
-      height: 100%;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4rem;
     }
   }
 
   .cta-panel--compact {
     padding-block: clamp(1.5rem, 3vw, 2.25rem);
-  }
-
-  @media (min-width: 60em) {
-    .cta-panel--compact {
-      grid-template-columns: auto minmax(0, 1fr) 14rem;
-    }
-
-    .cta-panel--compact .cta-panel__blocks {
-      margin-block: calc(-1 * clamp(1.5rem, 3vw, 2.25rem));
-      grid-column: 3;
-    }
   }
 
   .cta-panel h2 {

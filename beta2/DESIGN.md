@@ -16,14 +16,13 @@ How it differs from beta1 (Editorial):
 - **Founders as profile cards**, with the photo on an ink panel.
 - **Closing CTA as a boxed ink panel** with grid lines and a mint edge, inside a paper section.
 
-### Signature graphic (after review: "be more creative, use the > from the logo")
-`ChevronBlocks.astro`: the logo's chevrons as big, flat colour blocks in teal, amber, mint and ink, in the mark's order. This sets beta2 apart from beta1 (small chevron markers) and from beta3 (schematic diagrams, planned). Used:
-- **Home hero:** behind the interface panels, bleeding off the right edge.
-- **Every interior page header:** cropped at the right edge, behind the "On this page" card. On narrow screens it becomes a slim amber/mint/teal chevron stripe along the bottom of the header, so it never sits behind text.
-- **CTA panels:** an arrow-shaped banner (pointed right end via `clip-path`) with the blocks at the point.
-- **Section tags:** the 01–05 index tags are arrow-shaped.
-- **Watermarks:** a large faint teal chevron (6%) behind selected paper sections, alternating right and left (`.wm`, `.wm--left`), and in the footer.
-All of it is decorative (`aria-hidden`) and hidden in forced-colours mode. Text never sits on the solid blocks, and the header text is capped at 56% width when there's no card.
+### Signature graphic (after two reviews of the chevron idea)
+`SplitBand.astro`: **one** logo chevron stroke (the mark's arm angle, dx 10 : dy 12), cropped so only the tip of the upper arm shows at the top edge and the full lower arm runs off the bottom. It reads as a bold diagonal split, with a slightly lighter tone on the far side and a hint of the arrow point.
+- **Home hero:** mint, behind the interface panels. It starts at the halfway line on wide screens, so it never crosses the text. On phones it sits behind the panels below the text, as the stroke only.
+- **Interior page headers:** the same stroke in quiet teal, cropped at the right edge on wide screens (behind the "On this page" card). Not shown on phones. Header text is capped at 56% when there's no card.
+- **Section tags:** the small arrow-shaped 01–05 tags stay.
+- An earlier version (four repeated chevron blocks, arrow-shaped CTA banners, watermarks, a phone stripe) was removed after review: "not asking to replicate the logo everywhere".
+Decorative only (`aria-hidden`), hidden in forced-colours mode.
 
 ### Interior pages (after the Home review: "not too different from beta1")
 - **Page header** (`PageHeader.astro`): a compact dark band with a breadcrumb, the H1 and intro, and an **"On this page"** card of numbered jump links that match the numbered sections below. A mint bottom edge. No illustrations, unlike beta1.

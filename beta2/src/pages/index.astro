@@ -11,7 +11,7 @@ import HeroPanels from '../components/HeroPanels.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
 import FounderPortrait from '../components/FounderPortrait.astro';
 import CtaPanel from '../components/CtaPanel.astro';
-import ChevronBlocks from '../components/ChevronBlocks.astro';
+import SplitBand from '../components/SplitBand.astro';
 import ProblemOutcome from '../components/ProblemOutcome.astro';
 import StepBoxes from '../components/StepBoxes.astro';
 import { url } from '../lib/paths';
@@ -48,6 +48,8 @@ const founders = [
 >
   <!-- 1. Hero -->
   <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero__stage">
+    <div class="hero__band"><SplitBand /></div>
     <div class="wrap hero__inner">
       <div class="hero__text">
         <p class="eyebrow"><span class="eyebrow__tag">Data, digital and AI services</span></p>
@@ -59,9 +61,9 @@ const founders = [
         </div>
       </div>
       <div class="hero__art">
-        <ChevronBlocks class="hero__blocks" />
         <div class="hero__panels"><HeroPanels /></div>
       </div>
+    </div>
     </div>
 
     <!-- Key facts strip (labels drafted from brief facts) -->
@@ -78,7 +80,7 @@ const founders = [
   </section>
 
   <!-- 2. The problem we solve -->
-  <section class="section on-paper problem wm" aria-labelledby="problem-heading">
+  <section class="section on-paper problem" aria-labelledby="problem-heading">
     <div class="wrap">
       <IndexHead id="problem-heading" index="01" text="AI is easy to pilot. Hard to run." />
       <div class="problem__grid">
@@ -130,7 +132,7 @@ const founders = [
   </section>
 
   <!-- 6. Founders -->
-  <section class="section on-paper wm wm--left" aria-labelledby="founders-heading">
+  <section class="section on-paper" aria-labelledby="founders-heading">
     <div class="wrap">
       <IndexHead id="founders-heading" index="05" text="Led by the people who do the work" />
       <ul class="profiles">
@@ -192,19 +194,31 @@ const founders = [
     justify-self: center;
   }
 
-  /* Big flat chevron blocks behind the panels, bleeding off the right edge */
-  .hero__art :global(.hero__blocks) {
+  /* Signature split band (one logo chevron stroke) behind the hero content */
+  .hero__stage {
+    position: relative;
+  }
+
+  .hero__band {
     position: absolute;
-    top: 0;
-    bottom: -22%;
-    left: 8%;
-    width: 150%;
-    height: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 46%;
+  }
+
+  /* On narrow screens show only the stroke (the far-side tone would leave a seam) */
+  @media (max-width: 59.99em) {
+    .hero__band :global(.split-band__far) {
+      display: none;
+    }
   }
 
   @media (min-width: 60em) {
-    .hero__art :global(.hero__blocks) {
-      top: -18%;
+    .hero__band {
+      top: calc(-1 * clamp(2.5rem, 1.5rem + 4vw, 5rem));
+      left: 50%;
+      height: auto;
     }
   }
 

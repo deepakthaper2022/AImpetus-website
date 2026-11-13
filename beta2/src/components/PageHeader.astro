@@ -2,7 +2,7 @@
 // Beta 2 interior page header: compact dark band with breadcrumbs, H1 and intro,
 // plus an "On this page" card of numbered jump links (when sections are given).
 import Breadcrumbs from './Breadcrumbs.astro';
-import ChevronBlocks from './ChevronBlocks.astro';
+import SplitBand from './SplitBand.astro';
 import { brandify } from '../lib/brand';
 import { url } from '../lib/paths';
 
@@ -22,7 +22,7 @@ const { title, intro, crumbs, toc, kicker, crumbLabel } = Astro.props;
 const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?? title }];
 ---
 <section class:list={['page-header', { 'page-header--toc': toc?.length }]} aria-labelledby="page-title">
-  <div class="page-header__blocks"><ChevronBlocks tone="soft" /></div>
+  <div class="page-header__band"><SplitBand tone="teal" /></div>
   <div class="wrap page-header__inner">
     <div class="page-header__main">
       <Breadcrumbs items={trail} />
@@ -62,47 +62,24 @@ const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?
       linear-gradient(135deg, var(--ink) 60%, #10403f 100%);
   }
 
-  /* Signature chevron blocks, cropped at the right edge (wide screens) */
-  .page-header__blocks {
+  /* Signature split band (quiet teal), cropped at the right edge on wide screens */
+  .page-header__band {
     display: none;
   }
 
   @media (min-width: 60em) {
-    .page-header__blocks {
+    .page-header__band {
       display: block;
       position: absolute;
       top: 0;
       bottom: 0;
-      right: -6rem;
-      width: min(40vw, 36rem);
+      left: 62%;
+      right: 0;
     }
 
-    .page-header:not(.page-header--toc) .page-header__blocks {
-      right: -4rem;
-    }
-
-    /* Keep text clear of the blocks */
+    /* Keep text clear of the band */
     .page-header:not(.page-header--toc) .page-header__main {
       max-width: 56%;
-    }
-  }
-
-  /* Narrow screens: a slim chevron stripe along the bottom instead */
-  @media (max-width: 59.99em) {
-    .page-header::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 0.875rem;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Cpolygon points='0,0 4,0 11,7 4,14 0,14 7,7' fill='%23F59E0B'/%3E%3Cpolygon points='14,0 18,0 25,7 18,14 14,14 21,7' fill='%235EEAD4'/%3E%3Cpolygon points='28,0 32,0 39,7 32,14 28,14 35,7' fill='%230F766E'/%3E%3C/svg%3E");
-      background-size: 42px 14px;
-      opacity: 0.9;
-    }
-
-    .page-header {
-      padding-bottom: calc(clamp(2.5rem, 2rem + 3vw, 4rem) + 0.875rem);
     }
   }
 
