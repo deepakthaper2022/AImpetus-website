@@ -295,13 +295,3 @@ h2::before {
     background: CanvasText;
   }
 }
-
-/* 404 page */
-
-.logo-link {
-  display: inline-block;
-}
-
-.hero-404 .actions {
-  margin-top: 2rem;
-}
