@@ -135,7 +135,7 @@ main {
 
 .site-header {
   /* Clear space of at least the chevron height around the logo */
-  padding: clamp(1.75rem, 4vw, 3rem) 0 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0 0;
 }
 
 .logo {
@@ -149,7 +149,7 @@ main {
   display: grid;
   gap: 2.5rem;
   align-items: center;
-  padding: clamp(2.5rem, 8vw, 6.5rem) 0 clamp(3rem, 8vw, 6rem);
+  padding: clamp(2.25rem, 5vw, 3.75rem) 0 clamp(3rem, 7vw, 5rem);
 }
 
 .eyebrow {
@@ -198,8 +198,11 @@ h1 .ai {
 
   .hero-mark {
     display: block;
+    align-self: start;
     width: 100%;
     height: auto;
+    /* Line the chevrons up with the top of the headline */
+    margin-top: 3rem;
   }
 }
 
