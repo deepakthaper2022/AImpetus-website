@@ -34,14 +34,36 @@ const toc = [
         intro="Good data makes digital change possible. Good digital services give AI somewhere useful to work. Strong delivery assurance keeps all of it on track."
       />
 
-      <!-- Decorative: the services as a stack, with assurance around it (explained by the text above) -->
-      <div class="stack" aria-hidden="true">
-        <div class="stack__frame">
-          <span class="stack__frame-label" set:html={brandify(services[3].name)} />
-          <div class="stack__layer stack__layer--ai"><span set:html={brandify(services[1].name)} /></div>
-          <div class="stack__layer stack__layer--digital"><span>{services[2].name}</span></div>
-          <div class="stack__layer stack__layer--data"><span>{services[0].name}</span></div>
-        </div>
+      <!-- Decorative (the text above says the same): the services as logo-style
+           chevron strips moving forward, on a "Delivery assurance" track -->
+      <div class="fit" aria-hidden="true">
+        <svg class="fit__wide" viewBox="0 0 900 400" focusable="false">
+          {[
+            { x: 0, cls: 'ink', label: services[0].name },
+            { x: 290, cls: 'teal', label: services[2].name },
+            { x: 580, cls: 'mint', label: services[1].name, ai: true },
+          ].map((c) => (
+            <g>
+              <polygon class={`fit__strip fit__strip--${c.cls}`} points={`${c.x},20 ${c.x + 100},20 ${c.x + 280},180 ${c.x + 100},340 ${c.x},340 ${c.x + 180},180`} />
+              <text
+                class={`fit__label fit__label--${c.cls}`}
+                transform={`translate(${c.x + 58} 58) rotate(41.6)`}
+              >
+                {c.ai ? <><tspan>A</tspan><tspan class="fit__i">I</tspan><tspan> to benefit</tspan></> : c.label}
+              </text>
+            </g>
+          ))}
+          <!-- The track -->
+          <polygon class="fit__track" points="0,362 866,362 896,381 866,400 0,400" />
+          <text class="fit__track-label" x="24" y="388">{services[3].name}</text>
+        </svg>
+
+        <ol class="fit__narrow">
+          <li class="fit__chip fit__chip--ink">{services[0].name}</li>
+          <li class="fit__chip fit__chip--teal">{services[2].name}</li>
+          <li class="fit__chip fit__chip--mint"><span set:html={brandify(services[1].name)} /></li>
+          <li class="fit__chip fit__chip--track">{services[3].name}</li>
+        </ol>
       </div>
 
       <div class="cards">
@@ -59,57 +81,89 @@ const toc = [
 </BaseLayout>
 
 <style>
-  .stack {
-    max-width: 44rem;
+  .fit {
+    max-width: 52rem;
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  }
-
-  .stack__frame {
-    position: relative;
-    display: grid;
-    gap: 0.5rem;
-    padding: 2.75rem 1rem 1rem;
-    border: 2px dashed var(--teal);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--grid-line);
     border-radius: var(--radius-card);
     background: var(--white);
   }
 
-  .stack__frame-label {
-    position: absolute;
-    top: 0.75rem;
-    left: 1rem;
-    color: var(--teal-dark);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .fit__wide {
+    display: none;
+    width: 100%;
+    height: auto;
   }
 
-  .stack__layer {
+  .fit__strip--ink { fill: var(--ink); }
+  .fit__strip--teal { fill: var(--teal); }
+  .fit__strip--mint { fill: var(--mint); }
+
+  .fit__label {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .fit__label--ink,
+  .fit__label--teal { fill: var(--white); }
+  .fit__label--mint { fill: var(--ink); }
+
+  .fit__i {
+    font-family: 'AImpetus I', 'Inter', sans-serif;
+  }
+
+  .fit__track { fill: var(--amber); }
+
+  .fit__track-label {
+    fill: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  /* Narrow screens: the same idea as stacked arrow strips */
+  .fit__narrow {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fit__chip {
     display: flex;
     align-items: center;
-    min-height: 3.25rem;
-    padding-inline: 1.25rem;
-    border-radius: 0.25rem;
+    min-height: 3rem;
+    padding: 0.5rem 2.25rem 0.5rem 1rem;
+    clip-path: polygon(0 0, calc(100% - 1.25rem) 0, 100% 50%, calc(100% - 1.25rem) 100%, 0 100%, 1.25rem 50%);
+    padding-left: 2rem;
     font-family: var(--font-heading);
     font-weight: 700;
   }
 
-  .stack__layer--ai {
-    margin-inline: 18%;
-    background: var(--mint);
+  .fit__chip--ink { background: var(--ink); color: var(--white); }
+  .fit__chip--teal { background: var(--teal); color: var(--white); margin-left: 0.75rem; }
+  .fit__chip--mint { background: var(--mint); color: var(--ink); margin-left: 1.5rem; }
+
+  .fit__chip--track {
+    margin-top: 0.25rem;
+    padding-left: 1rem;
+    clip-path: polygon(0 0, calc(100% - 1.25rem) 0, 100% 50%, calc(100% - 1.25rem) 100%, 0 100%);
+    background: var(--amber);
     color: var(--ink);
   }
 
-  .stack__layer--digital {
-    margin-inline: 8%;
-    background: var(--teal);
-    color: var(--white);
-  }
+  @media (min-width: 40em) {
+    .fit__wide {
+      display: block;
+    }
 
-  .stack__layer--data {
-    background: var(--ink);
-    color: var(--white);
+    .fit__narrow {
+      display: none;
+    }
   }
 
   .cards :global(.po) {
