@@ -92,7 +92,7 @@ The betas currently use SVG artwork, monogram badges and illustrations, so nothi
 - [x] Set-up (copied from beta1; base /beta2/, form contact-beta2), light header, Home page
 - [x] Home page reviewed ("ok, not too different from beta1"), so every interior page and the footer were restyled to set beta2 further apart
 - [x] All 15 pages built and checked (see beta2/DESIGN.md)
-- [ ] Founders review every page
+- [x] Founders reviewed; **beta2 frozen** (13 Nov 2026). No further changes unless asked.
 - [ ] After deploy: submit the form once to confirm Netlify detects `contact-beta2`
 
 ### beta3/ – Engine room: Schematic
