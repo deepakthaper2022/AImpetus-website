@@ -1,0 +1,73 @@
+---
+// Beta 3: the logo's chevrons as long stripes that cut right across a section and
+// pass BEHIND a photo, with the point peeking out beside it.
+// - "pair": amber + mint, in the mark's order and proportions (hero)
+// - "soft": a single pale mint stripe (secondary sections)
+// Place inside a position:relative media wrapper, before the image; the parent
+// section clips overflow, so the stripes are cut by its top and bottom edges.
+// Arm angle matches the mark (dx 10 : dy 12). Decorative only.
+interface Props { variant?: 'pair' | 'soft' }
+const { variant = 'pair' } = Astro.props;
+
+// Tall 1000 × 2000 box: tip at (tip, 1000), arms run to the top and bottom edges
+const chevron = (tip: number, w: number) => {
+  const run = 1000 / 1.2;
+  return [
+    [tip - run - w, 0], [tip - run, 0], [tip, 1000],
+    [tip - run, 2000], [tip - run - w, 2000], [tip - w, 1000],
+  ].map(([x, y]) => `${x.toFixed(0)},${y}`).join(' ');
+};
+---
+<svg class:list={['logo-stripes', `logo-stripes--${variant}`]} viewBox="0 0 1000 2000" aria-hidden="true" focusable="false">
+  {variant === 'pair' ? (
+    <>
+      <polygon class="ls ls--amber" points={chevron(800, 125)} />
+      <polygon class="ls ls--mint" points={chevron(975, 120)} />
+    </>
+  ) : (
+    <polygon class="ls ls--soft" points={chevron(960, 190)} />
+  )}
+</svg>
+
+<style>
+  .logo-stripes {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1 / 2;
+    overflow: visible;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  /* Box is 120% of the photo's width, so the tip sits just beyond its right edge */
+  .logo-stripes--pair {
+    left: -10%;
+    width: 120%;
+  }
+
+  .logo-stripes--soft {
+    left: -14%;
+    width: 128%;
+  }
+
+  /* Phones: hide the part above the photo so the stripes never run behind text.
+     Box height = 2 × 1.2W; photo half-height ≈ 0.33W → clip ≈ 36% from the top. */
+  @media (max-width: 63.99em) {
+    .logo-stripes--pair {
+      clip-path: inset(calc(36% - 1.25rem) -100vw 0 -100vw);
+    }
+  }
+
+  .ls--amber { fill: var(--amber); }
+  .ls--mint { fill: var(--mint); }
+  .ls--soft { fill: #c9eee6; }
+
+  @media (forced-colors: active) {
+    .logo-stripes {
+      display: none;
+    }
+  }
+</style>
