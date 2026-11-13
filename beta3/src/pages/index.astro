@@ -218,9 +218,10 @@ const founders = [
 
   /* ---------- Hero ---------- */
   .hero {
+    --stripe-pad: clamp(2rem, 1rem + 3vw, 3.75rem);
     position: relative;
     overflow: hidden;
-    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+    padding-block: var(--stripe-pad);
     background:
       radial-gradient(ellipse 55% 70% at 85% 40%, rgba(94, 234, 212, 0.16), transparent 70%),
       var(--white);
@@ -232,6 +233,7 @@ const founders = [
   }
 
   .hero__inner {
+    position: relative;
     display: grid;
     gap: clamp(2rem, 5vw, 3.5rem);
     align-items: center;
@@ -269,9 +271,17 @@ const founders = [
     margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
   }
 
+  /* Stripes position against the section on wide screens, the photo on narrow */
   .hero__media,
   .how__media {
     position: relative;
+  }
+
+  @media (min-width: 64em) {
+    .hero__media,
+    .how__media {
+      position: static;
+    }
   }
 
   .hero__media :global(picture),
@@ -519,12 +529,15 @@ const founders = [
 
   /* ---------- How we work ---------- */
   .how-section {
+    --stripe-pad: var(--section-space);
+    --stripe-gap: clamp(2rem, 5vw, 4rem);
     overflow: hidden;
   }
 
   .how {
+    position: relative;
     display: grid;
-    gap: clamp(2rem, 5vw, 4rem);
+    gap: var(--stripe-gap);
     align-items: center;
   }
 

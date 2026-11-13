@@ -1,63 +1,91 @@
 ---
-// Beta 3: the logo's chevrons as long stripes that cut right across a section and
-// pass BEHIND a photo, with the point peeking out beside it.
-// - "pair": amber + mint, in the mark's order and proportions (hero)
-// - "soft": a single pale mint stripe (secondary sections)
-// Place inside a position:relative media wrapper, before the image; the parent
-// section clips overflow, so the stripes are cut by its top and bottom edges.
+// Beta 3: the logo's chevrons as thick stripes that cut across a whole section and
+// pass BEHIND its photo. The point sits near the top edge, so only a sliver (≈6%)
+// of the upper arm shows; the long lower arm sweeps down to the bottom edge.
+// - "pair": amber + mint, in the mark's order (hero; anchored to the right edge)
+// - "soft": one pale mint stripe (secondary sections; anchored to the left)
+// On wide screens the SVG is positioned against the section (its media wrapper is
+// static); on narrow screens against the photo, so it never sits behind text.
 // Arm angle matches the mark (dx 10 : dy 12). Decorative only.
 interface Props { variant?: 'pair' | 'soft' }
 const { variant = 'pair' } = Astro.props;
 
-// Tall 1000 × 2000 box: tip at (tip, 1000), arms run to the top and bottom edges
-const chevron = (tip: number, w: number) => {
-  const run = 1000 / 1.2;
+const TIP_Y = 60; // of 1000: the visible sliver of the upper arm
+const arm = (tip: number, w: number) => {
+  const up = TIP_Y / 1.2;
+  const down = (1000 - TIP_Y) / 1.2;
   return [
-    [tip - run - w, 0], [tip - run, 0], [tip, 1000],
-    [tip - run, 2000], [tip - run - w, 2000], [tip - w, 1000],
+    [tip - up - w, 0], [tip - up, 0], [tip, TIP_Y],
+    [tip - down, 1000], [tip - down - w, 1000], [tip - w, TIP_Y],
   ].map(([x, y]) => `${x.toFixed(0)},${y}`).join(' ');
 };
+// viewBox spans x -440 … 900 so the stripes reach the bottom edge before the left edge
 ---
-<svg class:list={['logo-stripes', `logo-stripes--${variant}`]} viewBox="0 0 1000 2000" aria-hidden="true" focusable="false">
+<svg class:list={['logo-stripes', `logo-stripes--${variant}`]} viewBox="-440 0 1340 1000" aria-hidden="true" focusable="false">
   {variant === 'pair' ? (
     <>
-      <polygon class="ls ls--amber" points={chevron(800, 125)} />
-      <polygon class="ls ls--mint" points={chevron(975, 120)} />
+      <polygon class="ls ls--amber" points={arm(630, 170)} />
+      <polygon class="ls ls--mint" points={arm(900, 230)} />
     </>
   ) : (
-    <polygon class="ls ls--soft" points={chevron(960, 190)} />
+    <polygon class="ls ls--soft" points={arm(900, 280)} />
   )}
 </svg>
 
 <style>
+  /* Wide screens: positioned against the content wrapper, extended by the
+     section padding (--stripe-pad, set by the section) to reach its edges */
   .logo-stripes {
     position: absolute;
     z-index: 0;
-    top: 50%;
+    top: calc(-1 * var(--stripe-pad, 0px));
     max-width: none;
-    height: auto;
-    aspect-ratio: 1 / 2;
-    overflow: visible;
-    transform: translateY(-50%);
+    height: calc(100% + 2 * var(--stripe-pad, 0px));
+    width: auto;
+    aspect-ratio: 1340 / 1000;
     pointer-events: none;
   }
 
-  /* Box is 120% of the photo's width, so the tip sits just beyond its right edge */
+  /* Pushed partly off the right edge: the amber point sits just beside the photo,
+     the mint tip runs off the page, and the long arms stay clear of the text */
   .logo-stripes--pair {
-    left: -10%;
-    width: 120%;
+    right: 0;
+    transform: translateX(18%);
   }
 
-  .logo-stripes--soft {
-    left: -14%;
-    width: 128%;
-  }
-
-  /* Phones: hide the part above the photo so the stripes never run behind text.
-     Box height = 2 × 1.2W; photo half-height ≈ 0.33W → clip ≈ 36% from the top. */
-  @media (max-width: 63.99em) {
+  @media (min-width: 64em) and (max-width: 79.99em) {
     .logo-stripes--pair {
-      clip-path: inset(calc(36% - 1.25rem) -100vw 0 -100vw);
+      transform: translateX(26%);
+    }
+  }
+
+  /* Point just beyond the photo's right edge: the photo fills the left half of a
+     two-column grid, so its right edge is 50% + half the gap from the right.
+     The section sets --stripe-gap to its grid gap. */
+  .logo-stripes--soft {
+    right: calc(50% + var(--stripe-gap, 3rem) / 2 - 1.25rem);
+  }
+
+  /* Narrow screens: sit behind the photo only */
+  @media (max-width: 63.99em) {
+    .logo-stripes {
+      top: -1.25rem;
+      bottom: -2.5rem;
+      height: calc(100% + 3.75rem);
+    }
+
+    .logo-stripes--pair {
+      right: calc(-1 * var(--gutter));
+      transform: none;
+    }
+
+    .logo-stripes--soft {
+      left: auto;
+      right: calc(-1 * var(--gutter));
+      /* keep it to the photo area: nothing below, where the text starts */
+      top: -1.25rem;
+      bottom: 0;
+      height: calc(100% + 1.25rem);
     }
   }
 

@@ -464,6 +464,7 @@ a:hover {
   --button-bg-hover: var(--teal-dark);
   --button-text: var(--white);
   --radius: 2rem;
+  --section-space: clamp(3rem, 2rem + 3.5vw, 5.5rem);
 }
 
 /* Dark context inside a light page (CTA panel, footer) */
