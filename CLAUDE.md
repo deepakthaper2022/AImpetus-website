@@ -60,10 +60,11 @@ Copy what each project needs from `assets/` into it; never edit `assets/` or `br
 If the content PDF differs, the PDF wins.
 
 ## Beta design directions
-All three follow `brief/brand.md` (same colours, fonts, logo, voice) and the same accessibility bar. They should look clearly different from each other so the founders can compare.
-- **Beta 1 – Editorial:** typography-led, light paper background, generous white space, strong type hierarchy, minimal boxes; the chevron used as small section markers. Calm and authoritative.
-- **Beta 2 – Structured:** grid- and card-based, light sections alternating with ink bands, services as problem → outcome cards, highly scannable; clear, civic and practical.
-- **Beta 3 – Engine room:** dark-first (ink) hero and key sections with mint accents, bolder use of the chevron as a graphic device, more visual contrast and restrained motion (off under reduced motion).
+The founders have chosen the **Engine room** direction. All three betas are Engine room designs: dark-first (ink #0E2A2F) with mint accents on dark, paper sections where they help reading, the chevron as the signature graphic, and restrained motion (off under reduced motion). They follow `brief/brand.md` and the same accessibility bar, and must look clearly different from each other so the founders can compare and proofread them side by side.
+- **Beta 1 – Engine room: Editorial.** Typography-led. Large Space Grotesk headlines on ink, long calm sections, minimal boxes, the chevron as small section markers and list bullets. Mostly dark, with paper used for long reading sections (service detail, legal pages).
+- **Beta 2 – Engine room: Structured.** Dark hero and dark bands alternating with paper sections. Grid and card layouts: services as problem → outcome cards, "How we work" as numbered steps, founders as profile cards. Highly scannable.
+- **Beta 3 – Engine room: Schematic.** The most graphic. A dark hero with a large chevron composition, and simple line diagrams (built in SVG/CSS) that show data flowing through platforms into AI and better services, in the spirit of an engine room schematic. Bolder contrast and section transitions, still restrained and accessible. No stock imagery.
+Contrast on dark: body text in white or paper; mint (#5EEAD4) for accents, links and buttons on ink (buttons: mint background with ink text); teal (#0F766E) only on light backgrounds; amber never as text on light and only as a graphic accent on dark. Check every pair.
 The prompt for each beta may change or add to its direction, or include feedback on the previous beta. The prompt wins. Record the direction and decisions in that beta's `DESIGN.md`.
 
 ## Non-negotiables (all four)

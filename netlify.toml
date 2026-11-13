@@ -1,0 +1,89 @@
+# One Netlify site: holding page at the root, betas under /betaN/.
+# See CLAUDE.md. Form notification email is set in the Netlify UI, not here.
+
+[build]
+  command = "bash scripts/build-all.sh"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# --- Redirects --------------------------------------------------------------
+
+# www -> bare domain (both protocols)
+[[redirects]]
+  from = "https://www.aimpetus.ai/*"
+  to = "https://aimpetus.ai/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.aimpetus.ai/*"
+  to = "https://aimpetus.ai/:splat"
+  status = 301
+  force = true
+
+# Each beta's own 404 page. Not forced, so real files are always served first.
+# (The root 404.html is served automatically by Netlify.)
+[[redirects]]
+  from = "/beta1/*"
+  to = "/beta1/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/beta2/*"
+  to = "/beta2/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/beta3/*"
+  to = "/beta3/404.html"
+  status = 404
+
+# --- Headers ----------------------------------------------------------------
+
+# Security headers for everything. No third-party requests are allowed at all.
+# style-src allows inline styles because Astro may inline small stylesheets;
+# scripts must be same-origin files (no inline JS).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=31536000"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+# Betas must never be indexed.
+[[headers]]
+  for = "/beta1/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/beta2/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/beta3/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Long cache for fingerprinted Astro assets and self-hosted fonts.
+[[headers]]
+  for = "/*/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
