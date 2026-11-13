@@ -446,75 +446,53 @@ a:hover {
   border-top: 1px solid var(--rule-on-ink);
 }
 
-/* ================= Beta 3 – Schematic ================= */
-
-:root {
-  --ink-deeper: #0a2024;
-  --panel: #10303a;
-  --line: #2f5a60;
-  --tick: #5eead4;
+/* ================= Beta 3 – light, people-first =================
+   Opt-in per page via BaseLayout (light) while the interior pages are rebuilt. */
+.theme-light {
+  background: var(--white);
+  color: var(--ink);
+  --text: var(--ink);
+  --text-muted: var(--slate);
+  --heading: var(--ink);
+  --link: var(--teal);
+  --link-hover: var(--teal-dark);
+  --accent: var(--teal);
+  --rule: var(--rule-on-paper);
+  --focus: var(--ink);
+  --icon-line: var(--teal);
+  --button-bg: var(--teal);
+  --button-bg-hover: var(--teal-dark);
+  --button-text: var(--white);
+  --radius: 2rem;
 }
 
-/* Blueprint grid: fine 24px lines with stronger 120px lines */
-.blueprint {
-  background:
-    linear-gradient(to right, rgba(94, 234, 212, 0.09) 1px, transparent 1px) 0 0 / 120px 120px,
-    linear-gradient(to bottom, rgba(94, 234, 212, 0.09) 1px, transparent 1px) 0 0 / 120px 120px,
-    linear-gradient(to right, rgba(94, 234, 212, 0.035) 1px, transparent 1px) 0 0 / 24px 24px,
-    linear-gradient(to bottom, rgba(94, 234, 212, 0.035) 1px, transparent 1px) 0 0 / 24px 24px,
-    var(--ink);
+/* Dark context inside a light page (CTA panel, footer) */
+.on-ink {
+  background: var(--ink);
+  color: var(--paper);
+  --text: var(--paper);
+  --text-muted: var(--muted-on-ink);
+  --heading: var(--white);
+  --link: var(--mint);
+  --link-hover: var(--mint-light);
+  --accent: var(--mint);
+  --rule: var(--rule-on-ink);
+  --focus: var(--white);
+  --icon-line: var(--mint);
+  --button-bg: var(--mint);
+  --button-bg-hover: var(--mint-light);
+  --button-text: var(--ink);
 }
 
-.band-deep {
-  background: var(--ink-deeper);
+.band-paper {
+  background: var(--paper);
 }
 
-/* Angled section edge (cut at the logo's arm angle feel); overlaps the section above */
-.cut {
-  position: relative;
-  margin-top: calc(-1 * clamp(1.5rem, 4vw, 3.5rem));
-  padding-top: calc(var(--section-space) + clamp(1.5rem, 4vw, 3.5rem));
-  clip-path: polygon(0 clamp(1.5rem, 4vw, 3.5rem), 100% 0, 100% 100%, 0 100%);
-}
-
-/* "Spec sheet" frame with corner registration ticks */
-.spec {
-  position: relative;
-  border: 1px solid var(--line);
-  background:
-    linear-gradient(var(--tick), var(--tick)) top left / 1.25rem 2px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) top left / 2px 1.25rem no-repeat,
-    linear-gradient(var(--tick), var(--tick)) top right / 1.25rem 2px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) top right / 2px 1.25rem no-repeat,
-    linear-gradient(var(--tick), var(--tick)) bottom left / 1.25rem 2px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) bottom left / 2px 1.25rem no-repeat,
-    linear-gradient(var(--tick), var(--tick)) bottom right / 1.25rem 2px no-repeat,
-    linear-gradient(var(--tick), var(--tick)) bottom right / 2px 1.25rem no-repeat,
-    rgba(11, 35, 40, 0.72);
-}
-
-/* Small technical annotation label, e.g. "01 / SYSTEM" */
-.annot {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  color: var(--mint);
-  font-size: 0.8125rem;
+/* Small teal label above headings */
+.kicker {
+  color: var(--teal-dark);
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.annot::after {
-  content: "";
-  width: 3rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
-}
-
-@media (forced-colors: active) {
-  .spec {
-    border-color: CanvasText;
-  }
 }
