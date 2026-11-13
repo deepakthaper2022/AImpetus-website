@@ -1,0 +1,727 @@
+AImpetus Website Content (v1)
+
+AImpetus Website Content (v1)
+​Nov 12, 2026
+
+·
+
+​@Deepak
+
+This is the copy for every page of the launch site, in page order and ready to paste. It
+follows the agreed brand foundation: data and digital services with AI at the core, the
+tagline "AI in the engine room.", and copy written for buyers, with NHS and public-sector
+experience as proof.
+Conventions
+H1, H2, H3 mark heading levels. Use one H1 per page.
+[Button: …] is a button and [Link: …] is a text link, with the destination page in
+brackets.
+SEO title (under 60 characters) and Meta description (under 155 characters) sit at
+the top of each page.
+[Placeholder: …] marks something to fill in before go-live. All of them are listed in the
+last section.
+Nothing here claims AImpetus clients, partners, framework places or accreditations.
+Founder experience is always described as the founders' own.
+
+Developer brief: build requirements
+This section is for whoever builds the site. Use the copy in this document exactly as
+written, and the brand kit in the AImpetus Brand folder.
+
+Scope
+Pages: Home, Services overview, four service pages (Data and platforms, AI to benefit,
+Digital transformation, Delivery assurance), How we work, About us, Insights,
+Contact, Privacy notice, Cookie notice, Accessibility statement.
+Not in scope at launch: case studies, blog CMS beyond simple article pages, client
+login, analytics.
+Domain: aimpetus.ai, served over HTTPS, with www redirecting to the bare domain
+(or the other way round, consistently).
+
+Page 1 of 16
+
+AImpetus Website Content (v1)
+
+Must-haves
+Requirement
+
+What "done" looks like
+
+Responsive
+
+Works from 320 px phone width to large desktop.
+Navigation collapses to an accessible menu on
+small screens. No sideways scrolling.
+
+Accessible (WCAG 2.2 AA)
+
+Semantic HTML, one H1 per page, logical heading
+order, keyboard-only navigation with visible focus,
+skip link, alt text on meaningful images, labelled
+form fields with clear error messages, colour
+contrast at AA, touch targets at least 24 × 24 px,
+works at 400% zoom, respects reduced-motion
+settings.
+
+Favicon and icons
+
+favicon.ico (16/32/48), apple-touch-icon-180.png
+and the 192/512 PNGs, all from the brand kit icon
+folder.
+
+Page titles and descriptions
+
+Each page uses the SEO title and meta description
+given in this document. Add Open Graph and social
+sharing tags using the LinkedIn banner image.
+
+Working contact form
+
+Fields as on the Contact page. Sends to
+contact@aimpetus.ai, shows the confirmation
+message, includes the privacy notice link, and has
+spam protection that doesn't block disabled users
+(for example a hidden honeypot field or an
+accessible CAPTCHA).
+
+Booking link
+
+"Choose a time" opens the booking tool once
+chosen (placeholder for now).
+
+Legal pages
+
+Privacy, Cookie and Accessibility pages from the
+legal pages document, linked in the footer on every
+page.
+
+Cookies
+
+Strictly necessary cookies only at launch. No
+analytics or tracking without a consent banner.
+
+Performance
+
+Pages load quickly on mobile: optimised images, no
+heavy animation or autoplay video, fonts loaded
+efficiently.
+
+Search
+
+sitemap.xml, robots.txt and clean URLs (for
+example /services/data-and-platforms).
+
+Page 2 of 16
+
+AImpetus Website Content (v1)
+
+Brand
+Logo: use the SVG files from the brand kit (primary on light, reversed on dark). Never
+retype the logo as live text.
+Colours: Ink #0E2A2F, Teal #0F766E, Mint #5EEAD4 (on dark only), Amber #F59E0B
+(graphics only, never text on white), Paper #F7F7F4, secondary text #4A5A5D.
+Fonts: Space Grotesk Bold for headings, Inter for body text (both free Google Fonts).
+"AI" in headings: in Space Grotesk the capital I looks like a lowercase l, so "AI" can read
+as "Al". Wherever "AI" appears in a heading, give the I small serifs to match the logo, or
+set those two letters in a font with a serifed I. Check every heading that contains "AI".
+Imagery: no stock photos of robots, glowing brains or server rooms. Use the chevron
+motif, simple diagrams and, later, real photos of the founders.
+
+Before launch
+All placeholders in this document and the legal pages are filled in or removed.
+Contact form tested end to end, including the confirmation message and the email
+arriving.
+Accessibility checked with an automated tool plus a manual keyboard and screen
+reader pass, with results recorded in the accessibility statement.
+Every page checked on a phone, a tablet and a desktop browser.
+Both founders have read every page.
+
+Global elements
+These appear on every page.
+Header
+Logo: AImpetus (accessible label: "AImpetus – home")
+Navigation: Services · How we work · About us · Insights · Contact
+[Button: Book a conversation] → Contact
+Footer
+AImpetus – AI in the engine room.
+Data, digital and AI services.
+Links: Services · How we work · About us · Insights · Contact · Privacy notice ·
+Accessibility statement · Cookies
+[Link: Follow us on LinkedIn] → [Placeholder: company LinkedIn page]
+
+Page 3 of 16
+
+AImpetus Website Content (v1)
+
+AImpetus Ltd is registered in England and Wales. Company number 17574177.
+Registered office: 68 Oatlands Road, Shinfield, RG2 9DN.
+© 2026 AImpetus Ltd
+SEO defaults
+Site name: AImpetus
+Default SEO title: AImpetus | Data, digital and AI services
+Default meta description: Senior-led data, digital and AI services, with deep roots in
+the NHS and public sector. Data platforms, AI pilots that prove their benefit, digital
+transformation and delivery assurance.
+
+Home page
+SEO title: AImpetus | Data, digital and AI for public services
+Meta description: Better digital services, with AI in the engine room. Senior-led data,
+digital and AI delivery, with deep roots in the NHS and public sector.
+
+1. Hero
+Eyebrow: Data, digital and AI services
+H1: Better digital services, with AI in the engine room.
+Supporting line: We build the data platforms, digital services and governance that let
+AI work safely in live services. Senior-led, with 60 years of combined experience and
+deep roots in the NHS and public sector.
+[Button: Book a 30-minute conversation] → Contact
+[Link: See our services] → Services
+
+2. The problem we solve
+H2: AI is easy to pilot. Hard to run.
+Most organisations have tried AI. Far fewer have it working in a live service. The usual
+blockers aren't the AI itself. They're scattered data, ageing platforms, unclear governance
+and programmes stretched thin. We fix the groundwork, so AI and digital change can hold
+up in the real world.
+
+3. Why AImpetus
+H2: A new company. A proven team.
+1. Senior people, start to finish. Two founders with 60 years of combined experience.
+The people who scope your work lead its delivery.
+
+Page 4 of 16
+
+AImpetus Website Content (v1)
+
+2. We know how national health programmes work. More than a decade delivering NHS
+England and NHS Improvement data, cloud and digital programmes.
+3. Data and digital first, so AI holds up. We build the platforms, data and controls AI
+needs, then test use cases against real benefits.
+4. Delivery and commercial sense together. Experience of running a UK technology
+services business and large NHS delivery portfolios. Realistic plans, clear contracts,
+no surprises.
+5. Easy to work with. Small and partner-friendly. We fit your teams and standards, and
+leave knowledge behind.
+
+4. What we do
+H2: Four services, one aim: services that work better.
+Card
+
+Line
+
+Link
+
+Data and platforms
+
+Reliable, governed data that services
+and AI can depend on.
+
+[Link: Data and
+platforms]
+
+AI to benefit
+
+Choose the right use cases, test them
+safely and prove the benefit before you
+scale.
+
+[Link: AI to benefit]
+
+Digital
+transformation
+
+Redesign services and processes,
+modernise platforms and automate the
+routine.
+
+[Link: Digital
+transformation]
+
+Delivery assurance
+
+Steady programmes, clear governance
+and an honest view of risk.
+
+[Link: Delivery
+assurance]
+
+5. How we work (summary)
+H2: Start small. Prove it. Then scale.
+1. Understand – we start with your service, your data and the outcome you need.
+2. Prove – we test the idea quickly, against measures agreed up front.
+3. Scale or stop – we scale what works, stop what doesn't, and leave your team able to
+run it.
+[Link: How we work] → How we work
+
+6. Founders
+H2: Led by the people who do the work
+
+Page 5 of 16
+
+AImpetus Website Content (v1)
+
+Prahlad Koti, Co-founder and Managing Director – former UK Managing Director of
+Mastek, with more than 30 years in technology services.
+Deepak Thaper, Co-founder and Delivery & Technology Director – nearly 30 years in
+technology delivery, including more than a decade on NHS national programmes.
+[Link: Meet the founders] → About us
+
+7. Closing call to action
+H2: Got a data, AI or digital challenge?
+Tell us what you're working on. In 30 minutes we'll give you an honest view of where to
+start, even if that isn't with us.
+[Button: Book a 30-minute conversation] → Contact
+
+Services overview page
+SEO title: Services | AImpetus
+Meta description: Data and platforms, AI to benefit, digital transformation and
+delivery assurance for public-sector and other organisations.
+H1: Services built around the outcome, not the technology
+We help public-sector and other organisations improve services with data, digital and AI.
+Each service can stand alone or work with the others, and each starts with the problem
+you need to solve.
+H2: How our services fit together
+Good data makes digital change possible. Good digital services give AI somewhere useful
+to work. Strong delivery assurance keeps all of it on track.
+
+Data and platforms
+For when your data is scattered, your platforms are ageing or being merged, and AI can't
+use what you have. [Link: Explore data and platforms]
+
+AI to benefit
+For when there's pressure to use AI, but no clear priorities, and pilots that never reach live
+services. [Link: Explore AI to benefit]
+
+Page 6 of 16
+
+AImpetus Website Content (v1)
+
+Digital transformation
+For when services and processes were built for another era, organisations are merging,
+and you need to do more with less. [Link: Explore digital transformation]
+
+Delivery assurance
+For when a programme is running late, accountability is unclear, or you need an
+independent view of risk. [Link: Explore delivery assurance]
+H2: Not sure where to start?
+Most conversations begin with a problem, not a service. Tell us yours.
+[Button: Book a 30-minute conversation] → Contact
+
+Service page: Data and platforms
+SEO title: Data engineering and platforms | AImpetus
+Meta description: Data engineering, platform engineering and architecture for publicsector and other organisations. Reliable, governed data that services and AI can
+depend on.
+H1: Data you can rely on, platforms that last
+Every digital service and every AI use case depends on data that's accurate, connected
+and well governed. We help you get there, whether you're modernising an ageing platform,
+bringing organisations together or preparing for AI.
+H2: Sound familiar?
+The same data lives in several places, and nobody agrees which version is right.
+Your platforms are expensive to run and hard to change.
+Teams are being merged, and so are their systems.
+AI ideas stall because the data isn't ready.
+H2: What we do
+Data engineering: pipelines, integration and data quality, built to be maintained by
+your team.
+Platform engineering: cloud data platforms that are secure, scalable and cost-aware.
+Solution and data architecture: designs that fit your standards, your security needs
+and your future plans.
+Platform consolidation: moving and merging platforms without losing service
+continuity.
+
+Page 7 of 16
+
+AImpetus Website Content (v1)
+
+Data governance: clear ownership, information governance and controls that make
+data safe to use.
+H2: What you get
+One trusted view of the data that matters.
+Platforms that cost less to run and are easier to change.
+Data that's ready for analytics and AI.
+A team that can run and improve what we build.
+H2: Where our experience comes from
+Our founders have led data warehousing and analytics work for NHS Improvement.
+They've also run NHS England programmes on modern data platforms such as Azure
+Synapse and Palantir Foundry.
+[Button: Talk to us about your data] → Contact
+
+Service page: AI to benefit
+SEO title: AI use cases, pilots and benefits | AImpetus
+Meta description: Choose the right AI use cases, test them safely and prove the
+benefit before you scale. Practical, well-governed AI for public-sector and other
+organisations.
+H1: AI that earns its place in your service
+The question isn't whether to use AI. It's where AI will genuinely improve a service, and
+how to prove it before you commit. We help you choose well, test safely and make a clear
+decision: scale it or stop it.
+H2: Sound familiar?
+There's pressure to "do something with AI", but no shared view of where it would help
+most.
+Pilots look promising, then stall before they reach a live service.
+Nobody is sure how to measure whether AI is actually helping.
+Governance, safety and information governance questions slow everything down.
+H2: What we do
+Use-case discovery: we work with your teams to find where AI can make a real
+difference, and rank ideas by value and feasibility.
+Pilots and proofs of concept: focused tests with success measures agreed before we
+start.
+
+Page 8 of 16
+
+AImpetus Website Content (v1)
+
+Benefits tracking: clear measures of time, cost, quality or experience, so decisions
+rest on evidence.
+AI governance: proportionate controls for safety, transparency, security and
+information governance.
+Scale-up planning: what it will take to run AI in a live service, including data, people
+and running costs.
+H2: What you get
+A short list of AI use cases worth pursuing.
+Evidence of benefit, not just a demo.
+A clear scale-or-stop decision for each pilot.
+Governance your senior leaders and assurance teams can stand behind.
+H2: Where our experience comes from
+Our founders have led enterprise AI and data delivery with AI-native organisations and
+start-ups. They also hold certifications in AI security and governance.
+[Button: Talk to us about AI] → Contact
+
+Service page: Digital transformation
+SEO title: Digital transformation | AImpetus
+Meta description: Service and process redesign, cloud modernisation and
+automation for public-sector and other organisations. Simpler services that cost less
+to run.
+H1: Simpler services, built for how people work now
+Digital transformation isn't about new technology for its own sake. It's about services that
+are easier to use, cheaper to run and ready for what comes next, including AI. We help you
+redesign the service, modernise what sits underneath and deliver the change step by
+step.
+H2: Sound familiar?
+Services and processes were designed for another era, and it shows.
+Organisations are merging, and so are their ways of working.
+Staff spend too long on manual, repetitive tasks.
+Older systems are costly to keep running and hard to change.
+H2: What we do
+
+Page 9 of 16
+
+AImpetus Website Content (v1)
+
+Service and process redesign: we start with users and staff, and design out the
+friction.
+Cloud modernisation: moving and modernising applications so they're secure,
+resilient and cost-aware.
+Automation: removing routine manual work, from simple workflow automation to
+robotic process automation.
+Digital delivery: agile delivery from discovery to live, in line with public-sector service
+standards.
+Change support: helping teams adopt new ways of working, so the benefits last.
+H2: What you get
+Services that are simpler for users and staff.
+Lower running costs and less technical debt.
+More staff time for the work that matters.
+Foundations that are ready for data and AI.
+H2: Where our experience comes from
+Our founders have led large digital transformation, cloud migration and automation
+programmes for NHS England and NHS Improvement.
+[Button: Talk to us about transformation] → Contact
+
+Service page: Delivery assurance
+SEO title: Delivery assurance and governance | AImpetus
+Meta description: Independent delivery assurance, governance and programme
+leadership for national health and public-sector data, digital and AI programmes.
+H1: Confidence that your programme will deliver
+Data, digital and AI programmes rarely fail because of the technology. They struggle when
+governance is unclear, risks go unspoken and teams are stretched. We bring experienced,
+independent leadership that keeps delivery on track and gives senior owners an honest
+view.
+H2: Sound familiar?
+The programme is behind, and nobody is quite sure why.
+Accountability is blurred between teams, suppliers and boards.
+Reports say green, but the people doing the work say otherwise.
+A major decision or approval is coming, and you want an independent view first.
+
+Page 10 of 16
+
+AImpetus Website Content (v1)
+
+H2: What we do
+Delivery health checks: a quick, independent review of where a programme really
+stands, with practical recommendations.
+Delivery governance: clear roles, decision-making and reporting that work for boards
+and delivery teams alike.
+Independent assurance: ongoing support through key stages and approvals.
+Programme and project leadership: experienced leaders who can steady, restart or
+run delivery.
+Agile and hybrid delivery: ways of working that fit the programme, using Scrum,
+Kanban or hybrid approaches.
+H2: What you get
+An honest picture of progress and risk.
+Governance that speeds decisions up rather than slowing them down.
+A programme back on a realistic plan.
+Senior owners who can stand behind what they report.
+H2: Where our experience comes from
+Our founders have led large NHS delivery portfolios and run a UK technology services
+business. They've been responsible for delivery quality, governance and client
+relationships on major public-sector programmes.
+[Button: Talk to us about your programme] → Contact
+
+How we work page
+SEO title: How we work | AImpetus
+Meta description: Senior-led, partner-friendly delivery. We start small, prove the
+benefit, then scale what works for public-sector and other organisations.
+H1: Senior-led. Evidence-based. Easy to work with.
+We keep our approach simple: understand the problem properly, prove the value early
+and only scale what works. Senior people stay involved throughout.
+H2: Our approach
+1. Understand. We start with your service, your users, your data and the outcome you
+need. We agree what success looks like and how we'll measure it.
+2. Prove. We test the idea quickly and safely, against the measures we agreed. You see
+evidence, not just a demo.
+
+Page 11 of 16
+
+AImpetus Website Content (v1)
+
+3. Scale or stop. We scale what works and stop what doesn't. Then we make sure your
+team can run and improve it.
+H2: What you can expect from us
+Senior people throughout. The founders lead every engagement, supported by
+trusted senior associates.
+Honest advice. We'll tell you if something isn't worth doing, or if we're not the right fit.
+Your standards, not ours. We work within your security, information governance,
+accessibility and service standards.
+Knowledge left behind. We document, coach and hand over, so you're not dependent
+on us.
+Value for money. We size the team to the job, and nothing more.
+H2: Ways to work with us
+Option
+
+Best for
+
+How it works
+
+Health check or
+discovery
+
+Getting an independent view
+before you commit
+
+A short, fixed-scope piece of work
+with clear recommendations
+
+Specialist support
+
+Adding senior data, AI or
+delivery capability to your team
+
+Experienced specialists working
+inside your team, directly or
+through a partner
+
+Outcome-based
+project
+
+Delivering a defined result, such
+as a pilot or platform
+
+A small team accountable for
+agreed outcomes
+
+H2: Working alongside your teams
+We fit around the people already doing the work: your in-house teams, other suppliers
+and delivery partners. We bring senior specialists who need little supervision, work to
+your standards and leave knowledge behind.
+[Button: Book a 30-minute conversation] → Contact
+
+About us page
+SEO title: About us | AImpetus
+Meta description: AImpetus is a UK data, digital and AI services company founded by
+Prahlad Koti and Deepak Thaper, with 60 years of combined experience.
+H1: A new company. A proven team.
+
+Page 12 of 16
+
+AImpetus Website Content (v1)
+
+AImpetus is a UK data, digital and AI services company. We were founded in 2026 by two
+people who have spent their careers delivering technology for the NHS and the wider
+public sector.
+H2: Why we started AImpetus
+We've seen too many promising data and AI ideas stall before they reached a live service.
+The technology usually works. What's missing is the groundwork: reliable data, modern
+platforms, sound governance and steady delivery. AImpetus exists to put that
+groundwork in place, so AI can do real work in the engine room of public services.
+The name says what we're for: AI, and the impetus to move good ideas into everyday use.
+H2: Why now
+AI has moved from experiment to expectation. But the organisations that gain most won't
+be the ones with the most technology. They'll be the ones that stay focused on outcomes.
+That's why we started AImpetus now.
+Outcomes, not hype. The real test is benefit delivered: better services, lower costs
+and measurable impact. Technology is the means, not the goal.
+Understanding the business matters as much as the technology. AI and digital tools
+move fast. Knowing how an organisation really works, its people, pressures and
+priorities, matters just as much.
+The groundwork is the gap. The tools are ready. What often isn't ready is the data, the
+platforms and the governance underneath. That's exactly where we work.
+We both stepped out of conventional IT services to see the work from a different angle:
+new technology, new ways of delivering services, and the ground reality of making change
+stick. AImpetus brings that experience together, so the organisations we work with get
+the benefit, not the hype.
+H2: Our founders
+
+Prahlad Koti
+Co-founder and Managing Director
+Prahlad has spent more than 30 years building and running technology services
+businesses in the UK. At Mastek he rose from a technical support role to UK Managing
+Director, having led its Government and Health business and set up its healthcare
+practice. Along the way he led major public-sector bids, including the pricing and
+negotiation of a nine-year contract, and grew a FTSE 100 healthcare account threefold in
+five years.
+
+Page 13 of 16
+
+AImpetus Website Content (v1)
+
+He went on to become a Partner at Netcompany and Chief Operating Officer at
+Scrumconnect Consulting, a UK digital company focused on public-sector services. He
+also advises founders and boards on growth and operational resilience.
+At AImpetus, Prahlad leads commercial strategy, partnerships and business development.
+He holds an MBA from London Business School and a degree in Computer Science.
+[Link: Connect with Prahlad on LinkedIn] → https://www.linkedin.com/in/prahlad-koti/
+
+Deepak Thaper
+Co-founder and Delivery & Technology Director
+Deepak has spent nearly 30 years delivering technology programmes, the last decade and
+more inside the NHS. At Mastek he led data warehousing and analytics work for NHS
+Improvement. He then directed NHS England programmes spanning cloud, DevOps and
+modern data platforms such as Azure Synapse and Palantir Foundry, before becoming
+Vice President of Delivery for UK Healthcare. His NHS cloud work earned Mastek's CEO
+Award for Excellence.
+More recently he has led delivery and strategy within AI-native organisations and the AI
+start-up ecosystem, helping organisations move from AI experiments to practical, wellgoverned adoption.
+At AImpetus, Deepak leads delivery, architecture and AI. He holds an MBA, a professional
+certificate in applied data science and AI/ML from IIT Palakkad, AgilePM Practitioner
+certification, and certifications in AI security and governance.
+[Link: Connect with Deepak on LinkedIn] → https://www.linkedin.com/in/deepak-thaper80246113/
+H2: What we believe
+Outcomes before technology. We start with the service and the people who use it.
+Evidence before scale. Prove it works, then grow it.
+Honesty before sales. We'd rather lose a deal than oversell.
+Public value. Every pound of public money should do real work.
+[Button: Book a 30-minute conversation] → Contact
+
+Insights page
+SEO title: Insights | AImpetus
+Meta description: Practical thinking on data, digital and AI in national health and
+public services, from the AImpetus founders.
+
+Page 14 of 16
+
+AImpetus Website Content (v1)
+
+H1: Insights
+Practical thinking on making data, digital and AI work in public services. No hype, just
+what we've learned from delivery.
+[Link: Follow AImpetus on LinkedIn] → [Placeholder: company LinkedIn page]
+First articles to publish (recommended)
+Launch with two or three articles, so the page isn't empty. Post each on LinkedIn first,
+then republish here.
+Title
+
+Angle
+
+Author
+
+Why AI pilots stall in public services,
+and what to fix first
+
+The groundwork problem: data,
+platforms, governance
+
+Deepak
+
+AI in the engine room: putting AI where
+the work happens
+
+Explains the brand idea through
+practical examples
+
+Deepak
+
+What partners need from a specialist
+supplier
+
+Senior, low-supervision, credible with
+the client
+
+Prahlad
+
+Five questions to ask before you scale
+an AI pilot
+
+A practical checklist for senior
+responsible owners
+
+Deepak
+
+Getting value for money from digital
+transformation
+
+Sizing teams to the job, proving
+benefit early
+
+Prahlad
+
+Card format for each article: title, date, author, a two-line summary and [Link: Read
+more].
+
+Contact page
+SEO title: Contact us | AImpetus
+Meta description: Book a 30-minute conversation with the AImpetus founders about
+your data, digital or AI challenge.
+H1: Let's talk
+Tell us what you're working on. In 30 minutes we'll give you an honest view of where to
+start, even if that isn't with us. You'll speak directly to one of the founders.
+H2: Book a conversation
+[Button: Choose a time] → [Placeholder: booking link]
+H2: Or send us a message
+
+Page 15 of 16
+
+AImpetus Website Content (v1)
+
+Form fields (all labelled, with clear error messages):
+Name (required)
+Work email (required)
+Organisation (required)
+I'm a… (dropdown: NHS or public-sector organisation / Partner or supplier / Other)
+How can we help? (required, free text)
+[Button: Send message]
+Under the form: We'll use your details only to reply to your enquiry. See our [Link: privacy
+notice].
+Confirmation message: Thanks for getting in touch. One of the founders will reply within
+two working days.
+H2: Other ways to reach us
+Email: contact@aimpetus.ai
+LinkedIn: [Placeholder: company LinkedIn page]
+Based in the UK, working with clients across England.
+
+Placeholders and checks before go-live
+Fill in
+Company number (17574177) and registered office address added to the footer.
+Company LinkedIn page URL (footer, Insights, Contact)
+Contact email address: contact@aimpetus.ai (confirmed) – check the mailbox is set
+up before go-live
+Booking link, for example Microsoft Bookings or Calendly (Contact)
+Legal pages (drafted separately)
+Fill in the placeholders in the legal pages document (privacy, cookies, accessibility)
+Add accessibility test results to the accessibility statement
+Fill in the cookie table once the site is built
+Checks
+UK trade mark search on "AI in the engine room"
+Both founders read every page once
+Don't mention Cyber Essentials, frameworks or partners until each is confirmed
+Test the contact form and booking link end to end
+
+Page 16 of 16
+
+

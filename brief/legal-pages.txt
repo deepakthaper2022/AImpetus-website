@@ -1,0 +1,251 @@
+AImpetus Website Legal Pages (draft)
+
+AImpetus Website Legal Pages (draft)
+​Nov 12, 2026
+
+·
+
+​@Deepak
+
+These are standard, plain-English drafts for the aimpetus.ai website, written for a small
+UK company that collects enquiries through a contact form and a booking link. They aren't
+legal advice. Have them checked if your data use grows, for example a newsletter,
+analytics, or client data in projects. [Placeholder: …] marks details to confirm before
+publishing.
+
+Privacy notice
+Last updated: [Placeholder: publication date]
+This notice explains how AImpetus Ltd ("AImpetus", "we", "us") collects and uses personal
+information when you visit aimpetus.ai or contact us.
+
+Who we are
+AImpetus Ltd is the controller of your personal information. We are a company registered
+in England and Wales, company number 17574177, with our registered office at 68
+Oatlands Road, Shinfield, RG2 9DN. We are registered with the Information
+Commissioner's Office (ICO), registration number [Placeholder: ICO registration
+number].
+If you have any questions about this notice or your information, email
+contact@aimpetus.ai.
+
+What information we collect
+When you contact us: your name, work email address, organisation, the type of
+organisation you represent, and anything you include in your message.
+When you book a conversation: your name, email address, the time you choose and
+any notes you add. Bookings are handled by [Placeholder: booking tool, for example
+Microsoft Bookings or Calendly].
+When we work with you or your organisation: business contact details and
+correspondence needed to discuss, deliver and invoice our services.
+When you visit the website: basic technical information our hosting provider needs
+to run and secure the site, such as your IP address and browser type. See our cookie
+notice for more.
+We don't knowingly collect special category information (such as health information)
+through the website. Please don't include it in your message.
+
+Page 1 of 5
+
+AImpetus Website Legal Pages (draft)
+
+How and why we use it
+Purpose
+
+Lawful basis under UK GDPR
+
+Replying to your enquiry and arranging
+conversations
+
+Legitimate interests: responding to people
+who contact us
+
+Discussing, providing and invoicing our
+services
+
+Contract, or steps before entering a
+contract
+
+Keeping business records and meeting legal
+and tax obligations
+
+Legal obligation
+
+Running and securing our website
+
+Legitimate interests: keeping the site
+working and safe
+
+Sending occasional updates, if you've asked
+for them
+
+Consent, which you can withdraw at any
+time
+
+We don't sell your information, and we don't use it for automated decision-making or
+profiling.
+
+Who we share it with
+We share information only with trusted providers who help us run the business, under
+contracts that require them to protect it:
+Website hosting: [Placeholder: hosting provider]
+Email and office software: [Placeholder: for example Microsoft 365 or Google
+Workspace]
+Booking tool: [Placeholder: booking tool]
+Our accountants and professional advisers, where needed
+We may also share information if the law requires it, or with a delivery partner when
+you've agreed to work with us together.
+
+International transfers
+Some of our providers may store information outside the UK. Where they do, we make
+sure appropriate safeguards are in place, such as UK adequacy regulations or the UK
+International Data Transfer Agreement or Addendum.
+
+How long we keep it
+Enquiries that don't lead to work: up to 2 years from our last contact.
+
+Page 2 of 5
+
+AImpetus Website Legal Pages (draft)
+
+Client and supplier records: 6 years after the end of the relevant financial year, to
+meet tax and legal requirements.
+Marketing preferences: until you unsubscribe or ask us to stop.
+
+Your rights
+You have the right to:
+ask for a copy of your information
+ask us to correct it
+ask us to delete it
+ask us to restrict how we use it
+object to us using it, including for any marketing
+ask us to transfer it to you or someone else
+withdraw consent at any time, where we rely on consent
+To use any of these rights, email contact@aimpetus.ai. We'll reply within one month.
+
+Complaints
+If you're unhappy with how we've handled your information, please tell us first so we can
+put it right. You also have the right to complain to the Information Commissioner's Office
+at ico.org.uk or on 0303 123 1113.
+
+Changes to this notice
+We may update this notice from time to time. The latest version will always be on this
+page, with the date it was last updated.
+
+Cookie notice
+Last updated: [Placeholder: publication date]
+Cookies are small files a website stores on your device. Some are essential to make a site
+work. Others, such as analytics cookies, are optional.
+
+Cookies we use
+We keep cookies to a minimum. At launch, aimpetus.ai uses only strictly necessary
+cookies, which the site needs to work securely. These don't need your consent.
+
+Page 3 of 5
+
+AImpetus Website Legal Pages (draft)
+
+Cookie
+
+Provider
+
+Purpose
+
+Type
+
+How long
+
+[Placeholder:
+name]
+
+[Placeholder:
+hosting provider]
+
+Security and
+keeping the site
+running
+
+Strictly
+necessary
+
+[Placeholder:
+duration]
+
+[Placeholder:
+name]
+
+[Placeholder:
+booking tool]
+
+Making the booking
+calendar work, if
+embedded
+
+Strictly
+necessary
+
+[Placeholder:
+duration]
+
+Analytics (only if we add them)
+If we add analytics to understand how people use the site, we'll ask for your consent first
+through a cookie banner, and only set those cookies if you agree. You'll be able to change
+your choice at any time using the "Cookie settings" link in the footer.
+
+Managing cookies
+You can also block or delete cookies in your browser settings. Blocking strictly necessary
+cookies may stop parts of the site working.
+
+Contact
+Questions about cookies? Email contact@aimpetus.ai.
+
+Accessibility statement
+Last updated: [Placeholder: publication date]
+We want everyone to be able to use aimpetus.ai, including people who use assistive
+technology. Many of the organisations we work with have to meet public-sector
+accessibility standards, and we hold our own website to the same standard.
+
+Our commitment
+We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. That
+means you should be able to:
+navigate the whole site using just a keyboard
+use the site with a screen reader
+zoom in up to 400% without text spilling off the screen
+change colours, contrast and fonts using your browser or device settings
+read text that meets AA colour contrast
+
+Page 4 of 5
+
+AImpetus Website Legal Pages (draft)
+
+How accessible this website is
+We last tested the site on [Placeholder: test date] using [Placeholder: method, for
+example automated checks and manual keyboard and screen reader testing].
+[Placeholder: either "We are not aware of any accessibility problems" or a short list of
+known issues and when we plan to fix them.]
+
+Feedback and contact
+If you find a problem, or need information in a different format, email
+contact@aimpetus.ai. Tell us the page and what went wrong. We'll reply within 5 working
+days.
+
+Keeping this up to date
+We review this statement whenever we make significant changes to the site, and at least
+once a year.
+
+Checklist before publishing
+Pay the ICO data protection fee and add the registration number to the privacy notice.
+A micro business (turnover up to £632,000 or no more than 10 staff) pays the tier 1 fee
+of £52 a year, or £47 by direct debit (ICO guidance).
+Name the hosting provider, email software and booking tool in the privacy notice.
+Fill in the cookie table once the site is built, or remove the rows that don't apply.
+Don't add analytics until a consent banner is in place.
+Test accessibility and fill in the test date and results.
+Add the publication date to all three pages.
+Link all three pages from the website footer, and the privacy notice from the contact
+form.
+Make sure contact@aimpetus.ai is set up and monitored.
+
+Sources
+ICO: data protection fee
+Government response on data protection fee changes – GOV.UK
+
+Page 5 of 5
+
+
