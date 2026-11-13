@@ -30,6 +30,12 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 - [ ] **Git author identity.** The first commit used the global git identity (deepak-chistats / work email). Change it for this repo (`git config user.email …`) if it should be personal or an AImpetus address.
 - [ ] **HSTS.** netlify.toml sends `Strict-Transport-Security: max-age=31536000` without `includeSubDomains`/`preload`. Add these once every subdomain is confirmed HTTPS-only.
 
+## Images requested (owner: founders)
+The betas currently use SVG artwork, monogram badges and illustrations, so nothing is waiting on images. Photos would make the site more personal and credible:
+- [ ] **Founder portraits – real photos (most important).** One each for Prahlad and Deepak, taken in the same setting. Head and shoulders, looking at the camera or slightly off, natural light, plain or softly blurred neutral background (grey, white or a dark wall), smart-casual. At least 1200 × 1500 px (4:5 portrait), JPG, plus some room around the head for cropping. Used on Home (replacing the PK/DT badges) and About.
+- [ ] **Optional wide photo (AI-generated is OK).** For a full-width band on Home and the About header. At least 2400 × 1350 px (16:9), landscape. Requirements: no logos or NHS branding, no readable text or fake dashboards, no robots, glowing brains, server rooms or circuit boards (brief/brand.md), realistic people, not posed stock. Example prompt: "Documentary-style photo of a small, diverse team of senior professionals working together at a large table in a bright, modern UK public-sector office, laptops and printed plans, natural window light, calm and focused, shallow depth of field, cool teal and slate colour grade with a warm amber accent, no logos, no readable text, 16:9."
+- [ ] Every photo: confirm you have the rights (self-taken, or AI-generated under the tool's commercial terms), and write alt text, or mark it decorative.
+
 ## Before go-live (owner: founders)
 - [ ] Company LinkedIn page URL (footer, Insights, Contact)
 - [ ] Booking link, for example Microsoft Bookings or Calendly (Contact – "Choose a time")
@@ -77,7 +83,7 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 
 ### beta1/ – Engine room: Editorial
 - [x] Set-up, tokens, global styles, BaseLayout (noindex, OG, beta banner, skip link), Header (mobile menu), Footer
-- [x] Home page – awaiting founders' review before the other pages are built
+- [x] Home page – reworked after feedback (hero artwork, service tiles, cards, chevron track, CTA band). Awaiting founders' review before the other pages are built
 - [ ] Remaining pages, form, 404, DESIGN.md
 - Note: Lighthouse SEO is 66 on beta pages only because of the required `noindex` ("Page is blocked from indexing"). It can't reach 95 while betas are hidden from search; every other SEO check passes.
 

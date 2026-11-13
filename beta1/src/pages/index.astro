@@ -6,6 +6,9 @@ import Button from '../components/Button.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Chevron from '../components/Chevron.astro';
+import HeroArt from '../components/HeroArt.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
+import Monogram from '../components/Monogram.astro';
 import { url } from '../lib/paths';
 import { brandify } from '../lib/brand';
 
@@ -33,11 +36,11 @@ const why = [
 ];
 
 const services = [
-  { name: 'Data and platforms', line: 'Reliable, governed data that services and AI can depend on.', path: 'services/data-and-platforms/' },
-  { name: 'AI to benefit', line: 'Choose the right use cases, test them safely and prove the benefit before you scale.', path: 'services/ai-to-benefit/' },
-  { name: 'Digital transformation', line: 'Redesign services and processes, modernise platforms and automate the routine.', path: 'services/digital-transformation/' },
-  { name: 'Delivery assurance', line: 'Steady programmes, clear governance and an honest view of risk.', path: 'services/delivery-assurance/' },
-];
+  { name: 'Data and platforms', icon: 'data', line: 'Reliable, governed data that services and AI can depend on.', path: 'services/data-and-platforms/' },
+  { name: 'AI to benefit', icon: 'ai', line: 'Choose the right use cases, test them safely and prove the benefit before you scale.', path: 'services/ai-to-benefit/' },
+  { name: 'Digital transformation', icon: 'digital', line: 'Redesign services and processes, modernise platforms and automate the routine.', path: 'services/digital-transformation/' },
+  { name: 'Delivery assurance', icon: 'assurance', line: 'Steady programmes, clear governance and an honest view of risk.', path: 'services/delivery-assurance/' },
+] as const;
 
 const steps = [
   { lead: 'Understand', text: 'we start with your service, your data and the outcome you need.' },
@@ -46,8 +49,8 @@ const steps = [
 ];
 
 const founders = [
-  { name: 'Prahlad Koti', text: 'Co-founder and Managing Director – former UK Managing Director of Mastek, with more than 30 years in technology services.' },
-  { name: 'Deepak Thaper', text: 'Co-founder and Delivery & Technology Director – nearly 30 years in technology delivery, including more than a decade on NHS national programmes.' },
+  { name: 'Prahlad Koti', initials: 'PK', text: 'Co-founder and Managing Director – former UK Managing Director of Mastek, with more than 30 years in technology services.' },
+  { name: 'Deepak Thaper', initials: 'DT', text: 'Co-founder and Delivery & Technology Director – nearly 30 years in technology delivery, including more than a decade on NHS national programmes.' },
 ];
 ---
 <BaseLayout
@@ -56,32 +59,43 @@ const founders = [
 >
   <!-- 1. Hero -->
   <section class="hero" aria-labelledby="hero-heading">
-    <div class="wrap">
-      <p class="eyebrow"><Chevron tone="amber" /><span>Data, digital and AI services</span></p>
-      <h1 id="hero-heading">Better digital services, with <span class="hero-ai">A<span class="brand-i">I</span></span> in the engine room.</h1>
-      <p class="lede hero-lede">We build the data platforms, digital services and governance that let AI work safely in live services. Senior-led, with 60 years of combined experience and deep roots in the NHS and wider UK public sector.</p>
-      <div class="hero-actions">
-        <Button href={url('contact/')}>Book a 30-minute conversation</Button>
-        <ArrowLink href={url('services/')}>See our services</ArrowLink>
+    <div class="wrap hero__inner">
+      <div class="hero__text">
+        <p class="eyebrow"><Chevron tone="amber" /><span>Data, digital and AI services</span></p>
+        <h1 id="hero-heading">Better digital services, with <span class="hero-ai">A<span class="brand-i">I</span></span> in the engine room.</h1>
+        <p class="lede hero__lede">We build the data platforms, digital services and governance that let AI work safely in live services. Senior-led, with 60 years of combined experience and deep roots in the NHS and wider UK public sector.</p>
+        <div class="hero__actions">
+          <Button href={url('contact/')}>Book a 30-minute conversation</Button>
+          <ArrowLink href={url('services/')}>See our services</ArrowLink>
+        </div>
+      </div>
+      <div class="hero__art">
+        <HeroArt />
       </div>
     </div>
   </section>
 
   <!-- 2. The problem we solve -->
-  <section class="section" aria-labelledby="problem-heading">
+  <section class="section problem" aria-labelledby="problem-heading">
     <div class="wrap split">
-      <SectionHead id="problem-heading" text="AI is easy to pilot. Hard to run." />
-      <p class="lede split__body">Most organisations have tried AI. Far fewer have it working in a live service. The usual blockers aren't the AI itself. They're scattered data, ageing platforms, unclear governance and programmes stretched thin. We fix the groundwork, so AI and digital change can hold up in the real world.</p>
+      <div class="problem__head">
+        <Chevron class="problem__marker" />
+        <h2 id="problem-heading"><span class="problem__easy">A<span class="brand-i">I</span> is easy to pilot.</span> <span class="problem__hard">Hard to run.</span></h2>
+      </div>
+      <div class="problem__body">
+        <p class="lede">Most organisations have tried AI. Far fewer have it working in a live service. The usual blockers aren't the AI itself. They're scattered data, ageing platforms, unclear governance and programmes stretched thin. We fix the groundwork, so AI and digital change can hold up in the real world.</p>
+      </div>
     </div>
   </section>
 
   <!-- 3. Why AImpetus -->
-  <section class="section on-paper" aria-labelledby="why-heading">
-    <div class="wrap split">
+  <section class="section on-paper why" aria-labelledby="why-heading">
+    <div class="wrap">
       <SectionHead id="why-heading" text="A new company. A proven team." />
-      <ol class="numbered why-list split__body">
-        {why.map((item) => (
-          <li>
+      <ol class="why__grid">
+        {why.map((item, i) => (
+          <li class="why__card">
+            <span class="why__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <p><strong>{item.lead}</strong> {item.text}</p>
           </li>
         ))}
@@ -90,16 +104,18 @@ const founders = [
   </section>
 
   <!-- 4. What we do -->
-  <section class="section section--flush" aria-labelledby="services-heading">
+  <section class="section services" aria-labelledby="services-heading">
     <div class="wrap">
       <SectionHead id="services-heading" text="Four services, one aim: services that work better." />
-      <ul class="service-list">
+      <ul class="services__grid">
         {services.map((service) => (
-          <li class="service">
-            <h3 class="service__name">
-              <a href={url(service.path)}><span set:html={brandify(service.name)} /><Chevron class="service__chevron" /></a>
+          <li class="tile">
+            <ServiceIcon name={service.icon} />
+            <h3 class="tile__name">
+              <a href={url(service.path)} class="tile__link" set:html={brandify(service.name)} />
             </h3>
-            <p class="service__line">{service.line}</p>
+            <p class="tile__line">{service.line}</p>
+            <Chevron class="tile__chevron" />
           </li>
         ))}
       </ul>
@@ -107,12 +123,13 @@ const founders = [
   </section>
 
   <!-- 5. How we work (summary) -->
-  <section class="section" aria-labelledby="how-heading">
+  <section class="section how" aria-labelledby="how-heading">
     <div class="wrap">
       <SectionHead id="how-heading" text="Start small. Prove it. Then scale." />
-      <ol class="numbered steps">
-        {steps.map((step) => (
-          <li>
+      <ol class="track">
+        {steps.map((step, i) => (
+          <li class="track__step">
+            <span class="track__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <p><strong>{step.lead}</strong> – {step.text}</p>
           </li>
         ))}
@@ -122,34 +139,79 @@ const founders = [
   </section>
 
   <!-- 6. Founders -->
-  <section class="section on-paper" aria-labelledby="founders-heading">
-    <div class="wrap split">
+  <section class="section on-paper founders" aria-labelledby="founders-heading">
+    <div class="wrap">
       <SectionHead id="founders-heading" text="Led by the people who do the work" />
-      <div class="split__body">
-        <ul class="founder-list">
-          {founders.map((f) => (
-            <li><p><strong>{f.name}</strong>, {f.text}</p></li>
-          ))}
-        </ul>
-        <ArrowLink href={url('about/')} class="section-link">Meet the founders</ArrowLink>
-      </div>
+      <ul class="founders__grid">
+        {founders.map((f) => (
+          <li class="founder">
+            <Monogram initials={f.initials} />
+            <p><strong>{f.name}<span class="visually-hidden">,</span></strong> {f.text}</p>
+          </li>
+        ))}
+      </ul>
+      <ArrowLink href={url('about/')} class="section-link">Meet the founders</ArrowLink>
     </div>
   </section>
 
   <!-- 7. Closing call to action -->
-  <section class="section section--flush cta" aria-labelledby="cta-heading">
-    <div class="wrap">
-      <SectionHead id="cta-heading" text="Got a data, AI or digital challenge?" class="cta__head" />
-      <p class="lede measure cta__text">Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us.</p>
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__pattern" aria-hidden="true"></div>
+    <div class="wrap cta__inner">
+      <h2 id="cta-heading" set:html={brandify('Got a data, AI or digital challenge?')} />
+      <p class="lede cta__text">Tell us what you're working on. In 30 minutes we'll give you an honest view of where to start, even if that isn't with us.</p>
       <Button href={url('contact/')}>Book a 30-minute conversation</Button>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* Hero */
+  /* ---------- Hero ---------- */
   .hero {
-    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(4rem, 3rem + 6vw, 8rem);
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(3.5rem, 2.5rem + 5vw, 7rem);
+    /* Faint engineering grid with a mint glow behind the artwork */
+    background:
+      radial-gradient(ellipse 60% 70% at 78% 45%, rgba(94, 234, 212, 0.1), transparent 70%),
+      linear-gradient(to right, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 64px 64px,
+      var(--ink);
+  }
+
+  .hero::after {
+    /* Fade the grid out towards the bottom */
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--ink));
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .hero__art {
+    width: min(100%, 20rem);
+    justify-self: center;
+  }
+
+  @media (min-width: 60em) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+
+    .hero__art {
+      width: 100%;
+      max-width: 34rem;
+    }
   }
 
   .eyebrow {
@@ -172,13 +234,13 @@ const founders = [
     color: var(--mint);
   }
 
-  .hero-lede {
-    max-width: 40rem;
+  .hero__lede {
+    max-width: 38rem;
     margin-top: clamp(1.75rem, 3vw, 2.5rem);
     font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
   }
 
-  .hero-actions {
+  .hero__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -186,180 +248,383 @@ const founders = [
     margin-top: clamp(2rem, 4vw, 3rem);
   }
 
-  /* Two-column editorial split: heading left, text right */
+  /* ---------- Shared ---------- */
   .split {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   @media (min-width: 60em) {
     .split {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
       column-gap: clamp(3rem, 6vw, 7rem);
-      align-items: start;
+      align-items: end;
     }
-  }
-
-  .split__body {
-    max-width: var(--measure);
-  }
-
-  /* Numbered lists with large Space Grotesk numerals */
-  .numbered {
-    counter-reset: item;
-    display: grid;
-    gap: 0;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding: 0;
-    list-style: none;
-  }
-
-  .numbered > li {
-    counter-increment: item;
-    display: grid;
-    grid-template-columns: 3.25rem minmax(0, 1fr);
-    gap: 1rem;
-    padding-block: 1.5rem;
-    border-top: 1px solid var(--rule);
-  }
-
-  .numbered > li::before {
-    content: counter(item, decimal-leading-zero);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: var(--accent);
-  }
-
-  .numbered p {
-    max-width: var(--measure);
-  }
-
-  .why-list > li p {
-    font-size: var(--step-1);
-    line-height: 1.5;
-  }
-
-  @media (min-width: 60em) {
-    .split > .numbered {
-      margin-top: 0;
-    }
-  }
-
-  .steps {
-    gap: 0 clamp(2rem, 4vw, 3.5rem);
-  }
-
-  @media (min-width: 48em) {
-    .steps {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .steps > li {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.25rem;
-      padding-block: 1.75rem 0;
-    }
-
-    .steps > li::before {
-      font-size: clamp(2.5rem, 2rem + 2vw, 3.75rem);
-      line-height: 1;
-    }
-  }
-
-  .steps p {
-    font-size: var(--step-1);
-    line-height: 1.5;
   }
 
   .section-link {
     margin-top: clamp(2rem, 4vw, 3rem);
   }
 
-  /* Services: typographic index, minimal boxes */
-  .service-list {
-    margin-top: clamp(2.5rem, 5vw, 4rem);
+  /* ---------- Problem ---------- */
+  .problem {
+    background: linear-gradient(180deg, var(--ink) 0%, #0c2529 100%);
+  }
+
+  .problem :global(.problem__marker) {
+    display: block;
+    width: 1rem;
+    height: 1.2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .problem h2 {
+    font-size: var(--step-4);
+    line-height: 1.02;
+  }
+
+  .problem__easy {
+    display: block;
+    color: var(--muted-on-ink);
+  }
+
+  .problem__hard {
+    display: block;
+    color: var(--mint);
+  }
+
+  .problem__body {
+    max-width: var(--measure);
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--amber);
+  }
+
+  /* ---------- Why (paper) ---------- */
+  .why__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
     padding: 0;
     list-style: none;
-    border-bottom: 1px solid var(--rule);
   }
 
-  .service {
-    display: grid;
-    gap: 0.5rem 2rem;
-    padding-block: clamp(1.5rem, 3vw, 2.25rem);
-    border-top: 1px solid var(--rule);
-  }
-
-  @media (min-width: 48em) {
-    .service {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      column-gap: clamp(3rem, 6vw, 7rem);
-      align-items: baseline;
+  @media (min-width: 40em) {
+    .why__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  .service__name {
-    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.375rem);
+  @media (min-width: 64em) {
+    .why__grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .why__card {
+      grid-column: span 2;
+    }
+
+    /* 3 + 2 layout: the last two cards share the second row */
+    .why__card:nth-child(4),
+    .why__card:nth-child(5) {
+      grid-column: span 3;
+    }
   }
 
-  .service__name a {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.75rem;
+  .why__card {
+    position: relative;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 1px solid var(--rule-on-paper);
+    border-radius: 1rem;
+    background: var(--white);
+    box-shadow: 0 1px 0 rgba(14, 42, 47, 0.04), 0 12px 32px -18px rgba(14, 42, 47, 0.25);
+  }
+
+  .why__card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: clamp(1.5rem, 3vw, 2rem);
+    width: 2.5rem;
+    height: 4px;
+    border-radius: 0 0 4px 4px;
+    background: var(--teal);
+  }
+
+  .why__num {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 1.8rem + 1.5vw, 3rem);
+    line-height: 1;
+    color: var(--teal);
+  }
+
+  .why__card strong {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 1.125rem;
+  }
+
+  /* ---------- Services ---------- */
+  .services {
+    background:
+      radial-gradient(ellipse 50% 60% at 10% 0%, rgba(94, 234, 212, 0.08), transparent 70%),
+      var(--ink);
+  }
+
+  .services__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .services__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .tile {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    min-height: 15rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid #24484e;
+    border-radius: 1rem;
+    background: linear-gradient(160deg, #15393f 0%, #102e33 100%);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .tile:hover,
+  .tile:focus-within {
+    border-color: var(--mint);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -20px rgba(94, 234, 212, 0.35);
+  }
+
+  .tile__name {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  .tile__link {
     color: var(--white);
     text-decoration: none;
   }
 
-  .service__name a:hover {
-    color: var(--mint);
+  /* Whole tile is clickable; the link keeps the accessible name */
+  .tile__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+  }
+
+  .tile__link:hover {
+    color: var(--white);
+  }
+
+  .tile:hover .tile__link {
     text-decoration: underline;
-    text-decoration-thickness: 3px;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
   }
 
-  .service__name :global(.service__chevron) {
-    width: 0.45em;
-    height: 0.55em;
-    transition: transform 0.15s ease;
+  .tile__link:focus-visible {
+    outline: none;
   }
 
-  .service__name a:hover :global(.service__chevron) {
+  .tile__link:focus-visible::after {
+    outline: var(--focus-width) solid var(--white);
+    outline-offset: 3px;
+  }
+
+  .tile__line {
+    max-width: 30rem;
+    color: var(--muted-on-ink);
+  }
+
+  .tile :global(.tile__chevron) {
+    position: absolute;
+    top: clamp(1.5rem, 3vw, 2.25rem);
+    right: clamp(1.5rem, 3vw, 2.25rem);
+    width: 1rem;
+    height: 1.2rem;
+    transition: transform 0.2s ease;
+  }
+
+  .tile:hover :global(.tile__chevron) {
     transform: translateX(4px);
   }
 
-  .service__line {
-    max-width: var(--measure);
-    color: var(--muted-on-ink);
-    font-size: var(--step-1);
-    line-height: 1.5;
-  }
-
-  /* Founders */
-  .founder-list {
+  /* ---------- How we work: chevron track ---------- */
+  .track {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
     padding: 0;
     list-style: none;
   }
 
-  .founder-list p {
+  .track__step {
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  .track__num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border: 2px solid var(--mint);
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--mint);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  .track__step p {
+    padding-top: 0.6rem;
     font-size: var(--step-1);
     line-height: 1.5;
   }
 
-  /* Closing CTA */
-  .cta {
-    text-align: left;
+  /* Vertical connector on small screens */
+  .track__step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 3.5rem;
+    bottom: -1.75rem;
+    left: calc(1.625rem - 1px);
+    width: 2px;
+    background: linear-gradient(var(--mint), var(--rule-on-ink));
   }
 
-  .cta :global(.cta__head h2) {
-    max-width: 18ch;
+  @media (min-width: 48em) {
+    .track {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .track__step {
+      padding-left: 0;
+      padding-top: 5rem;
+    }
+
+    .track__step p {
+      padding-top: 0;
+    }
+
+    .track__num {
+      width: 3.75rem;
+      height: 3.75rem;
+      font-size: 1.25rem;
+    }
+
+    /* Horizontal connector with an amber chevron at its end */
+    .track__step:not(:last-child)::before {
+      top: 1.875rem;
+      bottom: auto;
+      left: 4.5rem;
+      right: calc(-1 * clamp(2rem, 4vw, 3.5rem) + 1.25rem);
+      width: auto;
+      height: 2px;
+      background: linear-gradient(to right, var(--mint), rgba(94, 234, 212, 0.25));
+    }
+
+    .track__step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: calc(1.875rem - 7px);
+      right: calc(-1 * clamp(2rem, 4vw, 3.5rem) + 0.5rem);
+      width: 12px;
+      height: 16px;
+      background: var(--amber);
+      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+    }
+  }
+
+  /* ---------- Founders (paper) ---------- */
+  .founders__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    .founders__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .founder {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid var(--rule-on-paper);
+    border-radius: 1rem;
+    background: var(--white);
+    box-shadow: 0 12px 32px -18px rgba(14, 42, 47, 0.25);
+  }
+
+  .founder strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 26em) {
+    .founder {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  /* ---------- Closing CTA ---------- */
+  .cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--section-space);
+    background: linear-gradient(120deg, #0e2a2f 0%, #0f3f3f 55%, #105450 100%);
+  }
+
+  .cta__pattern {
+    position: absolute;
+    inset: 0;
+    /* Repeating chevron motif, fading in from the left */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 48 48'%3E%3Cpolygon points='9,12 18,12 28,24 18,36 9,36 19,24' fill='%235EEAD4' fill-opacity='0.07'/%3E%3Cpolygon points='22,12 30,12 40,24 30,36 22,36 32,24' fill='%235EEAD4' fill-opacity='0.12'/%3E%3C/svg%3E");
+    background-size: 96px 96px;
+    -webkit-mask-image: linear-gradient(to right, transparent 25%, #000 85%);
+    mask-image: linear-gradient(to right, transparent 25%, #000 85%);
+  }
+
+  .cta__inner {
+    position: relative;
+  }
+
+  .cta h2 {
+    max-width: 16ch;
     font-size: var(--step-4);
     line-height: 1.04;
   }
 
   .cta__text {
+    max-width: 36rem;
     margin-block: 1.75rem 2.25rem;
   }
 </style>
