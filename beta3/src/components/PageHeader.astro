@@ -23,8 +23,8 @@ const { title, intro, kicker, crumbs, crumbLabel, photo, stripes = 'tint' } = As
 const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?? title }];
 ---
 <section class:list={['page-header', { 'page-header--photo': photo }]} aria-labelledby="page-title">
+  {stripes && <div class="page-header__stripes"><LogoStripes variant={stripes} /></div>}
   <div class="wrap page-header__inner">
-    {!photo && stripes && <div class="page-header__stripes"><LogoStripes variant={stripes} /></div>}
     <div class="page-header__text">
       <Breadcrumbs items={trail} />
       {kicker && <p class="kicker">{kicker}</p>}
@@ -34,7 +34,7 @@ const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?
     </div>
     {photo && (
       <div class="page-header__media">
-        <PhotoFrame src={photo} stripes={stripes} eager ratio="3 / 2" />
+        <PhotoFrame src={photo} eager ratio="3 / 2" />
       </div>
     )}
   </div>
@@ -98,14 +98,52 @@ const trail = crumbs ?? [{ label: 'Home', href: url('') }, { label: crumbLabel ?
     margin-top: 1.5rem;
   }
 
-  /* No photo: pale stripes on the right, wide screens only */
+  /* Pale logo stripes: the SAME size and position on every interior page (fixed
+     height, anchored to the header's top-right), so they stay put between pages.
+     Headers share a minimum height so the visible part matches too. Wide only. */
   .page-header__stripes {
     display: none;
   }
 
   @media (min-width: 64em) {
+    .page-header {
+      display: flex;
+      align-items: center;
+      min-height: 32rem;
+    }
+
+    .page-header > .wrap {
+      flex: 1;
+    }
+
+    .page-header:not(.page-header--photo) .page-header__text {
+      max-width: 40rem;
+    }
+  }
+
+  /* The long lower arm needs room: show the stripes from 75em (1200px) */
+  @media (min-width: 75em) {
+    /* Same header height on every interior page, so the stripes look identical */
+    .page-header {
+      min-height: 39rem;
+    }
+
     .page-header__stripes {
       display: block;
+    }
+
+    .page-header__stripes :global(.logo-stripes) {
+      top: 0;
+      right: 0;
+      height: 40rem;
+      transform: translateX(16%);
+    }
+  }
+
+  /* Smaller laptops: push further off the edge to keep the arm clear of the text */
+  @media (min-width: 75em) and (max-width: 89.99em) {
+    .page-header__stripes :global(.logo-stripes) {
+      transform: translateX(28%);
     }
   }
 </style>

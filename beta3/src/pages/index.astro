@@ -350,17 +350,25 @@ const founders = [
     background: linear-gradient(120deg, #e9f7f4 0%, #f4fbf9 60%, #ffffff 100%);
   }
 
-  /* A sliver of the logo's mint arm in the panel's corner */
+  /* A piece of the logo's arm crossing the top-right corner: it enters through the
+     top border and leaves through the right border (the mark's 10:12 angle) */
   .problem::after {
     content: '';
+    display: none;
     position: absolute;
     top: 0;
-    right: -2rem;
-    width: 9rem;
-    height: 3.5rem;
+    right: 0;
+    width: 6rem;
+    height: 7.2rem;
     background: #c9eee6;
-    clip-path: polygon(0 0, 62% 0, 100% 100%, 38% 100%);
+    clip-path: polygon(0 0, 45% 0, 100% 54%, 100% 100%);
     pointer-events: none;
+  }
+
+  @media (min-width: 60em) {
+    .problem::after {
+      display: block;
+    }
   }
 
   .problem > * {

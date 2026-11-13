@@ -44,7 +44,11 @@ How it differs from the other two:
   - About: story with a name callout, Why now, large founder profiles in natural colour, beliefs.
   - Contact: conversation photo in the header, a dark booking strip, then the form and other ways to reach us.
   - Legal pages: light header with a readable column.
-- **Hero stripe balance** (after "how does it look"): mint leads, and amber is a thinner accent stripe. The problem statement sits in a soft mint panel with a teal edge and a sliver of the mint arm.
+- **Stripe rules** (after the founders' review):
+  - amber and mint are always the **same thickness**;
+  - interior headers use one fixed stripe size (40rem tall) anchored to the header's top-right, and every header is 39rem tall from 1200 px, so the stripes look **static** when switching pages;
+  - header stripes show from 1200 px wide (pushed further off-edge up to 1440 px) and are measured at least 18 px clear of the text;
+  - the problem panel's stripe piece enters through the top border and leaves through the right border, so it is never cut mid-panel.
 
 ## Contrast (on white unless stated)
 Ink 15.1:1 · slate 7.2:1 · teal 5.5:1 · teal-dark 7.9:1 · white on teal button 5.5:1 · ink on mint button (CTA) 10.2:1 · slate on paper 6.7:1 · teal-dark on paper 7.3:1.
