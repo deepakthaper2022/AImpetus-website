@@ -214,20 +214,13 @@ h1 .ai {
   }
 }
 
-/* Contact and founders */
+/* Contact */
 
 .details {
   display: grid;
   gap: 3rem;
   padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 8vw, 5.5rem);
   border-top: 1px solid var(--rule);
-}
-
-@media (min-width: 48em) {
-  .details {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 4rem;
-  }
 }
 
 h2 {
@@ -274,30 +267,6 @@ h2::before {
 .email {
   margin-top: 0.875rem;
   color: var(--muted);
-}
-
-.founder-list {
-  display: grid;
-  gap: 1.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.founder h3 {
-  font-size: 1.25rem;
-}
-
-.role {
-  margin-top: 0.25rem;
-  color: var(--muted);
-}
-
-.founder-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  font-weight: 600;
 }
 
 /* Footer */

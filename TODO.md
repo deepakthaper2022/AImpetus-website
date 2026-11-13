@@ -46,6 +46,7 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 
 ## holding/
 - [x] Built (Prompt 1): index.html, styles.css, 404.html, robots.txt, site.webmanifest, self-hosted fonts, favicon set, OG/Twitter tags, canonical
+- Founders section (names, roles, LinkedIn links) removed at the founders' request (13 Nov 2026). `brief/holding-page.md` still includes it, so update the brief to match.
 - [ ] The 404 copy is a draft (see "Copy drafted by the builder")
 - [ ] Optional: the large chevron graphic only shows from 960 px wide. On phones the page is text-only. Say if you want a small version on mobile.
 - [ ] Both founders approve the holding page copy and look
