@@ -1,14 +1,11 @@
 ---
-// The four service pages. Copy lives in src/data/services.ts.
+// Beta 2 service pages. Copy lives in src/data/services.ts.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
-import type { ArtName } from '../../components/PageArt.astro';
-import SectionHead from '../../components/SectionHead.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import FeatureSection from '../../components/FeatureSection.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import IndexHead from '../../components/IndexHead.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import Chevron from '../../components/Chevron.astro';
+import CtaPanel from '../../components/CtaPanel.astro';
 import { services, type Service } from '../../data/services';
 import { url } from '../../lib/paths';
 import { brandify } from '../../lib/brand';
@@ -20,42 +17,35 @@ export function getStaticPaths() {
 interface Props { service: Service }
 const { service } = Astro.props;
 const others = services.filter((s) => s.slug !== service.slug);
+
+const toc = [
+  { id: 'familiar-heading', label: 'Sound familiar?' },
+  { id: 'do-heading', label: 'What we do' },
+  { id: 'get-heading', label: 'What you get' },
+  { id: 'experience-heading', label: 'Where our experience comes from' },
+];
 ---
 <BaseLayout title={service.seoTitle} description={service.description}>
-  <PageHero title={service.h1} intro={service.intro} art={service.slug as ArtName}>
-    <Breadcrumbs
-      slot="breadcrumbs"
-      items={[{ label: 'Home', href: url('') }, { label: 'Services', href: url('services/') }, { label: service.name }]}
-    />
-  </PageHero>
+  <PageHeader
+    title={service.h1}
+    intro={service.intro}
+    toc={toc}
+    crumbs={[{ label: 'Home', href: url('') }, { label: 'Services', href: url('services/') }, { label: service.name }]}
+  >
+    <p class="service-tag">
+      <span class="service-tag__icon" aria-hidden="true"><ServiceIcon name={service.icon} /></span>
+      <span set:html={brandify(service.name)} />
+    </p>
+  </PageHeader>
 
-  <section class="section familiar" aria-labelledby="familiar-heading">
-    <div class="wrap split">
-      <SectionHead id="familiar-heading" text="Sound familiar?" />
-      <ul class="chevron-list chevron-list--large split__body">
-        {service.familiar.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <FeatureSection
-    id="do-heading"
-    heading="What we do"
-    items={service.whatWeDo.map((item) => ({ lead: item.term, text: item.text }))}
-    leadSuffix=":"
-    ordered={false}
-  />
-
-  <section class="section get" aria-labelledby="get-heading">
+  <!-- 01 Sound familiar? -->
+  <section class="section on-paper" aria-labelledby="familiar-heading">
     <div class="wrap">
-      <SectionHead id="get-heading" text="What you get" />
-      <ul class="get__grid">
-        {service.whatYouGet.map((item) => (
-          <li class="tile-dark get__item">
-            <svg class="get__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-              <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill="#F59E0B" />
-              <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill="#5EEAD4" />
-            </svg>
+      <IndexHead id="familiar-heading" index="01" text="Sound familiar?" />
+      <ul class="symptoms">
+        {service.familiar.map((item) => (
+          <li class="symptom">
+            <span class="symptom__mark" aria-hidden="true"></span>
             <p>{item}</p>
           </li>
         ))}
@@ -63,23 +53,50 @@ const others = services.filter((s) => s.slug !== service.slug);
     </div>
   </section>
 
-  <section class="section on-paper" aria-labelledby="experience-heading">
-    <div class="wrap split">
-      <SectionHead id="experience-heading" text="Where our experience comes from" />
-      <div class="experience split__body">
-        <p set:html={brandify(service.experience)} />
-      </div>
+  <!-- 02 What we do: definition table -->
+  <section class="section white-band" aria-labelledby="do-heading">
+    <div class="wrap">
+      <IndexHead id="do-heading" index="02" text="What we do" />
+      <dl class="def-table">
+        {service.whatWeDo.map((item) => (
+          <div class="def-table__row">
+            <dt><Chevron class="def-table__chevron" />{item.term}<span class="visually-hidden">:</span></dt>
+            <dd>{item.text}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
-  <!-- "Other services" heading is builder-drafted copy (brief/copy-changes.md) -->
-  <section class="section others" aria-labelledby="others-heading">
+  <!-- 03 What you get -->
+  <section class="section get" aria-labelledby="get-heading">
     <div class="wrap">
-      <h2 id="others-heading" class="others__heading">Other services</h2>
-      <ul class="others__list">
+      <IndexHead id="get-heading" index="03" text="What you get" />
+      <ul class="outcomes">
+        {service.whatYouGet.map((item) => (
+          <li class="outcome">
+            <span class="outcome__tick" aria-hidden="true"></span>
+            <p>{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 Where our experience comes from -->
+  <section class="section on-paper" aria-labelledby="experience-heading">
+    <div class="wrap">
+      <IndexHead id="experience-heading" index="04" text="Where our experience comes from" />
+      <div class="evidence">
+        <p set:html={brandify(service.experience)} />
+      </div>
+
+      <!-- "Other services" heading is builder-drafted copy (brief/copy-changes.md) -->
+      <h2 class="others__heading" id="others-heading">Other services</h2>
+      <ul class="others" aria-labelledby="others-heading">
         {others.map((s) => (
           <li class="others__item">
-            <ServiceIcon name={s.icon} />
+            <span class="others__icon" aria-hidden="true"><ServiceIcon name={s.icon} /></span>
             <a href={url(`services/${s.slug}/`)} class="others__link" set:html={brandify(s.name)} />
             <Chevron class="others__chevron" />
           </li>
@@ -88,76 +105,219 @@ const others = services.filter((s) => s.slug !== service.slug);
     </div>
   </section>
 
-  <CtaBand button={service.cta} href={url('contact/')} />
+  <CtaPanel button={service.cta} href={url('contact/')} />
 </BaseLayout>
 
 <style>
-  .split {
-    display: grid;
-    gap: 2rem;
+  .service-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border: 1px solid #2f5a60;
+    border-radius: var(--radius-card);
+    background: rgba(94, 234, 212, 0.06);
+    color: var(--paper);
+    font-weight: 600;
   }
 
-  @media (min-width: 60em) {
-    .split {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      column-gap: clamp(3rem, 6vw, 7rem);
-      align-items: start;
+  .service-tag__icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    background: var(--ink);
+  }
+
+  .service-tag__icon :global(.service-icon) {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  /* 01 Symptoms: ruled 2x2 grid */
+  .symptoms {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius-card);
+    background: var(--grid-line);
+    overflow: hidden;
+  }
+
+  @media (min-width: 48em) {
+    .symptoms {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  .split__body {
-    max-width: var(--measure);
+  .symptom {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--white);
   }
 
-  .familiar {
-    background: linear-gradient(180deg, var(--ink) 0%, #0c2529 100%);
+  .symptom p {
+    font-size: var(--step-1);
+    line-height: 1.5;
   }
 
-  .get__grid {
+  /* Amber ring with a dash: "a problem you'll recognise" */
+  .symptom__mark {
+    position: relative;
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-top: 0.15rem;
+    border: 2px solid var(--amber);
+    border-radius: 50%;
+  }
+
+  .symptom__mark::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0.35rem auto;
+    height: 2px;
+    background: var(--amber);
+    transform: translateY(-50%);
+  }
+
+  /* 02 Definition table */
+  .white-band {
+    background: var(--white);
+    color: var(--ink);
+    --text: var(--ink);
+    --text-muted: var(--slate);
+    --heading: var(--ink);
+    --link: var(--teal);
+    --link-hover: var(--teal-dark);
+    --accent: var(--teal);
+    --rule: var(--grid-line);
+    --focus: var(--ink);
+    --on-accent: var(--white);
+    border-block: 1px solid var(--grid-line);
+  }
+
+  .def-table {
+    margin: 0;
+    border-top: 2px solid var(--ink);
+  }
+
+  .def-table__row {
     display: grid;
-    gap: 1.25rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
+    gap: 0.375rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--grid-line);
+  }
+
+  @media (min-width: 48em) {
+    .def-table__row {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+      gap: 2rem;
+      align-items: baseline;
+    }
+  }
+
+  .def-table dt {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .def-table :global(.def-table__chevron) {
+    width: 0.55rem;
+    height: 0.66rem;
+  }
+
+  .def-table dd {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  /* 03 Outcomes on ink */
+  .get {
+    background:
+      linear-gradient(to right, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 48px 48px,
+      var(--ink);
+  }
+
+  .outcomes {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   @media (min-width: 40em) {
-    .get__grid {
+    .outcomes {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 64em) {
-    .get__grid {
+    .outcomes {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
-  .get__item {
+  .outcome {
     display: grid;
     align-content: start;
-    gap: 1.25rem;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #2f5a60;
+    border-top: 4px solid var(--mint);
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, #14383e, #0d272b);
   }
 
-  .get__mark {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .get__item p {
+  .outcome p {
     color: var(--white);
     font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.45;
   }
 
-  .experience {
-    margin: 0;
-    padding-left: clamp(1.25rem, 3vw, 2rem);
-    border-left: 4px solid var(--amber);
+  .outcome__tick {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--mint);
   }
 
-  .experience p {
+  .outcome__tick::after {
+    content: '';
+    position: absolute;
+    left: 0.7rem;
+    top: 0.42rem;
+    width: 0.45rem;
+    height: 0.85rem;
+    border: solid var(--ink);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+
+  /* 04 Evidence callout */
+  .evidence {
+    max-width: 52rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--grid-line);
+    border-top: 5px solid var(--teal);
+    border-radius: var(--radius-card);
+    background: var(--white);
+  }
+
+  .evidence p {
     font-family: var(--font-heading);
     font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
     font-weight: 700;
@@ -165,24 +325,22 @@ const others = services.filter((s) => s.slug !== service.slug);
     color: var(--ink);
   }
 
-  .others {
-    padding-block: clamp(3rem, 2rem + 4vw, 5rem);
-  }
-
+  /* Other services */
   .others__heading {
-    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
   }
 
-  .others__list {
+  .others {
     display: grid;
     gap: 1rem;
-    margin-top: 1.75rem;
+    margin-top: 1.25rem;
     padding: 0;
     list-style: none;
   }
 
   @media (min-width: 48em) {
-    .others__list {
+    .others {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
@@ -192,44 +350,51 @@ const others = services.filter((s) => s.slug !== service.slug);
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid #24484e;
-    border-radius: 1rem;
-    background: linear-gradient(160deg, #15393f 0%, #102e33 100%);
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius-card);
+    background: var(--white);
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
 
   .others__item:hover,
   .others__item:focus-within {
-    border-color: var(--mint);
+    border-color: var(--teal);
     transform: translateY(-2px);
   }
 
-  .others__item :global(.service-icon) {
+  .others__icon {
+    display: grid;
+    place-items: center;
     flex: none;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.25rem;
+    background: var(--ink);
+    --icon-line: var(--mint);
+  }
+
+  .others__icon :global(.service-icon) {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
   .others__link {
     flex: 1;
-    color: var(--white);
+    color: var(--ink);
     font-family: var(--font-heading);
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
     font-weight: 700;
     text-decoration: none;
   }
 
-  /* Whole card is clickable */
   .others__link::after {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 1rem;
   }
 
   .others__link:hover {
-    color: var(--white);
     text-decoration: underline;
   }
 
@@ -238,13 +403,14 @@ const others = services.filter((s) => s.slug !== service.slug);
   }
 
   .others__link:focus-visible::after {
-    outline: var(--focus-width) solid var(--white);
+    outline: var(--focus-width) solid var(--ink);
     outline-offset: 3px;
+    border-radius: var(--radius-card);
   }
 
   .others__item :global(.others__chevron) {
     flex: none;
-    width: 0.75rem;
-    height: 0.9rem;
+    width: 0.7rem;
+    height: 0.85rem;
   }
 </style>

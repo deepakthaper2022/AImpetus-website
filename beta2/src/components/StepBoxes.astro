@@ -1,0 +1,75 @@
+---
+// Beta 2: numbered step boxes with tab numbers and amber chevrons between.
+interface Step { lead: string; text: string }
+interface Props { steps: Step[]; separator?: string }
+const { steps, separator = ' – ' } = Astro.props;
+---
+<ol class="stepboxes">
+  {steps.map((step, i) => (
+    <li class="stepbox">
+      <span class="stepbox__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      <p><strong>{step.lead}</strong>{separator}{step.text}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .stepboxes {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  @media (min-width: 48em) {
+    .stepboxes {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  .stepbox {
+    position: relative;
+    padding: 4.5rem 1.75rem 1.75rem;
+    border: 1px solid #2f5a60;
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, #14383e, #0d272b);
+  }
+
+  .stepbox__num {
+    position: absolute;
+    top: 0;
+    left: 1.75rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0 0 0.375rem 0.375rem;
+    background: var(--mint);
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .stepbox p {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  /* Arrow between boxes */
+  @media (min-width: 48em) {
+    .stepbox:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: calc(-0.75rem - 7px);
+      z-index: 1;
+      width: 14px;
+      height: 18px;
+      background: var(--amber);
+      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+      transform: translateY(-50%);
+    }
+  }
+
+</style>

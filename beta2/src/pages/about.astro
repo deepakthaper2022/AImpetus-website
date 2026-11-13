@@ -1,13 +1,14 @@
 ---
-// About us – copy from brief/website-content.pdf ("About us page").
+// Beta 2 About us – copy from brief/website-content.pdf ("About us page").
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
-import SectionHead from '../components/SectionHead.astro';
+import PageHeader from '../components/PageHeader.astro';
+import IndexHead from '../components/IndexHead.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
 import FounderPortrait from '../components/FounderPortrait.astro';
 import ArrowLink from '../components/ArrowLink.astro';
-import CtaBand from '../components/CtaBand.astro';
-import FeatureSection from '../components/FeatureSection.astro';
+import CtaPanel from '../components/CtaPanel.astro';
 import { url } from '../lib/paths';
+import { brandify } from '../lib/brand';
 
 const whyNow = [
   { icon: 'target', lead: 'Outcomes, not hype.', text: 'The real test is benefit delivered: better services, lower costs and measurable impact. Technology is the means, not the goal.' },
@@ -52,55 +53,81 @@ const beliefs = [
   { icon: 'honest', lead: 'Honesty before sales.', text: "We'd rather lose a deal than oversell." },
   { icon: 'public', lead: 'Public value.', text: 'Every pound of public money should do real work.' },
 ] as const;
+
+const toc = [
+  { id: 'started-heading', label: 'Why we started AImpetus' },
+  { id: 'now-heading', label: 'Why now' },
+  { id: 'founders-heading', label: 'Our founders' },
+  { id: 'believe-heading', label: 'What we believe' },
+];
 ---
 <BaseLayout
   title="About us | AImpetus"
   description="AImpetus is a UK data, digital and AI services company founded by Prahlad Koti and Deepak Thaper, with 60 years of combined experience."
 >
-  <PageHero
+  <PageHeader
+    crumbLabel="About us"
     title="A new company. A proven team."
     intro="AImpetus is a UK data, digital and AI services company. We were founded in 2026 by two people who have spent their careers delivering technology for the NHS and the wider public sector."
-    art="about"
+    toc={toc}
   />
 
-  <section class="section started" aria-labelledby="started-heading">
-    <div class="wrap split">
-      <SectionHead id="started-heading" text="Why we started AImpetus" />
-      <div class="split__body">
+  <section class="section on-paper" aria-labelledby="started-heading">
+    <div class="wrap">
+      <IndexHead id="started-heading" index="01" text="Why we started AImpetus" />
+      <div class="story">
         <p class="lede">We've seen too many promising data and AI ideas stall before they reached a live service. The technology usually works. What's missing is the groundwork: reliable data, modern platforms, sound governance and steady delivery. AImpetus exists to put that groundwork in place, so AI can do real work in the engine room of public services.</p>
-        <p class="name-note">The name says what we're for: AI, and the impetus to move good ideas into everyday use.</p>
+        <div class="name-card">
+          <span class="name-card__mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <polygon points="9,12 18,12 28,24 18,36 9,36 19,24" fill="#F59E0B" />
+              <polygon points="22,12 30,12 40,24 30,36 22,36 32,24" fill="#5EEAD4" />
+            </svg>
+          </span>
+          <p>The name says what we're for: AI, and the impetus to move good ideas into everyday use.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <FeatureSection
-    id="now-heading"
-    heading="Why now"
-    intro="AI has moved from experiment to expectation. But the organisations that gain most won't be the ones with the most technology. They'll be the ones that stay focused on outcomes. That's why we started AImpetus now."
-    items={[...whyNow]}
-    ordered={false}
-  >
+  <section class="section band-white" aria-labelledby="now-heading">
     <div class="wrap">
+      <IndexHead
+        id="now-heading"
+        index="02"
+        text="Why now"
+        intro="AI has moved from experiment to expectation. But the organisations that gain most won't be the ones with the most technology. They'll be the ones that stay focused on outcomes. That's why we started AImpetus now."
+      />
+      <ol class="ruled">
+        {whyNow.map((item, i) => (
+          <li class="ruled__cell">
+            <div class="ruled__top">
+              <span class="ruled__chip"><FeatureIcon name={item.icon} /></span>
+              <span class="ruled__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <h3 class="ruled__lead">{item.lead}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ol>
       <p class="lede now__close">We both stepped out of conventional IT services to see the work from a different angle: new technology, new ways of delivering services, and the ground reality of making change stick. AImpetus brings that experience together, so the organisations we work with get the benefit, not the hype.</p>
     </div>
-  </FeatureSection>
+  </section>
 
-  <section class="section founders" aria-labelledby="founders-heading">
+  <section class="section band-ink" aria-labelledby="founders-heading">
     <div class="wrap">
-      <SectionHead id="founders-heading" text="Our founders" />
-      <div class="founders__list">
+      <IndexHead id="founders-heading" index="03" text="Our founders" />
+      <div class="founders">
         {founders.map((f) => (
-          <article class="profile" aria-labelledby={`${f.id}-name`}>
-            <div class="profile__side">
+          <article class="founder" aria-labelledby={`${f.id}-name`}>
+            <div class="founder__side">
               <FounderPortrait slug={f.slug} initials={f.initials} size="lg" />
-            </div>
-            <div class="profile__body">
               <h3 id={`${f.id}-name`}>{f.name}</h3>
-              <p class="profile__role">{f.role}</p>
-              <div class="profile__bio">
-                {f.bio.map((para) => <p>{para}</p>)}
-              </div>
+              <p class="founder__role">{f.role}</p>
               <ArrowLink href={f.linkedin}>{f.linkText}</ArrowLink>
+            </div>
+            <div class="founder__bio">
+              {f.bio.map((para) => <p>{para}</p>)}
             </div>
           </article>
         ))}
@@ -108,99 +135,196 @@ const beliefs = [
     </div>
   </section>
 
-  <FeatureSection id="believe-heading" heading="What we believe" items={[...beliefs]} ordered={false} />
+  <section class="section on-paper" aria-labelledby="believe-heading">
+    <div class="wrap">
+      <IndexHead id="believe-heading" index="04" text="What we believe" />
+      <ul class="ruled ruled--4">
+        {beliefs.map((item) => (
+          <li class="ruled__cell">
+            <div class="ruled__top">
+              <span class="ruled__chip"><FeatureIcon name={item.icon} /></span>
+            </div>
+            <h3 class="ruled__lead">{item.lead}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-  <CtaBand button="Book a 30-minute conversation" href={url('contact/')} />
+  <CtaPanel button="Book a 30-minute conversation" href={url('contact/')} />
 </BaseLayout>
 
 <style>
-  .split {
+  .story {
     display: grid;
     gap: 2rem;
+    align-items: start;
   }
 
   @media (min-width: 60em) {
-    .split {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      column-gap: clamp(3rem, 6vw, 7rem);
-      align-items: start;
+    .story {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+      gap: clamp(3rem, 6vw, 5rem);
     }
   }
 
-  .split__body {
+  .story .lede {
     max-width: var(--measure);
   }
 
-  .started {
-    background: linear-gradient(180deg, var(--ink) 0%, #0c2529 100%);
-  }
-
-  .name-note {
-    margin-top: 1.75rem;
-    padding: 1.25rem 1.5rem;
-    border-left: 4px solid var(--amber);
-    border-radius: 0 0.75rem 0.75rem 0;
-    background: rgba(94, 234, 212, 0.06);
-    color: var(--white);
-    font-weight: 600;
-  }
-
-  .now__close {
-    position: relative;
-    max-width: 52rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    padding-left: 1.5rem;
-    border-left: 4px solid var(--amber);
-  }
-
-  /* Line up with the cards column of FeatureSection */
-  @media (min-width: 64em) {
-    .now__close {
-      margin-left: calc((100% - clamp(3rem, 5vw, 5rem)) / 3 + clamp(3rem, 5vw, 5rem));
-    }
-  }
-
-  .founders__list {
+  .name-card {
     display: grid;
-    gap: clamp(2.5rem, 5vw, 4rem);
-    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--grid-line);
+    border-top: 5px solid var(--amber);
+    border-radius: var(--radius-card);
+    background: var(--white);
   }
 
-  .profile {
+  .name-card__mark {
     display: grid;
-    gap: 1.5rem;
-    padding-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px solid var(--rule-on-ink);
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.375rem;
+    background: var(--ink);
   }
 
-  .profile__side {
-    width: 8rem;
+  .name-card__mark svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .name-card p {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  /* Ruled grids (shared borders) */
+  .ruled {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius-card);
+    background: var(--grid-line);
+    overflow: hidden;
   }
 
   @media (min-width: 48em) {
-    .profile__side {
-      width: auto;
+    .ruled {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .profile {
-      grid-template-columns: 10rem minmax(0, 1fr);
-      gap: clamp(2rem, 4vw, 3rem);
+    .ruled--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  .profile h3 {
-    font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  @media (min-width: 64em) {
+    .ruled--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
-  .profile__role {
-    margin-top: 0.375rem;
+  .ruled__cell {
+    display: grid;
+    align-content: start;
+    gap: 0.625rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--white);
+  }
+
+  .band-white .ruled__cell {
+    background: var(--paper);
+  }
+
+  .ruled__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .ruled__chip {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.375rem;
+    background: var(--ink);
+  }
+
+  .ruled__num {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--slate);
+  }
+
+  .ruled__lead {
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .now__close {
+    max-width: 52rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-left: 1.25rem;
+    border-left: 4px solid var(--teal);
+  }
+
+  /* Founders: large profile cards on ink */
+  .founders {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .founder {
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid #2f5a60;
+    border-radius: var(--radius-card);
+    background: linear-gradient(170deg, #14383e, #0d272b);
+  }
+
+  @media (min-width: 56em) {
+    .founder {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
+  }
+
+  .founder__side {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+  }
+
+  .founder__side :global(.portrait) {
+    width: min(100%, 12rem);
+    margin-bottom: 1rem;
+  }
+
+  .founder h3 {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  .founder__role {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #2f5a60;
     color: var(--mint);
     font-weight: 600;
   }
 
-  .profile__bio {
+  .founder__bio {
     max-width: 44rem;
-    margin-block: 1.25rem 1rem;
   }
-
 </style>

@@ -1,19 +1,23 @@
 ---
-// Privacy, cookie and accessibility pages: ink title band, paper reading area.
+// Beta 2 privacy, cookie and accessibility pages: dark header band with an
+// "On this page" list of the sections, then the text on a white document panel.
 import BaseLayout from './BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import PageHeader from '../components/PageHeader.astro';
 import Placeholder from '../components/Placeholder.astro';
-interface Props { title: string; heading: string; description?: string }
-const { title, heading, description } = Astro.props;
+interface Section { id: string; label: string }
+interface Props { title: string; heading: string; description?: string; sections?: Section[] }
+const { title, heading, description, sections = [] } = Astro.props;
 ---
 <BaseLayout title={title} description={description}>
-  <PageHero title={heading} art={false}>
+  <PageHeader title={heading} toc={sections}>
     <p class="updated">Last updated: <Placeholder text="publication date" /></p>
-  </PageHero>
+  </PageHeader>
   <section class="section on-paper legal">
     <div class="wrap">
-      <div class="prose">
-        <slot />
+      <div class="doc">
+        <div class="prose">
+          <slot />
+        </div>
       </div>
     </div>
   </section>
@@ -21,12 +25,26 @@ const { title, heading, description } = Astro.props;
 
 <style>
   .updated {
-    margin-top: 1.25rem;
     color: var(--muted-on-ink);
     font-weight: 600;
   }
 
   .legal {
-    padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+    padding-block: clamp(2.5rem, 2rem + 3vw, 5rem);
+  }
+
+  .doc {
+    max-width: 52rem;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    border: 1px solid var(--grid-line);
+    border-top: 5px solid var(--teal);
+    border-radius: var(--radius-card);
+    background: var(--white);
+  }
+
+  .doc :global(h2) {
+    scroll-margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--grid-line);
   }
 </style>

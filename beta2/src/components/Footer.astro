@@ -1,13 +1,14 @@
 ---
+// Beta 2 footer: light, structured columns. Copy from the brief ("Footer").
 import Placeholder from './Placeholder.astro';
 import { footerNav, company, COMPANY_LINKEDIN } from '../lib/site';
 import { url } from '../lib/paths';
 import { brandify } from '../lib/brand';
 ---
 <footer class="site-footer">
-  <div class="wrap">
+  <div class="wrap footer-grid">
     <div class="footer-brand">
-      <img src={url('images/aimpetus-logo-reversed.svg')} alt="AImpetus" width="519" height="96" class="footer-logo" loading="lazy" />
+      <img src={url('images/aimpetus-logo-primary.svg')} alt="AImpetus" width="519" height="96" class="footer-logo" loading="lazy" />
       <p class="footer-tagline" set:html={brandify(company.tagline)} />
       <p class="footer-descriptor">{company.descriptor}</p>
     </div>
@@ -27,8 +28,10 @@ import { brandify } from '../lib/brand';
         <>Follow us on LinkedIn <Placeholder text="company LinkedIn page" /></>
       )}
     </p>
+  </div>
 
-    <div class="footer-legal">
+  <div class="footer-legal">
+    <div class="wrap">
       <p>{company.registration}</p>
       <p>{company.copyright}</p>
     </div>
@@ -37,16 +40,31 @@ import { brandify } from '../lib/brand';
 
 <style>
   .site-footer {
-    padding-block: clamp(3rem, 6vw, 5rem) 2.5rem;
-    background: var(--ink-deep);
-    color: var(--muted-on-ink);
+    border-top: 4px solid var(--teal);
+    background: var(--white);
+    color: var(--ink);
     font-size: 0.9375rem;
-    --text-muted: var(--muted-on-ink);
+    --link: var(--teal);
+    --link-hover: var(--teal-dark);
+    --focus: var(--ink);
+    --heading: var(--ink);
   }
 
-  .site-footer .wrap {
+  .footer-grid {
     display: grid;
-    gap: 2.5rem;
+    gap: 2rem;
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 48em) {
+    .footer-grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      column-gap: 4rem;
+    }
+
+    .footer-brand {
+      grid-row: span 2;
+    }
   }
 
   .footer-logo {
@@ -55,63 +73,67 @@ import { brandify } from '../lib/brand';
   }
 
   .footer-tagline {
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: var(--step-2);
     line-height: 1.2;
-    color: var(--white);
   }
 
   .footer-descriptor {
-    margin-top: 0.5rem;
+    margin-top: 0.375rem;
+    color: var(--slate);
   }
 
+  /* Links as a ruled grid */
   .footer-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
     padding: 0;
     list-style: none;
+    border-top: 1px solid var(--grid-line);
+  }
+
+  @media (min-width: 64em) {
+    .footer-nav ul {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .footer-nav li {
+    border-bottom: 1px solid var(--grid-line);
   }
 
   .footer-nav a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    min-height: 2.75rem;
-    color: var(--paper);
+    min-height: 3rem;
+    padding-right: 0.5rem;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
   }
 
   .footer-nav a:hover {
-    color: var(--mint);
+    color: var(--teal-dark);
+    text-decoration: underline;
   }
 
   .footer-social {
-    color: var(--paper);
+    align-self: start;
+    font-weight: 600;
   }
 
   .footer-legal {
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--rule-on-ink);
+    padding-block: 1.25rem;
+    background: var(--paper);
+    border-top: 1px solid var(--grid-line);
+    color: var(--slate);
     font-size: var(--step--1);
   }
 
   .footer-legal p + p {
     margin-top: 0.25rem;
-  }
-
-  @media (min-width: 48em) {
-    .site-footer .wrap {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      column-gap: 4rem;
-    }
-
-    .footer-brand {
-      grid-row: span 2;
-    }
-
-    .footer-legal {
-      grid-column: 1 / -1;
-    }
   }
 </style>

@@ -373,7 +373,7 @@ a:hover {
 }
 
 /* Stack rows on small screens; labels come from data-label */
-@media (max-width: 47.99em) {
+@media (max-width: 59.99em) {
   .data-table thead {
     position: absolute;
     width: 1px;
@@ -448,4 +448,28 @@ a:hover {
 .page-hero + .section:not(.on-paper) {
   padding-top: clamp(3rem, 2rem + 4vw, 5.5rem);
   border-top: 1px solid var(--rule-on-ink);
+}
+
+/* Beta 2: ink band with faint vertical grid lines */
+.band-ink {
+  background:
+    linear-gradient(to right, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--ink);
+}
+
+/* Beta 2: white band (between paper sections) */
+.band-white {
+  background: var(--white);
+  color: var(--ink);
+  border-block: 1px solid var(--grid-line);
+  --text: var(--ink);
+  --text-muted: var(--slate);
+  --heading: var(--ink);
+  --link: var(--teal);
+  --link-hover: var(--teal-dark);
+  --accent: var(--teal);
+  --rule: var(--grid-line);
+  --focus: var(--ink);
+  --icon-line: var(--teal);
+  --on-accent: var(--white);
 }

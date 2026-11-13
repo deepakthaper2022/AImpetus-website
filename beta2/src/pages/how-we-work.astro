@@ -1,13 +1,13 @@
 ---
-// How we work – copy from brief/website-content.pdf ("How we work page").
+// Beta 2 How we work – copy from brief/website-content.pdf ("How we work page").
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
-import SectionHead from '../components/SectionHead.astro';
-import StepTrack from '../components/StepTrack.astro';
-import DataTable from '../components/DataTable.astro';
-import CtaBand from '../components/CtaBand.astro';
-import FeatureSection from '../components/FeatureSection.astro';
+import PageHeader from '../components/PageHeader.astro';
+import IndexHead from '../components/IndexHead.astro';
+import StepBoxes from '../components/StepBoxes.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import CtaPanel from '../components/CtaPanel.astro';
 import { url } from '../lib/paths';
+import { brandify } from '../lib/brand';
 
 const approach = [
   { lead: 'Understand.', text: "We start with your service, your users, your data and the outcome you need. We agree what success looks like and how we'll measure it." },
@@ -24,64 +24,216 @@ const expect = [
 ] as const;
 
 const ways = [
-  ['Health check or discovery', 'Getting an independent view before you commit', 'A short, fixed-scope piece of work with clear recommendations'],
-  ['Specialist support', 'Adding senior data, AI or delivery capability to your team', 'Experienced specialists working inside your team, directly or through a partner'],
-  ['Outcome-based project', 'Delivering a defined result, such as a pilot or platform', 'A small team accountable for agreed outcomes'],
+  { option: 'Health check or discovery', bestFor: 'Getting an independent view before you commit', how: 'A short, fixed-scope piece of work with clear recommendations' },
+  { option: 'Specialist support', bestFor: 'Adding senior data, AI or delivery capability to your team', how: 'Experienced specialists working inside your team, directly or through a partner' },
+  { option: 'Outcome-based project', bestFor: 'Delivering a defined result, such as a pilot or platform', how: 'A small team accountable for agreed outcomes' },
+];
+
+const toc = [
+  { id: 'approach-heading', label: 'Our approach' },
+  { id: 'expect-heading', label: 'What you can expect from us' },
+  { id: 'ways-heading', label: 'Ways to work with us' },
+  { id: 'alongside-heading', label: 'Working alongside your teams' },
 ];
 ---
 <BaseLayout
   title="How we work | AImpetus"
   description="Senior-led, partner-friendly delivery. We start small, prove the benefit, then scale what works for public-sector and other organisations."
 >
-  <PageHero
-    art="how-we-work"
+  <PageHeader
+    crumbLabel="How we work"
     title="Senior-led. Evidence-based. Easy to work with."
     intro="We keep our approach simple: understand the problem properly, prove the value early and only scale what works. Senior people stay involved throughout."
+    toc={toc}
   />
 
-  <section class="section" aria-labelledby="approach-heading">
+  <section class="section band-ink" aria-labelledby="approach-heading">
     <div class="wrap">
-      <SectionHead id="approach-heading" text="Our approach" />
-      <StepTrack steps={approach} separator=" " />
+      <IndexHead id="approach-heading" index="01" text="Our approach" />
+      <StepBoxes steps={approach} separator=" " />
     </div>
   </section>
 
-  <FeatureSection id="expect-heading" heading="What you can expect from us" items={[...expect]} ordered={false} />
-
-  <section class="section ways" aria-labelledby="ways-heading">
+  <section class="section on-paper" aria-labelledby="expect-heading">
     <div class="wrap">
-      <SectionHead id="ways-heading" text="Ways to work with us" />
-      <DataTable columns={['Option', 'Best for', 'How it works']} rows={ways} />
+      <IndexHead id="expect-heading" index="02" text="What you can expect from us" />
+      <ul class="checklist">
+        {expect.map((item) => (
+          <li class="check">
+            <span class="check__chip"><FeatureIcon name={item.icon} /></span>
+            <div>
+              <h3 class="check__lead">{item.lead}</h3>
+              <p>{item.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
-  <CtaBand
-    id="alongside-heading"
-    heading="Working alongside your teams"
-    text="We fit around the people already doing the work: your in-house teams, other suppliers and delivery partners. We bring senior specialists who need little supervision, work to your standards and leave knowledge behind."
-    button="Book a 30-minute conversation"
-    href={url('contact/')}
-  />
+  <section class="section band-white" aria-labelledby="ways-heading">
+    <div class="wrap">
+      <IndexHead id="ways-heading" index="03" text="Ways to work with us" />
+      <ul class="compare">
+        {ways.map((w, i) => (
+          <li class="compare__col">
+            <div class="compare__head">
+              <span class="compare__num" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
+              <h3 set:html={brandify(w.option)} />
+            </div>
+            <dl>
+              <div class="compare__row">
+                <dt>Best for</dt>
+                <dd>{w.bestFor}</dd>
+              </div>
+              <div class="compare__row">
+                <dt>How it works</dt>
+                <dd>{w.how}</dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="alongside">
+    <CtaPanel
+      id="alongside-heading"
+      heading="Working alongside your teams"
+      text="We fit around the people already doing the work: your in-house teams, other suppliers and delivery partners. We bring senior specialists who need little supervision, work to your standards and leave knowledge behind."
+      button="Book a 30-minute conversation"
+      href={url('contact/')}
+    />
+  </div>
 </BaseLayout>
 
 <style>
-  .ways :global(.data-table) {
-    font-size: 1.0625rem;
-  }
-
-  .ways :global(.data-table tbody th) {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    color: var(--white);
+  /* 02 Checklist in a ruled two-column grid */
+  .checklist {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius-card);
+    background: var(--grid-line);
+    overflow: hidden;
   }
 
   @media (min-width: 48em) {
-    .ways :global(.data-table tbody th) {
-      width: 26%;
+    .checklist {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .ways :global(.data-table tbody tr:hover) {
-      background: rgba(94, 234, 212, 0.04);
+    .check:last-child {
+      grid-column: 1 / -1;
     }
+  }
+
+  .check {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--white);
+  }
+
+  .check__chip {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.375rem;
+    background: var(--ink);
+  }
+
+  .check__lead {
+    margin-bottom: 0.375rem;
+    font-size: 1.25rem;
+  }
+
+  /* 03 Comparison columns */
+  .compare {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 56em) {
+    .compare {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .compare__col {
+    border: 1px solid var(--grid-line);
+    border-top: 5px solid var(--teal);
+    border-radius: var(--radius-card);
+    background: var(--paper);
+  }
+
+  .compare__col:nth-child(2) {
+    border-top-color: var(--amber);
+  }
+
+  .compare__col:nth-child(3) {
+    border-top-color: var(--ink);
+  }
+
+  .compare__head {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+
+  .compare__head h3 {
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  }
+
+  .compare__num {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    background: var(--ink);
+    color: var(--mint);
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  .compare dl {
+    margin: 0;
+  }
+
+  .compare__row {
+    display: grid;
+    gap: 0.375rem;
+    padding: 1.125rem 1.5rem;
+    border-top: 1px solid var(--grid-line);
+  }
+
+  .compare__row dt {
+    color: var(--slate);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .compare__row dd {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .alongside :global(.cta-wrap) {
+    padding-top: var(--section-space);
   }
 </style>

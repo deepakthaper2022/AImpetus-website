@@ -2,21 +2,24 @@
 // Contact form success page (Netlify Forms action). Builder-drafted H1 and title
 // (brief/copy-changes.md); body is the brief's confirmation message.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
+import PageHeader from '../../components/PageHeader.astro';
 import ArrowLink from '../../components/ArrowLink.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { url } from '../../lib/paths';
 ---
 <BaseLayout title="Thanks | AImpetus">
   <!-- TODO: H1 and SEO title to approve (not in the brief) -->
-  <PageHero title="Thanks for getting in touch" intro="One of the founders will reply within two working days.">
-    <Breadcrumbs slot="breadcrumbs" items={[{ label: 'Home', href: url('') }, { label: 'Contact', href: url('contact/') }, { label: 'Thanks' }]} />
-    <p class="back"><ArrowLink href={url('')}>Go to the home page</ArrowLink></p>
-  </PageHero>
+  <PageHeader
+    title="Thanks for getting in touch"
+    intro="One of the founders will reply within two working days."
+    crumbs={[{ label: 'Home', href: url('') }, { label: 'Contact', href: url('contact/') }, { label: 'Thanks' }]}
+  >
+    <p><ArrowLink href={url('')}>Go to the home page</ArrowLink></p>
+  </PageHeader>
+  <div class="on-paper spacer" aria-hidden="true"></div>
 </BaseLayout>
 
 <style>
-  .back {
-    margin-top: 2rem;
+  .spacer {
+    min-height: clamp(4rem, 10vw, 8rem);
   }
 </style>

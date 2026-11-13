@@ -90,8 +90,10 @@ The betas currently use SVG artwork, monogram badges and illustrations, so nothi
 
 ### beta2/ – Engine room: Structured
 - [x] Set-up (copied from beta1; base /beta2/, form contact-beta2), light header, Home page
-- [ ] Founders review the Home page
-- [ ] Restyle the remaining pages in the Structured direction (they currently inherit beta1's page layouts with the beta2 header), then the full checks, DESIGN.md and commit
+- [x] Home page reviewed ("ok, not too different from beta1"), so every interior page and the footer were restyled to set beta2 further apart
+- [x] All 15 pages built and checked (see beta2/DESIGN.md)
+- [ ] Founders review every page
+- [ ] After deploy: submit the form once to confirm Netlify detects `contact-beta2`
 
 ### beta3/ – Engine room: Schematic
 - [ ] Build, then founders review

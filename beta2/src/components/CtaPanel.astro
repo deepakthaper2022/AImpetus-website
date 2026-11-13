@@ -1,0 +1,107 @@
+---
+// Beta 2 closing call to action: a boxed ink panel inside a paper section.
+import Button from './Button.astro';
+import { brandify } from '../lib/brand';
+interface Props { heading?: string; text?: string; button: string; href: string; id?: string }
+const { heading, text, button, href, id = 'cta-heading' } = Astro.props;
+---
+<section class="on-paper cta-wrap" aria-labelledby={heading ? id : undefined} aria-label={heading ? undefined : button}>
+  <div class="wrap">
+    <div class:list={['cta-panel', { 'cta-panel--compact': !heading }]}>
+      {(heading || text) && (
+        <div class="cta-panel__text">
+          {heading && <h2 id={id} set:html={brandify(heading)} />}
+          {text && <p class="lede">{text}</p>}
+        </div>
+      )}
+      <div class="cta-panel__action">
+        <Button href={href}>{button}</Button>
+      </div>
+      {!heading && !text && (
+        <div class="cta-panel__trail" aria-hidden="true">
+          {[1, 2, 3, 4, 5].map(() => <span></span>)}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-wrap {
+    padding-block: clamp(2.5rem, 5vw, 4rem) var(--section-space);
+  }
+
+  .cta-panel {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-left: 6px solid var(--mint);
+    border-radius: var(--radius-card);
+    background:
+      linear-gradient(to right, rgba(94, 234, 212, 0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      var(--ink);
+    color: var(--paper);
+    --heading: var(--white);
+    --link: var(--mint);
+    --focus: var(--white);
+  }
+
+  .cta-panel--compact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .cta-panel__trail {
+    display: none;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 40em) {
+    .cta-panel__trail {
+      display: flex;
+    }
+  }
+
+  .cta-panel__trail span:nth-child(1) { opacity: 0.15; }
+  .cta-panel__trail span:nth-child(2) { opacity: 0.3; }
+  .cta-panel__trail span:nth-child(3) { opacity: 0.5; }
+  .cta-panel__trail span:nth-child(4) { opacity: 0.75; }
+
+  .cta-panel__trail span {
+    width: 1.25rem;
+    height: 1.5rem;
+    background: var(--mint);
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  }
+
+  @media (min-width: 60em) {
+    .cta-panel {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4rem;
+    }
+  }
+
+  .cta-panel h2 {
+    max-width: 18ch;
+    color: var(--white);
+  }
+
+  .cta-panel .lede {
+    max-width: 38rem;
+  }
+
+  .cta-panel h2 + .lede {
+    margin-top: 1.25rem;
+  }
+
+  .cta-wrap .cta-panel :global(.button) {
+    --button-bg: var(--mint);
+    --button-bg-hover: var(--mint-light);
+    --button-text: var(--ink);
+  }
+</style>

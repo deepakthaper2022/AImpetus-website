@@ -3,10 +3,10 @@
 import LegalLayout from '../layouts/LegalLayout.astro';
 import Placeholder from '../components/Placeholder.astro';
 ---
-<LegalLayout title="Accessibility statement | AImpetus" heading="Accessibility statement">
+<LegalLayout title="Accessibility statement | AImpetus" heading="Accessibility statement" sections={[{"id": "our-commitment", "label": "Our commitment"}, {"id": "how-accessible-this-website-is", "label": "How accessible this website is"}, {"id": "feedback-and-contact", "label": "Feedback and contact"}, {"id": "keeping-this-up-to-date", "label": "Keeping this up to date"}]}>
   <p class="lede">We want everyone to be able to use aimpetus.ai, including people who use assistive technology. Many of the organisations we work with have to meet public-sector accessibility standards, and we hold our own website to the same standard.</p>
 
-  <h2>Our commitment</h2>
+  <h2 id="our-commitment">Our commitment</h2>
   <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. That means you should be able to:</p>
   <ul>
     <li>navigate the whole site using just a keyboard</li>
@@ -16,13 +16,13 @@ import Placeholder from '../components/Placeholder.astro';
     <li>read text that meets AA colour contrast</li>
   </ul>
 
-  <h2>How accessible this website is</h2>
+  <h2 id="how-accessible-this-website-is">How accessible this website is</h2>
   <p>We last tested the site on <Placeholder text="test date" /> using <Placeholder text="method, for example automated checks and manual keyboard and screen reader testing" />.</p>
   <p><Placeholder text={'either "We are not aware of any accessibility problems" or a short list of known issues and when we plan to fix them.'} /></p>
 
-  <h2>Feedback and contact</h2>
+  <h2 id="feedback-and-contact">Feedback and contact</h2>
   <p>If you find a problem, or need information in a different format, email <a href="mailto:contact@aimpetus.ai">contact@aimpetus.ai</a>. Tell us the page and what went wrong. We'll reply within 5 working days.</p>
 
-  <h2>Keeping this up to date</h2>
+  <h2 id="keeping-this-up-to-date">Keeping this up to date</h2>
   <p>We review this statement whenever we make significant changes to the site, and at least once a year.</p>
 </LegalLayout>

@@ -30,6 +30,7 @@ Agreed 13 Nov 2026: replace the Home section H2 "A new company. A proven team." 
 | Service pages – navigation (betas) | Breadcrumb "Home › Services › [service name]" · section heading "Other services" linking to the other three service pages · thanks page breadcrumb "Home › Contact › Thanks" |
 | Beta 2 Home – key facts strip | "60 · years of combined experience" · "10+ · years on NHS national programmes" · "4 · services, one aim" (restating facts already in the copy) |
 | Beta 2 Home – service cards | Labels "The problem" (followed by the Services page "For when…" line) and "The outcome" (followed by the Home card line) |
+| Beta 2 interior pages – navigation | "On this page" (label of the jump-link list in each page header; the links repeat the page's own H2s) |
 | Contact form errors (betas) | Error summary heading: There is a problem · Enter your name · Enter your work email address · Enter an email address in the correct format, like name@example.org · Enter your organisation · Tell us how we can help |
 
 ## Holding page
