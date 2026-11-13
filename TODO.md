@@ -46,8 +46,8 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 
 ## holding/
 - [x] Built (Prompt 1): index.html, styles.css, 404.html, robots.txt, site.webmanifest, self-hosted fonts, favicon set, OG/Twitter tags, canonical
-- Founders section (names, roles, LinkedIn links) removed at the founders' request (13 Nov 2026). `brief/holding-page.md` still includes it, so update the brief to match.
-- Hero line changed at the founders' request (13 Nov 2026): "deep roots in the NHS and public sector" → "deep roots in the NHS and wider UK public sector". Update `brief/holding-page.md` to match.
+- Founders section (names, roles, LinkedIn links) removed at the founders' request (13 Nov 2026). brief updated.
+- Hero line changed at the founders' request (13 Nov 2026): "deep roots in the NHS and public sector" → "deep roots in the NHS and wider UK public sector". Brief updated.
 - [ ] The 404 copy is a draft (see "Copy drafted by the builder")
 - [ ] Optional: the large chevron graphic only shows from 960 px wide. On phones the page is text-only. Say if you want a small version on mobile.
 - [ ] Both founders approve the holding page copy and look
@@ -55,8 +55,9 @@ Not in the brief. Used on the site and marked in code with `<!-- TODO: copy to a
 
 ## beta1/, beta2/, beta3/ (shared content – applies to every beta)
 
-### Copy changes to make in the content PDF first
-- [ ] Home hero supporting line: change "deep roots in the NHS and public sector" to "deep roots in the NHS and wider UK public sector" (to match the holding page). Also consider the similar wording in the default meta description and the Home meta description ("deep roots in the NHS and public sector").
+### Copy changes not yet in the content PDF
+- [ ] `brief/copy-changes.md` records the agreed changes (the "NHS and wider UK public sector" wording in the Home hero, Home meta and default meta, plus the drafted copy). Put them into the Website Content doc, export a new PDF, then delete copy-changes.md.
+- [ ] The default meta description is 195 characters, over the PDF's 155 guide. Shorten it in the doc if you want.
 
 ### Placeholders from the content PDF
 - [ ] `[Placeholder: company LinkedIn page]`: footer "Follow us on LinkedIn", Insights "Follow AImpetus on LinkedIn", Contact "Other ways to reach us"

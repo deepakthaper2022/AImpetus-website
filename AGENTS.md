@@ -22,6 +22,7 @@ Only build the folder you've been asked to build. Never change a finished folder
 | `brief/holding-page.md` | Exact copy and notes for the holding page. |
 | `brief/website-content.pdf` | **Authoritative** copy for every beta page, plus the developer brief (scope, must-haves, before-launch checklist). Read the PDF; the `.txt` is a plain-text extract for searching and may lose table layout. |
 | `brief/legal-pages.pdf` | Privacy notice, cookie notice and accessibility statement copy (`.txt` extract alongside). |
+| `brief/copy-changes.md` | Copy changes agreed after the content PDF was exported. **Overrides the PDF** where they differ, until a new PDF is exported. |
 | `brief/brand.md` | Colours, fonts, logo usage, the serifed-"AI" rule, visual direction, voice. |
 | `assets/` | Final logos, icons, favicon and social images. Use these files; don't redraw them. |
 
