@@ -10,11 +10,7 @@ import HeaderCard from '../components/HeaderCard.astro';
 
 // Facts card wording agreed with the founders (brief/copy-changes.md)
 const eras = ['Mainframe', 'Desktop', 'Cloud', 'AI'];
-const facts = [
-  { title: 'AI-native from day one', text: 'Founded in 2026 around data, cloud and AI.' },
-  { title: 'Founder-led, every engagement', text: 'The people who scope your work lead its delivery.' },
-  { title: 'Decades in the NHS and public sector', text: 'NHS England, NHS Improvement and the wider UK public sector.' },
-];
+const facts = ['AI-native from day one', 'Founder-led, every engagement', 'Decades in the NHS and public sector'];
 import { url } from '../lib/paths';
 
 const whyNow = [
@@ -78,12 +74,11 @@ const beliefs = [
           <ol class="eras" aria-label="Eras of technology we have delivered in">
             {eras.map((era) => <li class:list={{ 'eras__now': era === 'AI' }}>{era}</li>)}
           </ol>
-          <p class="fact__text">Three decades of delivery across every era of enterprise technology.</p>
         </li>
         {facts.map((f) => (
           <li class="fact">
-            <p class="fact__title" set:html={f.title.replace('AI-native', 'A<span class="brand-i">I</span>-native')} />
-            <p class="fact__text">{f.text}</p>
+            <span class="fact__mark" aria-hidden="true"></span>
+            <p class="fact__title" set:html={f.replace('AI-native', 'A<span class="brand-i">I</span>-native')} />
           </li>
         ))}
       </ul>
@@ -194,6 +189,25 @@ const beliefs = [
   .fact--lead .fact__title {
     font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
     color: var(--white);
+  }
+
+  .fact:not(.fact--lead) {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.875rem;
+    min-height: 5.5rem;
+  }
+
+  .fact:not(.fact--lead) .fact__title {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+  }
+
+  .fact__mark {
+    flex: none;
+    width: 0.75rem;
+    height: 0.9rem;
+    background: var(--teal);
+    clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
   }
 
   .fact__text {
